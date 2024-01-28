@@ -2,6 +2,7 @@ import React from 'react';
 import SearchBar from './searchbar'; 
 import './App.css';
 import MainScreen from './Posts';
+import DropdownExample from './PlaceDropdown';
 
 function App() {
   const handleSearch = (searchTerm) => {
@@ -23,15 +24,10 @@ function App() {
           <a href="/">홈</a>
         </li>
         <li>
-          <a href="/order">주문 내역</a>
-        </li>
-        <li>
           <a href="/mypage">마이페이지</a>
         </li>
       </ul>
-      <div id="account">
-        <a href="/notice">알림</a>
-      </div>
+      
     </div>
     <div id="container">
       <div id="foodtype">
@@ -62,18 +58,12 @@ function App() {
       </div>
       <div id="place">
         <h2>현재, </h2>
-        <select id="building">
-          <option value="hanwoori" selected>한우리집</option>
-          <option value="ehouse">이하우스</option>
-          <option value="ihouse">아이하우스</option>
-          <option value="studentunion">학생문화관</option>
-          <option value="library">중앙도서관</option>
-        </select>
+          <DropdownExample/>
         <h2> 내에서 모집 중인 주문은...</h2>
       </div>
       <div id="posts">
         <div id="post">
-
+          <MainScreen/>
         </div>
       </div>
     </div>
