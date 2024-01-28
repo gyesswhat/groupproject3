@@ -3,6 +3,7 @@ import SearchBar from './searchbar';
 import './App.css';
 import MainScreen from './Posts';
 import DropdownExample from './PlaceDropdown';
+import Test from './test';
 
 function App() {
   const handleSearch = (searchTerm) => {
@@ -67,6 +68,7 @@ function App() {
         </div>
       </div>
     </div>
+    <Test/>
     </>
   );
 }
