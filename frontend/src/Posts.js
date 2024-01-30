@@ -3,21 +3,26 @@ import React, { useState } from 'react';
 // 각 함께 배달할 사람 모집글을 나타내는 컴포넌트
 const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
   <a id="delivery-recruitment-item" href={`/${id}`}>
-    
-      <h4>[{restaurant}] {menu}</h4>
-    
-    <div id='info'>
-      <p id='green'>{timer}분</p> <p> 뒤 주문 예정</p>
-      <p className='dot' id='green'>•</p>
-      <p>모집 인원</p> <p id='green'>{recruited}/{recruit}</p>
+    <h4>
+      [{restaurant}] {menu}
+    </h4>
+
+    <div id="info">
+      <p id="green">{timer}분</p> <p> 뒤 주문 예정</p>
+      <p className="dot" id="green">
+        •
+      </p>
+      <p>모집 인원</p>{' '}
+      <p id="green">
+        {recruited}/{recruit}
+      </p>
     </div>
-    <div id='recruiter-cost'>
+    <div id="recruiter-cost">
       <p>{recruiter}</p>
-      <div id='cost'>
-        <p id='green'>배달비 포함</p> <h4>{cost}</h4> <p>원</p>
+      <div id="cost">
+        <p id="green">배달비 포함</p> <h4>{cost}</h4> <p>원</p>
       </div>
     </div>
-    
   </a>
 );
 
@@ -33,7 +38,7 @@ const MainScreen = () => {
       recruited: 3,
       recruit: 4,
       cost: 12800,
-      recruiter: '폼폼푸린'
+      recruiter: '폼폼푸린',
     },
     {
       id: 2,
@@ -43,7 +48,7 @@ const MainScreen = () => {
       recruited: 2,
       recruit: 3,
       cost: 8500,
-      recruiter: '이화'
+      recruiter: '이화',
     },
     // 추가적인 모집글 데이터를 필요에 따라 추가할 수 있습니다.
   ];
@@ -51,7 +56,7 @@ const MainScreen = () => {
   return (
     <div id="main-screen">
       <div id="delivery-recruitment-list">
-        {dummyDeliveryRecruitments.map((deliveryRecruitment) => (
+        {dummyDeliveryRecruitments.map(deliveryRecruitment => (
           <DeliveryRecruitmentItem
             id={deliveryRecruitment.id}
             restaurant={deliveryRecruitment.restaurant}
@@ -61,7 +66,6 @@ const MainScreen = () => {
             recruited={deliveryRecruitment.recruited}
             timer={deliveryRecruitment.timer}
             cost={deliveryRecruitment.cost}
-
           />
         ))}
       </div>
