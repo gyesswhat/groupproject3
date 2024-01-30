@@ -1,5 +1,4 @@
 import React from 'react';
-import SearchBar from './searchbar'; 
 import './App.css';
 import MainScreen from './Posts';
 import DropdownExample from './PlaceDropdown';
@@ -16,9 +15,6 @@ function App() {
       <div id="title">
         <h3>이화</h3>
         <h3 id="green">공유배달</h3>
-      </div>
-      <div id="search">
-        <SearchBar onSearch={handleSearch}/>
       </div>
       <ul id="topmenu">
         <li>
