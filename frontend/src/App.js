@@ -3,12 +3,10 @@ import './App.css';
 import MainScreen from './Posts';
 import DropdownExample from './PlaceDropdown';
 import Test from './test';
+import Login from './Login';
 
 function App() {
-  const handleSearch = (searchTerm) => {
-    console.log('검색어:', searchTerm);
-  };
-
+  
   return (
     <>
     <div id="topbar">
@@ -28,27 +26,27 @@ function App() {
     </div>
     <div id="container">
       <div id="foodtype">
-        <a href='/'>
+        <a href='/western'>
           <img src="/search-icon.png"/>
           <p>양식</p>
         </a>
-        <a href='/'>
+        <a href='/franchise'>
           <img src="/search-icon.png"/>
           <p>프랜차이즈</p>
         </a>
-        <a href='/'>
+        <a href='/korean'>
           <img src="/search-icon.png"/>
           <p>한식</p>
         </a>
-        <a href='/'>
+        <a href='/japanese'>
           <img src="/search-icon.png"/>
           <p>일식</p>
         </a>
-        <a href='/'>
+        <a href='/vegan'>
           <img src="/search-icon.png"/>
           <p>비건, 채식</p>
         </a>
-        <a href='/'>
+        <a href='/dessert'>
           <img src="/search-icon.png"/>
           <p>디저트</p>
         </a>
@@ -65,6 +63,8 @@ function App() {
       </div>
     </div>
     <Test/>
+    <div>
+    <Login/></div>
     </>
   );
 }
