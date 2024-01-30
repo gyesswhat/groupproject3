@@ -4,7 +4,6 @@ import './App.css';
 import MainScreen from './Posts';
 import DropdownExample from './PlaceDropdown';
 import Test from './test';
-import axios from 'axios';
 
 function App() {
   const handleSearch = (searchTerm) => {

@@ -28,6 +28,7 @@
 
 #green {
   color: green;
+  font-weight: bolder;
 }
 
 #search {
@@ -110,17 +111,96 @@ p {
   font-size: 12px;
   display: flex;
   flex-direction: row;
-  margin-left: 20px;
+  margin-left: 30px;
   padding: 10px;
 }
 
 #building {
-  color: green;
   margin-left: 10px;
   margin-right: 10px;
   margin-top: 12px;
   padding: 2px;
   font: 15px bold;
+  width: 120px;
   height: 30px;
 }
 
+#main-screen {
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+#delivery-recruitment-list {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#delivery-recruitment-item {
+  width: 480px;
+  height: 90px;
+  padding: 10px;
+  margin:5px 10px 5px 10px;
+  border:#ddd 1px solid;
+  border-radius: 10px;
+}
+
+
+
+#delivery-recruitment-item > h4 {
+ /* Move menu to the top of the column */
+  width: 100%;
+  height: fit-content;
+  margin-top:10px;
+  margin-bottom:5px;
+}
+
+#info {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.dot {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+#info p {
+  margin: 2px;
+}
+
+
+
+h5 {
+  margin-top: 10px;
+}
+
+#recruiter-cost {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: baseline;
+  height:fit-content;
+}
+
+#cost {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+
+  
+}
+
+#cost > h4 {
+  margin: 5px;
+}
+
+#cost > #green {
+  margin-right: 5px;
+}

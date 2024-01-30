@@ -2,12 +2,21 @@ import React, { useState } from 'react';
 
 // 각 함께 배달할 사람 모집글을 나타내는 컴포넌트
 const DeliveryRecruitmentItem = ({ restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
-  <div className="delivery-recruitment-item">
-    <h3>[{restaurant}] {menu}</h3>
-    <p>{timer}분 뒤 주문 예정</p>
-    <p>모집 인원 {recruited}/{recruit}</p>
-    <p>{recruiter}</p>
-    <p>배달비 포함 {cost}원</p>
+  <div id="delivery-recruitment-item">
+    
+      <h4>[{restaurant}] {menu}</h4>
+    
+    <div id='info'>
+      <p id='green'>{timer}분</p> <p> 뒤 주문 예정</p>
+      <p class='dot' id='green'>•</p>
+      <p>모집 인원</p> <p id='green'>{recruited}/{recruit}</p>
+    </div>
+    <div id='recruiter-cost'>
+      <p>{recruiter}</p>
+      <div id='cost'>
+        <p id='green'>배달비 포함</p> <h4>{cost}</h4> <p>원</p>
+      </div>
+    </div>
     
   </div>
 );
@@ -40,8 +49,8 @@ const MainScreen = () => {
   ];
 
   return (
-    <div className="main-screen">
-      <div className="delivery-recruitment-list">
+    <div id="main-screen">
+      <div id="delivery-recruitment-list">
         {dummyDeliveryRecruitments.map((deliveryRecruitment) => (
           <DeliveryRecruitmentItem
             key={deliveryRecruitment.id}
