@@ -27,7 +27,7 @@ const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruit
 );
 
 // 메인 화면에서 사용자가 작성한 함께 배달할 사람 모집글을 보여주는 컴포넌트
-const MainScreen = () => {
+const Posts = () => {
   // 가상의 함께 배달할 사람 모집글 데이터
   const dummyDeliveryRecruitments = [
     {
@@ -73,4 +73,4 @@ const MainScreen = () => {
   );
 };
 
-export default MainScreen;
+export default Posts;

@@ -27,7 +27,7 @@ a {
 }
 
 #title h3 {
-  margin: 0; /* 기본 마진 제거 */
+  margin: 0;
 }
 
 #green {
@@ -38,8 +38,8 @@ a {
 #topmenu {
   font-size: 11px;
   display: flex;
-  flex-direction: row; /* row로 설정하여 수평으로 나타나도록 함 */
-  justify-content: flex-end; /* flex-end로 설정하여 우측으로 정렬 */
+  flex-direction: row;
+  justify-content: flex-end;
   list-style: none;
   margin-right: 100px;
 }
@@ -47,12 +47,11 @@ a {
 button {
   background-color: #eee;
   border: 1px solid #eee;
-  border-radius: 0px 7px 7px 0px;
+  border-radius: 5px;
   padding: 5px 8px;
   cursor: pointer;
 }
 
-/* 이미지 크기 조절 */
 button img {
   width: 9px;
   height: 9px;
@@ -60,21 +59,20 @@ button img {
 
 #foodtype {
   display: flex;
-  flex-wrap: wrap; /* 요소들이 너무 많아서 여러 줄로 나열될 경우 줄 바꿈 설정 */
+  flex-wrap: wrap;
   justify-content: space-between;
   margin-right: 100px;
   margin-left: 100px;
-  flex-direction: row;
 }
 
 #foodtype > a {
-  margin: 10px; /* 각각의 div 요소 사이의 간격 설정 */
-  display: flex; /* 추가: 내부 요소들을 수평으로 배치하기 위해 flex를 사용합니다. */
-  flex-direction: column; /* 추가: 내부 요소들을 세로로 배치합니다. */
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   text-decoration: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  border: green solid 1px;
+  border: darkgreen solid 1px;
   width: 120px;
   height: 50px;
   border-radius: 10px;
@@ -91,9 +89,9 @@ p {
 }
 
 #foodtype img {
-  width: 20px; /* 이미지 크기를 조절할 수 있습니다. */
+  width: 20px;
   height: 20px;
-  margin-bottom: 5px; /* 이미지 아래에 여백을 추가하여 텍스트와의 간격 조절 */
+  margin-bottom: 5px;
   flex-direction: column;
   align-items: center;
 }
@@ -103,7 +101,14 @@ p {
   display: flex;
   flex-direction: row;
   margin-left: 100px;
+  margin-right: 100px;
   padding: 10px;
+  justify-content: space-between;
+}
+
+#place-text {
+  display: flex;
+  flex-direction: row;
 }
 
 #building {
@@ -114,6 +119,24 @@ p {
   font-size: 13px;
   width: 120px;
   height: 30px;
+}
+
+#recruit-button {
+  display: flex;
+  background-color: darkgreen;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border-radius: 5px;
+  height: 20px;
+}
+
+#recruit-button > a {
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: white;
+  size: 10px;
+  font-weight: bold;
 }
 
 #main-screen {
@@ -141,7 +164,6 @@ p {
 }
 
 #delivery-recruitment-item > h4 {
-  /* Move menu to the top of the column */
   width: 100%;
   height: fit-content;
   margin-top: 10px;
@@ -189,46 +211,109 @@ h5 {
 }
 
 /* 로그인 페이지*/
+body {
+  margin: 0;
+  height: 100%;
+}
 
-#login,
-#welcome,
-#id-pw {
-  margin-top: 30px;
+#login-page-whole {
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(to right, #f0f0f0 50%, #087112 50%);
+}
+
+#login-page {
+  display: flex;
+  flex-direction: row;
+  font-family: 'Nunito';
+  align-items: center;
+  margin-left: 0px;
+}
+
+#welcome {
+  display: flex;
+  flex-direction: column;
+}
+
+#login {
   display: flex;
   flex-direction: column;
 }
 
 #id-pw {
-  font-size: 10px;
-  width: 200px;
+  margin-top: 5vh; /* 5%의 뷰포트 높이로 조절 */
+  display: flex;
+  flex-direction: column;
+}
+
+#welcome {
+  width: 30vw; /* 40%의 뷰포트 너비로 조절 */
+  font-size: 1vw; /* 뷰포트 너비의 2%로 조절 */
+}
+
+#welcome > strong {
+  font-size: 4vw; /* 뷰포트 너비의 5%로 조절 */
+}
+
+#login {
+  width: 50%;
+  align-items: center;
+}
+
+#id-pw {
+  width: 30vw; /* 40%의 뷰포트 너비로 조절 */
 }
 
 #id-pw > p {
-  margin-top: 20px;
-  margin-bottom: 5px;
+  margin-top: 2vh; /* 2%의 뷰포트 높이로 조절 */
+  margin-bottom: 1vh; /* 1%의 뷰포트 높이로 조절 */
+  font-size: 1vw; /* 뷰포트 너비의 1.5%로 조절 */
 }
 
 #id,
 #pw {
-  padding: 5px;
+  padding-top: 2vh; /* 2%의 뷰포트 높이로 조절 */
+  padding-bottom: 2vh; /* 2%의 뷰포트 높이로 조절 */
+  padding-left: 1.5vw; /* 뷰포트 너비의 1.5%로 조절 */
+  border: 1px #ccc solid;
+  border-radius: 8px;
+  font-size: 1vw; /* 뷰포트 너비의 1.5%로 조절 */
 }
 
 #login-button {
-  margin-top: 30px;
+  margin-top: 3vh; /* 3%의 뷰포트 높이로 조절 */
+  background-color: darkgreen;
+  color: white;
+  padding-top: 2vh; /* 2%의 뷰포트 높이로 조절 */
+  padding-bottom: 2vh; /* 2%의 뷰포트 높이로 조절 */
+  border-radius: 8px;
+  font-size: 1vw; /* 뷰포트 너비의 1.5%로 조절 */
 }
 
 #register-button {
   display: flex;
   justify-content: center;
-  font-size: 10px;
+  font-size: 1vw; /* 뷰포트 너비의 1.5%로 조절 */
   align-items: baseline;
+  text-decoration: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  color: black;
 }
 
 #register-button > #green {
-  margin-top: 10px;
-  margin-left: 5px;
+  margin-top: 1vh; /* 1%의 뷰포트 높이로 조절 */
+  margin-left: 0.5vw; /* 뷰포트 너비의 0.5%로 조절 */
 }
 
 #login-register {
-  width: 200px;
+  width: 30vw; /* 40%의 뷰포트 너비로 조절 */
+}
+
+#login-right {
+  height: 100%;
+  display: flex;
+}
+
+#login-right-img {
+  height: 90%; /* 부모 요소에 맞게 확장 */
 }
