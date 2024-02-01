@@ -3,8 +3,6 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-  padding-top: 10px;
 }
 
 a {
@@ -24,6 +22,8 @@ a {
   display: flex;
   flex-direction: column;
   margin-left: 100px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #title h3 {
@@ -142,7 +142,8 @@ p {
 #main-screen {
   display: flex;
   align-items: center;
-  justify-content: center;
+  margin-left: 100px;
+  margin-right: 100px;
 }
 
 #delivery-recruitment-list {
@@ -154,7 +155,7 @@ p {
 }
 
 #delivery-recruitment-item {
-  width: 480px;
+  width: 38.9vw; /*480px*/
   height: 90px;
   padding: 10px;
   margin: 5px 10px 5px 10px;
@@ -219,7 +220,7 @@ body {
 #login-page-whole {
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(to right, #f0f0f0 50%, #087112 50%);
+  background: linear-gradient(to right, white 50%, #087112 50%);
 }
 
 #login-page {
@@ -241,59 +242,60 @@ body {
 }
 
 #id-pw {
-  margin-top: 5vh; /* 5%의 뷰포트 높이로 조절 */
+  margin-top: 5vh;
   display: flex;
   flex-direction: column;
 }
 
 #welcome {
-  width: 30vw; /* 40%의 뷰포트 너비로 조절 */
-  font-size: 1vw; /* 뷰포트 너비의 2%로 조절 */
+  width: 30vw;
+  font-size: 1vw;
 }
 
 #welcome > strong {
-  font-size: 4vw; /* 뷰포트 너비의 5%로 조절 */
+  font-size: 4vw;
 }
 
 #login {
   width: 50%;
-  align-items: center;
+  margin-left: 100px;
 }
 
 #id-pw {
-  width: 30vw; /* 40%의 뷰포트 너비로 조절 */
+  width: 30vw;
 }
 
 #id-pw > p {
-  margin-top: 2vh; /* 2%의 뷰포트 높이로 조절 */
-  margin-bottom: 1vh; /* 1%의 뷰포트 높이로 조절 */
-  font-size: 1vw; /* 뷰포트 너비의 1.5%로 조절 */
+  margin-top: 3vh;
+  margin-bottom: 1vh;
+  font-size: 1vw;
 }
 
 #id,
 #pw {
-  padding-top: 2vh; /* 2%의 뷰포트 높이로 조절 */
-  padding-bottom: 2vh; /* 2%의 뷰포트 높이로 조절 */
-  padding-left: 1.5vw; /* 뷰포트 너비의 1.5%로 조절 */
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  padding-left: 1.5vw;
   border: 1px #ccc solid;
   border-radius: 8px;
-  font-size: 1vw; /* 뷰포트 너비의 1.5%로 조절 */
+  font-size: 1vw;
 }
 
 #login-button {
-  margin-top: 3vh; /* 3%의 뷰포트 높이로 조절 */
+  margin-top: 5vh;
+  margin-bottom: 1vh;
   background-color: darkgreen;
   color: white;
-  padding-top: 2vh; /* 2%의 뷰포트 높이로 조절 */
-  padding-bottom: 2vh; /* 2%의 뷰포트 높이로 조절 */
+  padding-top: 2vh;
+  padding-bottom: 2vh;
   border-radius: 8px;
-  font-size: 1vw; /* 뷰포트 너비의 1.5%로 조절 */
+  font-size: 1vw;
 }
 
 #register-button {
   display: flex;
   justify-content: center;
-  font-size: 1vw; /* 뷰포트 너비의 1.5%로 조절 */
+  font-size: 1vw;
   align-items: baseline;
   text-decoration: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -312,8 +314,14 @@ body {
 #login-right {
   height: 100%;
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 #login-right-img {
-  height: 90%; /* 부모 요소에 맞게 확장 */
+  height: 90vh; /* 부모 요소에 맞게 확장, 높이 조정 */
+  display: flex;
+  margin-right: 3vw;
+  align-items: center;
+  justify-content: center;
 }

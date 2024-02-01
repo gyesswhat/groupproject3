@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DropdownExample from './PlaceDropdown';
 
 // 각 함께 배달할 사람 모집글을 나타내는 컴포넌트
 const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
@@ -39,6 +40,8 @@ const Posts = () => {
       recruit: 4,
       cost: 12800,
       recruiter: '폼폼푸린',
+      foodtype: 'japanese',
+      building: 'hanwoori',
     },
     {
       id: 2,
@@ -49,27 +52,50 @@ const Posts = () => {
       recruit: 3,
       cost: 8500,
       recruiter: '이화',
+      foodtype: 'franchise',
+      building: 'ehouse',
     },
-    // 추가적인 모집글 데이터를 필요에 따라 추가할 수 있습니다.
   ];
 
+  const [selectedBuilding, setSelectedBuilding] = useState('');
+
+  const handleBuildingChange = selectedValue => {
+    setSelectedBuilding(selectedValue);
+  };
+
+  const filteredDeliveryRecruitments = dummyDeliveryRecruitments.filter(
+    deliveryRecruitment => !selectedBuilding || deliveryRecruitment.building === selectedBuilding,
+  );
+
   return (
-    <div id="main-screen">
-      <div id="delivery-recruitment-list">
-        {dummyDeliveryRecruitments.map(deliveryRecruitment => (
-          <DeliveryRecruitmentItem
-            id={deliveryRecruitment.id}
-            restaurant={deliveryRecruitment.restaurant}
-            menu={deliveryRecruitment.menu}
-            recruiter={deliveryRecruitment.recruiter}
-            recruit={deliveryRecruitment.recruit}
-            recruited={deliveryRecruitment.recruited}
-            timer={deliveryRecruitment.timer}
-            cost={deliveryRecruitment.cost}
-          />
-        ))}
+    <>
+      <div id="place">
+        <div id="place-text">
+          <h2>현재, </h2>
+          <DropdownExample onBuildingChange={handleBuildingChange} />
+          <h2> 내에서 모집 중인 주문은...</h2>
+        </div>
+        <div id="recruit-button">
+          <a href="/recruit">배달팟 모집</a>
+        </div>
       </div>
-    </div>
+      <div id="main-screen">
+        <div id="delivery-recruitment-list">
+          {filteredDeliveryRecruitments.map(deliveryRecruitment => (
+            <DeliveryRecruitmentItem
+              key={deliveryRecruitment.id}
+              restaurant={deliveryRecruitment.restaurant}
+              menu={deliveryRecruitment.menu}
+              recruiter={deliveryRecruitment.recruiter}
+              recruit={deliveryRecruitment.recruit}
+              recruited={deliveryRecruitment.recruited}
+              timer={deliveryRecruitment.timer}
+              cost={deliveryRecruitment.cost}
+            />
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 

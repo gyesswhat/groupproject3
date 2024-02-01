@@ -2,7 +2,7 @@ import React from 'react';
 
 const FoodTypeItem = ({ id, food }) => (
   <a href={`/${id}`}>
-    <img src={`/${id}-icon.svg`} />
+    <img src={`/${id}-icon.svg`} alt={`/${food}`} />
     <p>{food}</p>
   </a>
 );
