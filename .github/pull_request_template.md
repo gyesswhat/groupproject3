@@ -12,8 +12,6 @@
 - [ ] ETC, No production code change (chore)
 - [ ] Build task and Dependency management (build)
 
-# Test Method (*필수)
-
 # Screenshot
 
 # Reference
