@@ -1,19 +1,19 @@
-PR 제목 
-<타입> : <제목> (커밋 메시지랑 똑같이)
+# Task Summary (*필수)
 
-// 필수
-# Why
- // 이 테스크를 진행하게 된 이유를 작성
-# How
-// 해당 테스크를 수행하기 위한 과정과 흐름에 대해 집중해서 작성합니다. (변경사항)
-# Result
-// 해당 테스크를 통한 결과에 대해 담백하게 작성합니다. (test 결과..?)
-// 작업한 내용, 스크린샷
+# Changes (*필수)
 
-// 선택
-# Prize
-// 해당 테스크를 통해서 어떤 기술적 성취가 있었는지 작성합니다.(수치적인 개선점 등)
+# PR 유형 (*필수)
+- [ ] Bug Fix (fix)
+- [ ] New Features (feat)
+- [ ] Test (test)
+- [ ] Document modification (docs)
+- [ ] Refactoring (refactor)
+- [ ] Styling (style)
+- [ ] ETC, No production code change (chore)
+- [ ] Build task and Dependency management (build)
+
+# Test Method (*필수)
+
+# Screenshot
+
 # Reference
-// 해당 테스크를 수행하며 참고한 Link를 모두 작성합니다. (Reference)
-# Related issue
-//관련된 pr 링크를 작성합니다. 
