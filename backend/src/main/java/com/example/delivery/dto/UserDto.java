@@ -19,4 +19,8 @@ public class UserDto {
     public User toEntity(){
         return (new User(null, email, password, nickname, account, bank));
     }
+
+    public void passwordEncoding(String encodingPassword){
+        this.password = encodingPassword;
+    }
 }
