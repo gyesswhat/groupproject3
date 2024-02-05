@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
+import DropdownExample from './PlaceDropdown';
 
-// 각 함께 배달할 사람 모집글을 나타내는 컴포넌트
 const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
   <a id="delivery-recruitment-item" href={`/${id}`}>
-    
-      <h4>[{restaurant}] {menu}</h4>
-    
-    <div id='info'>
-      <p id='green'>{timer}분</p> <p> 뒤 주문 예정</p>
-      <p className='dot' id='green'>•</p>
-      <p>모집 인원</p> <p id='green'>{recruited}/{recruit}</p>
+    <h4>
+      [{restaurant}] {menu}
+    </h4>
+
+    <div id="info">
+      <p id="green">{timer}분</p> <p> 뒤 주문 예정</p>
+      <p className="dot" id="green">
+        •
+      </p>
+      <p>모집 인원</p>{' '}
+      <p id="green">
+        {recruited}/{recruit}
+      </p>
     </div>
-    <div id='recruiter-cost'>
+    <div id="recruiter-cost">
       <p>{recruiter}</p>
-      <div id='cost'>
-        <p id='green'>배달비 포함</p> <h4>{cost}</h4> <p>원</p>
+      <div id="cost">
+        <p id="green">배달비 포함</p> <h4>{cost}</h4> <p>원</p>
       </div>
     </div>
-    
   </a>
 );
 
-// 메인 화면에서 사용자가 작성한 함께 배달할 사람 모집글을 보여주는 컴포넌트
-const MainScreen = () => {
-  // 가상의 함께 배달할 사람 모집글 데이터
+const Posts = () => {
   const dummyDeliveryRecruitments = [
     {
       id: 1,
@@ -33,7 +36,9 @@ const MainScreen = () => {
       recruited: 3,
       recruit: 4,
       cost: 12800,
-      recruiter: '폼폼푸린'
+      recruiter: '폼폼푸린',
+      foodtype: 'japanese',
+      building: 'hanwoori',
     },
     {
       id: 2,
@@ -43,30 +48,56 @@ const MainScreen = () => {
       recruited: 2,
       recruit: 3,
       cost: 8500,
-      recruiter: '이화'
+      recruiter: '이화',
+      foodtype: 'franchise',
+      building: 'ehouse',
     },
-    // 추가적인 모집글 데이터를 필요에 따라 추가할 수 있습니다.
   ];
 
-  return (
-    <div id="main-screen">
-      <div id="delivery-recruitment-list">
-        {dummyDeliveryRecruitments.map((deliveryRecruitment) => (
-          <DeliveryRecruitmentItem
-            id={deliveryRecruitment.id}
-            restaurant={deliveryRecruitment.restaurant}
-            menu={deliveryRecruitment.menu}
-            recruiter={deliveryRecruitment.recruiter}
-            recruit={deliveryRecruitment.recruit}
-            recruited={deliveryRecruitment.recruited}
-            timer={deliveryRecruitment.timer}
-            cost={deliveryRecruitment.cost}
+  // 필터 코드 추가:
 
-          />
-        ))}
+  const [selectedBuilding, setSelectedBuilding] = useState('');
+
+  const handleBuildingChange = selectedValue => {
+    setSelectedBuilding(selectedValue);
+  };
+
+  const filteredDeliveryRecruitments = dummyDeliveryRecruitments.filter(
+    deliveryRecruitment => !selectedBuilding || deliveryRecruitment.building === selectedBuilding,
+  );
+
+  //
+
+  return (
+    <>
+      <div id="place">
+        <div id="place-text">
+          <h2>현재, </h2>
+          <DropdownExample onBuildingChange={handleBuildingChange} />
+          <h2> 내에서 모집 중인 주문은...</h2>
+        </div>
+        <div id="recruit-button">
+          <a href="/recruit">배달팟 모집</a>
+        </div>
       </div>
-    </div>
+      <div id="main-screen">
+        <div id="delivery-recruitment-list">
+          {filteredDeliveryRecruitments.map(deliveryRecruitment => (
+            <DeliveryRecruitmentItem
+              key={deliveryRecruitment.id}
+              restaurant={deliveryRecruitment.restaurant}
+              menu={deliveryRecruitment.menu}
+              recruiter={deliveryRecruitment.recruiter}
+              recruit={deliveryRecruitment.recruit}
+              recruited={deliveryRecruitment.recruited}
+              timer={deliveryRecruitment.timer}
+              cost={deliveryRecruitment.cost}
+            />
+          ))}
+        </div>
+      </div>
+    </>
   );
 };
 
-export default MainScreen;
+export default Posts;
