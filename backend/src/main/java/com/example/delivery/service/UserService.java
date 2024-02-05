@@ -48,8 +48,6 @@ public class UserService {
 
     public User update(Long id, UserEditDto userInfo){
         User target = userRepository.findById(id).orElse(null);
-        if((target==null) || emailCheck(userInfo.getEmail()))
-            return null;
         target.patch(userInfo);
         User updated = userRepository.save(target);
         return updated;
