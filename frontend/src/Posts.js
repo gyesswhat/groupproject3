@@ -82,16 +82,16 @@ const Posts = () => {
       </div>
       <div id="main-screen">
         <div id="delivery-recruitment-list">
-          {filteredDeliveryRecruitments.map(deliveryRecruitment => (
+          {filteredDeliveryRecruitments.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost }) => (
             <DeliveryRecruitmentItem
-              key={deliveryRecruitment.id}
-              restaurant={deliveryRecruitment.restaurant}
-              menu={deliveryRecruitment.menu}
-              recruiter={deliveryRecruitment.recruiter}
-              recruit={deliveryRecruitment.recruit}
-              recruited={deliveryRecruitment.recruited}
-              timer={deliveryRecruitment.timer}
-              cost={deliveryRecruitment.cost}
+              key={id}
+              restaurant={restaurant}
+              menu={menu}
+              recruiter={recruiter}
+              recruit={recruit}
+              recruited={recruited}
+              timer={timer}
+              cost={cost}
             />
           ))}
         </div>
