@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+// window.location.href switch문 삭제 ('Posts.js'에 필터링 함수 추가):
+
 function DropdownExample({ onBuildingChange }) {
   const [selectedBuilding, setSelectedBuilding] = useState('');
 

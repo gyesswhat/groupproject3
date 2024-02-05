@@ -54,7 +54,7 @@ const Posts = () => {
     },
   ];
 
-  // 필터 코드 추가:
+  // 필터 함수 코드 추가:
 
   const [selectedBuilding, setSelectedBuilding] = useState('');
 
