@@ -64,7 +64,7 @@ function Login() {
           </div>
         </div>
         <div id="login-right">
-          <img src="/login-right-img.svg" id="login-right-img" alt="Login" />
+          <img src="/assets/login-right-img.svg" id="login-right-img" alt="Login" />
         </div>
       </div>
     </div>
