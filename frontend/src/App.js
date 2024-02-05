@@ -2,7 +2,8 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './Login';
 import MainScreen from './MainScreen';
-import DropdownExample from './PlaceDropdown';
+
+// Router 추가 (시작화면=로그인 페이지)
 
 function App() {
   return (

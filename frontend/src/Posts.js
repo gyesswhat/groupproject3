@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import DropdownExample from './PlaceDropdown';
 
-// 각 함께 배달할 사람 모집글을 나타내는 컴포넌트
 const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
   <a id="delivery-recruitment-item" href={`/${id}`}>
     <h4>
@@ -27,9 +26,7 @@ const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruit
   </a>
 );
 
-// 메인 화면에서 사용자가 작성한 함께 배달할 사람 모집글을 보여주는 컴포넌트
 const Posts = () => {
-  // 가상의 함께 배달할 사람 모집글 데이터
   const dummyDeliveryRecruitments = [
     {
       id: 1,
@@ -57,6 +54,8 @@ const Posts = () => {
     },
   ];
 
+  // 필터 코드 추가:
+
   const [selectedBuilding, setSelectedBuilding] = useState('');
 
   const handleBuildingChange = selectedValue => {
@@ -66,6 +65,8 @@ const Posts = () => {
   const filteredDeliveryRecruitments = dummyDeliveryRecruitments.filter(
     deliveryRecruitment => !selectedBuilding || deliveryRecruitment.building === selectedBuilding,
   );
+
+  //
 
   return (
     <>

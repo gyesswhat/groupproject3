@@ -1,10 +1,8 @@
 import React from 'react';
 import './App.css';
 import Posts from './Posts';
-import DropdownExample from './PlaceDropdown';
 import FoodTypes from './FoodType';
 import Logo from './Logo';
-import MainScreenFilter from './PostsFilter';
 
 function MainScreen() {
   return (
