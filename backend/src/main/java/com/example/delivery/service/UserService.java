@@ -1,6 +1,9 @@
 package com.example.delivery.service;
 
+import com.example.delivery.dto.LoginDto;
 import com.example.delivery.dto.UserDto;
+import com.example.delivery.dto.UserEditDto;
+import com.example.delivery.dto.UserShowDto;
 import com.example.delivery.entity.User;
 import com.example.delivery.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,32 @@ public class UserService {
         return user;
     }
 
+    public User login(LoginDto loginDto) throws NoSuchAlgorithmException{
+        User user = userRepository.findByEmail(loginDto.getEmail());
+        String encodingPassword = encrypt(loginDto.getPassword());
+        if(user != null && (user.getPassword().equals(encodingPassword)))
+            return user;
+        else
+            return null;
+    }
+
+    public UserShowDto show(Long id){
+        User user = userRepository.findById(id).orElse(null);
+        if(user==null)
+            return null;
+        UserShowDto userInfo = new UserShowDto(user);
+        return userInfo;
+    }
+
+    public User update(Long id, UserEditDto userInfo){
+        User target = userRepository.findById(id).orElse(null);
+        if((target==null) || emailCheck(userInfo.getEmail()))
+            return null;
+        target.patch(userInfo);
+        User updated = userRepository.save(target);
+        return updated;
+    }
+
     public static String encrypt(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] passByte = password.getBytes(StandardCharsets.UTF_8);
@@ -36,7 +65,6 @@ public class UserService {
             sb.append(Integer.toHexString(0xff & digested[i]));
         }
         return sb.toString();
-
     }
 
 }

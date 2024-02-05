@@ -1,5 +1,6 @@
 package com.example.delivery.entity;
 
+import com.example.delivery.dto.UserEditDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -27,4 +28,13 @@ public class User {
 
     @Column(nullable = false)
     private String bank;
+
+    public void patch(UserEditDto userInfo) {
+        if(userInfo.getNickname()!=null)
+            this.nickname = userInfo.getNickname();
+        if(userInfo.getAccount()!=null)
+            this.account = userInfo.getAccount();
+        if(userInfo.getBank()!=null)
+            this.bank = userInfo.getBank();
+    }
 }
