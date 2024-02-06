@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import DropdownExample from './PlaceDropdown';
+import FoodTypes from './FoodType';
 
 const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
   <a id="delivery-recruitment-item" href={`/${id}`}>
@@ -62,12 +63,21 @@ const Posts = () => {
     setSelectedBuilding(selectedValue);
   };
 
+  const [selectedFoodtype, setSelectedFoodtype] = useState('');
+
+  const handleFoodtypeChange = selectedValue => {
+    setSelectedFoodtype(selectedValue);
+  };
+
   const filteredDeliveryRecruitments = dummyDeliveryRecruitments.filter(
-    deliveryRecruitment => !selectedBuilding || deliveryRecruitment.building === selectedBuilding,
+    deliveryRecruitment =>
+      (!selectedBuilding || deliveryRecruitment.building === selectedBuilding) &&
+      (!selectedFoodtype || deliveryRecruitment.foodtype === selectedFoodtype),
   );
 
   return (
     <>
+      <FoodTypes onFoodtypeChange={handleFoodtypeChange} />
       <div id="place">
         <div id="place-text">
           <h2>현재, </h2>
@@ -82,7 +92,7 @@ const Posts = () => {
         <div id="delivery-recruitment-list">
           {filteredDeliveryRecruitments.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost }) => (
             <DeliveryRecruitmentItem
-              key={id}
+              id={id}
               restaurant={restaurant}
               menu={menu}
               recruiter={recruiter}

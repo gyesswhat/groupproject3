@@ -18,7 +18,6 @@ export default function Main() {
         </ul>
       </div>
       <div id="container">
-        <FoodTypes />
         <div id="posts">
           <div id="post">
             <Posts />
