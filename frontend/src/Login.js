@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, Routes, Route, Outlet, useParams, Navigate, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 
 function Login() {
@@ -21,9 +21,6 @@ function Login() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    // 로그인 로직 추가...
-
-    // 로그인 성공 시 메인 페이지로 이동
     navigate('/main');
   };
 
@@ -67,7 +64,7 @@ function Login() {
           </div>
         </div>
         <div id="login-right">
-          <img src="/login-right-img.svg" id="login-right-img" alt="Login" />
+          <img src="/assets/login-right-img.svg" id="login-right-img" alt="Login" />
         </div>
       </div>
     </div>

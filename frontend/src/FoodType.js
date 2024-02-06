@@ -2,7 +2,7 @@ import React from 'react';
 
 const FoodTypeItem = ({ id, food }) => (
   <a href={`/${id}`}>
-    <img src={`/${id}-icon.svg`} alt={`/${food}`} />
+    <img src={`/assets/${id}-icon.svg`} alt={`/${food}`} />
     <p>{food}</p>
   </a>
 );
@@ -37,8 +37,8 @@ const FoodTypes = () => {
 
   return (
     <div id="foodtype">
-      {FoodTypeList.map(FoodType => (
-        <FoodTypeItem id={FoodType.id} food={FoodType.food} />
+      {FoodTypeList.map(({ id, food }) => (
+        <FoodTypeItem id={id} food={food} />
       ))}
     </div>
   );
