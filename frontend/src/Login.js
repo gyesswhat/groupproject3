@@ -43,6 +43,7 @@ function Login() {
                 placeholder="@ewhain.net"
                 value={userId}
                 onChange={handleInputChange}
+                required
               />
               <p>비밀번호</p>
               <input
@@ -52,6 +53,7 @@ function Login() {
                 placeholder="비밀번호"
                 value={userPw}
                 onChange={handleInputChange}
+                required
               />
               <button type="submit" id="login-button">
                 로그인

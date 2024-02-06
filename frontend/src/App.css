@@ -282,7 +282,7 @@ body {
 #pw {
   padding-top: 2vh;
   padding-bottom: 2vh;
-  padding-left: 1.5vw;
+  padding-left: 1.2vw;
   border: 1px #ccc solid;
   border-radius: 8px;
   font-size: 1vw;
@@ -331,4 +331,55 @@ body {
   margin-right: 3vw;
   align-items: center;
   justify-content: center;
+}
+
+#register-box {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Nunito';
+  align-items: center;
+  font-weight: 800;
+}
+
+#register {
+  display: flex;
+  flex-direction: column;
+}
+
+#register-title {
+  display: flex;
+}
+
+#register-title h2 {
+  align-self: flex-start; /* 수정된 부분 */
+}
+
+#register-form {
+  font-size: 1vw;
+  width: 30vw;
+}
+
+label {
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+}
+
+#register-form > div {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3vh;
+  margin-bottom: 1vh;
+}
+
+#register-submit {
+  width: 30vw;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+  background-color: darkgreen;
+  color: white;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  border-radius: 8px;
+  font-size: 1vw;
+  font-weight: 800;
 }
