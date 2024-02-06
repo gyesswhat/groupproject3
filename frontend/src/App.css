@@ -10,6 +10,11 @@ a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+p {
+  margin-top: 0;
+  font-size: 10px;
+}
+
 #topbar a {
   color: #666;
   text-decoration: none;
@@ -57,6 +62,15 @@ button img {
   height: 9px;
 }
 
+#clickAvailable {
+  cursor: pointer;
+}
+
+#foodtype div.selected {
+  color: darkgreen;
+  border: 2px solid green;
+}
+
 #foodtype {
   display: flex;
   flex-wrap: wrap;
@@ -65,13 +79,12 @@ button img {
   margin-left: 100px;
 }
 
-#foodtype > a {
+#foodtype > div {
   margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   border: darkgreen solid 1px;
   width: 120px;
   height: 50px;
@@ -79,13 +92,7 @@ button img {
   padding-top: 10px;
   background-color: #eee;
   margin-top: 30px;
-  font: bolder;
-}
-
-p {
-  color: black;
-  margin-top: 0;
-  font-size: 10px;
+  font-weight: bold;
 }
 
 #foodtype img {

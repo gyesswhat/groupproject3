@@ -19,7 +19,6 @@ function MainScreen() {
         </ul>
       </div>
       <div id="container">
-        <FoodTypes />
         <div id="posts">
           <div id="post">
             <Posts />
