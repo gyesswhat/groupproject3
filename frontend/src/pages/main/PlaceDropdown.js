@@ -11,7 +11,6 @@ export default function DropdownExample({ onBuildingChange }) {
     onBuildingChange(selectedValue);
   };
 
-  // FIXME: const 파일로 빼기
   return (
     <div>
       <select id="building" onChange={handleBuildingChange} value={selectedBuilding}>
