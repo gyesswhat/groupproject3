@@ -31,6 +31,7 @@
     "prefer-arrow-callback": "error", // Require using arrow functions for callbacks
     "require-await": "error",
     "import/export": "off",
+    "import/prefer-default-export": "off",
     "arrow-parens": ["error", "as-needed"], // a => {}
     "no-param-reassign": ["error", { "props": false }],
     "no-unused-expressions": [

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import DropdownExample from './PlaceDropdown';
 
 const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
@@ -6,13 +6,13 @@ const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruit
     <h4>
       [{restaurant}] {menu}
     </h4>
-
     <div id="info">
-      <p id="green">{timer}분</p> <p> 뒤 주문 예정</p>
+      <p id="green">{timer}분</p>
+      <p> 뒤 주문 예정</p>
       <p className="dot" id="green">
         •
       </p>
-      <p>모집 인원</p>{' '}
+      <p>모집 인원</p>
       <p id="green">
         {recruited}/{recruit}
       </p>
@@ -54,7 +54,7 @@ const Posts = () => {
     },
   ];
 
-  // 필터 함수 코드 추가:
+  // TODO: 필터 함수 코드 추가:
 
   const [selectedBuilding, setSelectedBuilding] = useState('');
 
@@ -65,8 +65,6 @@ const Posts = () => {
   const filteredDeliveryRecruitments = dummyDeliveryRecruitments.filter(
     deliveryRecruitment => !selectedBuilding || deliveryRecruitment.building === selectedBuilding,
   );
-
-  //
 
   return (
     <>
