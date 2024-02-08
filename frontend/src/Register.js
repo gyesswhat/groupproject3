@@ -31,7 +31,10 @@ const Register = () => {
 
   return (
     <>
-      <Logo />
+      <div id="title">
+        <h3>이화</h3>
+        <h3 id="green">공유배달</h3>
+      </div>
       <div id="register-box">
         <div id="register">
           <div id="register-title">

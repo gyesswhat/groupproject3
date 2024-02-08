@@ -8,7 +8,9 @@ function MainScreen() {
   return (
     <>
       <div id="topbar">
-        <Logo />
+        <a href="main">
+          <Logo />
+        </a>
         <ul id="topmenu">
           <li>
             <a href="/">홈</a>
