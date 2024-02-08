@@ -2,7 +2,7 @@
 const fakeUser = {
   username: 'john_doe',
   email: 'john@example.com',
-  loggedIn: false,
+  loggedIn: true,
 };
 
 const getUser = () => fakeUser.loggedIn;
