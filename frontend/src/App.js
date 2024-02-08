@@ -1,16 +1,13 @@
-import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import MainScreen from './MainScreen';
+import { Main, Login } from './pages';
 
-// Router 추가 (시작화면=로그인 페이지)
-
+// TODO: Router 추가 (시작화면=로그인 페이지)
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/main" element={<MainScreen />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
