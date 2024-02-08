@@ -74,7 +74,7 @@ button img {
 #foodtype {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   margin-right: 100px;
   margin-left: 100px;
 }

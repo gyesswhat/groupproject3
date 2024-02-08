@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { FOOD_TYPE_LIST } from './main.const';
 
 const FoodTypeItem = ({ id, food, selected, onFoodTypeClick }) => (
   <div onClick={() => onFoodTypeClick(id)} className={selected ? 'selected' : ''} id="clickAvailable">
@@ -8,33 +9,6 @@ const FoodTypeItem = ({ id, food, selected, onFoodTypeClick }) => (
 );
 
 const FoodTypes = ({ onFoodtypeChange }) => {
-  const FoodTypeList = [
-    {
-      id: 'western',
-      food: '양식',
-    },
-    {
-      id: 'franchise',
-      food: '프랜차이즈',
-    },
-    {
-      id: 'korean',
-      food: '한식',
-    },
-    {
-      id: 'japanese',
-      food: '일식',
-    },
-    {
-      id: 'vegan',
-      food: '채식',
-    },
-    {
-      id: 'dessert',
-      food: '디저트',
-    },
-  ];
-
   const [selectedFoodType, setSelectedFoodType] = useState('');
 
   const handleFoodTypeClick = clickedId => {
@@ -47,7 +21,7 @@ const FoodTypes = ({ onFoodtypeChange }) => {
 
   return (
     <div id="foodtype">
-      {FoodTypeList.map(({ id, food }) => (
+      {FOOD_TYPE_LIST.map(({ id, food }) => (
         <FoodTypeItem id={id} food={food} selected={selectedFoodType === id} onFoodTypeClick={handleFoodTypeClick} />
       ))}
     </div>

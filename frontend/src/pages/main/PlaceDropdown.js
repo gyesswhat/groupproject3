@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-// window.location.href switch문 삭제 ('Posts.js'에 필터링 함수 추가):
-
-function DropdownExample({ onBuildingChange }) {
+// TODO: window.location.href switch문 삭제 ('Posts.js'에 필터링 함수 추가):
+export default function DropdownExample({ onBuildingChange }) {
   const [selectedBuilding, setSelectedBuilding] = useState('');
 
   const handleBuildingChange = e => {
@@ -11,6 +10,7 @@ function DropdownExample({ onBuildingChange }) {
     onBuildingChange(selectedValue);
   };
 
+  // FIXME: const 파일로 빼기
   return (
     <div>
       <select id="building" onChange={handleBuildingChange} value={selectedBuilding}>
@@ -25,5 +25,3 @@ function DropdownExample({ onBuildingChange }) {
     </div>
   );
 }
-
-export default DropdownExample;

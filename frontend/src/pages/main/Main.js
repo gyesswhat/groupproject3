@@ -1,14 +1,12 @@
-import React from 'react';
-import './App.css';
+import '../../App.css';
 import Posts from './Posts';
-import FoodTypes from './FoodType';
 import Logo from './Logo';
 
-function MainScreen() {
+export default function Main() {
   return (
     <>
       <div id="topbar">
-        <a href="main">
+        <a href="/">
           <Logo />
         </a>
         <ul id="topmenu">
@@ -30,5 +28,3 @@ function MainScreen() {
     </>
   );
 }
-
-export default MainScreen;

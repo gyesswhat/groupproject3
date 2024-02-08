@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from './Logo';
+import Logo from '../main/Logo';
 
-function Login() {
+export default function Login() {
   const [inputs, setInputs] = useState({
     userId: '',
     userPw: '',
@@ -21,7 +21,7 @@ function Login() {
 
   const handleSubmit = e => {
     e.preventDefault();
-    navigate('/main');
+    navigate('/');
   };
 
   return (
@@ -70,5 +70,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;
