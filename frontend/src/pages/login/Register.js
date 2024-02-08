@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from '../main/Logo';
+import { BANK_LIST } from './bank.const';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -28,6 +29,16 @@ const Register = () => {
     // 회원가입 처리 후 다음 페이지로 이동
     navigate('/main');
   };
+
+  const BankOptions = () => (
+    <>
+      {BANK_LIST.map((bank, index) => (
+        <option key={index} value={bank}>
+          {bank}
+        </option>
+      ))}
+    </>
+  );
 
   return (
     <>
@@ -74,26 +85,12 @@ const Register = () => {
                 <option selected hidden value="select">
                   은행 선택
                 </option>
-                <option value="카카오뱅크">카카오뱅크</option>
-                <option value="케이뱅크">케이뱅크</option>
-                <option value="토스뱅크">토스뱅크</option>
-                <option value="하나은행">하나은행</option>
-                <option value="제일은행">제일은행</option>
-                <option value="국민은행">국민은행</option>
-                <option value="신한은행">신한은행</option>
-                <option value="외환은행">외환은행</option>
-                <option value="우리은행">우리은행</option>
-                <option value="한국시티은행">한국시티은행</option>
-                <option value="경남은행">경남은행</option>
-                <option value="광주은행">광주은행</option>
-                <option value="대구은행">대구은행</option>
-                <option value="부산은행">부산은행</option>
-                <option value="전북은행">전북은행</option>
-                <option value="제주은행">제주은행</option>
-                <option value="기업은행">기업은행</option>
-                <option value="농협">농협</option>
-                <option value="수협">수협</option>
-                <option value="한국산업은행">한국산업은행</option>
+                {BANK_LIST.map((bank, index) => (
+                  <option key={index} value={bank}>
+                    {bank}
+                  </option>
+                ))}
+                ;
               </select>
             </div>
             <button type="submit" id="register-submit">
