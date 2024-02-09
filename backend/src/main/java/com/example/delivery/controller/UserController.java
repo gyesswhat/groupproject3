@@ -1,4 +1,4 @@
-package com.example.delivery.api;
+package com.example.delivery.controller;
 
 import com.example.delivery.dto.LoginDto;
 import com.example.delivery.dto.UserDto;
@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UserApiController {
+public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
