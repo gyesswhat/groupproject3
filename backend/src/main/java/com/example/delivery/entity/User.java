@@ -29,7 +29,7 @@ public class User {
     @Column(nullable = false)
     private String bank;
 
-    public void patch(UserEditDto userInfo) {
+    public void update(UserEditDto userInfo) {
         if(userInfo.getNickname()!=null)
             this.nickname = userInfo.getNickname();
         if(userInfo.getAccount()!=null)

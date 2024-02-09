@@ -23,7 +23,7 @@ public class UserService {
     }
 
     public User signup(UserDto userDto) throws NoSuchAlgorithmException {
-        userDto.passwordEncoding(encrypt(userDto.getPassword()));
+        userDto.setPassword(encrypt(userDto.getPassword()));
         User user = userDto.toEntity();
         userRepository.save(user);
         return user;
@@ -48,7 +48,7 @@ public class UserService {
 
     public User update(Long id, UserEditDto userInfo){
         User target = userRepository.findById(id).orElse(null);
-        target.patch(userInfo);
+        target.update(userInfo);
         User updated = userRepository.save(target);
         return updated;
     }
