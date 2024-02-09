@@ -3,7 +3,7 @@ package com.example.delivery.service;
 import com.example.delivery.dto.LoginDto;
 import com.example.delivery.dto.UserDto;
 import com.example.delivery.dto.UserEditDto;
-import com.example.delivery.dto.UserShowDto;
+import com.example.delivery.dto.UserDetailDto;
 import com.example.delivery.entity.User;
 import com.example.delivery.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,11 @@ public class UserService {
     private UserRepository userRepository;
 
     public boolean emailCheck(String email){
-        return userRepository.existsByEmail(email);
+        User user = userRepository.findByEmail(email).orElse(null);
+        if(user==null)
+            return false;
+        else
+            return true;
     }
 
     public User signup(UserDto userDto) throws NoSuchAlgorithmException {
@@ -30,7 +34,7 @@ public class UserService {
     }
 
     public User login(LoginDto loginDto) throws NoSuchAlgorithmException{
-        User user = userRepository.findByEmail(loginDto.getEmail());
+        User user = userRepository.findByEmail(loginDto.getEmail()).orElse(null);
         String encodingPassword = encrypt(loginDto.getPassword());
         if(user != null && (user.getPassword().equals(encodingPassword)))
             return user;
@@ -38,16 +42,18 @@ public class UserService {
             return null;
     }
 
-    public UserShowDto show(Long id){
+    public UserDetailDto show(Long id){
         User user = userRepository.findById(id).orElse(null);
         if(user==null)
             return null;
-        UserShowDto userInfo = new UserShowDto(user);
+        UserDetailDto userInfo = userRepository.findUserDetail(user.getId());
         return userInfo;
     }
 
     public User update(Long id, UserEditDto userInfo){
         User target = userRepository.findById(id).orElse(null);
+        if(target==null)
+            return null;
         target.update(userInfo);
         User updated = userRepository.save(target);
         return updated;

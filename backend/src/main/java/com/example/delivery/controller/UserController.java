@@ -3,7 +3,7 @@ package com.example.delivery.controller;
 import com.example.delivery.dto.LoginDto;
 import com.example.delivery.dto.UserDto;
 import com.example.delivery.dto.UserEditDto;
-import com.example.delivery.dto.UserShowDto;
+import com.example.delivery.dto.UserDetailDto;
 import com.example.delivery.entity.User;
 import com.example.delivery.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,9 +41,9 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<UserShowDto> show(){
+    public ResponseEntity<UserDetailDto> show(){
         Long id = Long.valueOf(String.valueOf(session.getAttribute("userId")));
-        UserShowDto userInfo = userService.show(id);
+        UserDetailDto userInfo = userService.show(id);
         return (userInfo!=null) ?
                 ResponseEntity.status(HttpStatus.OK).body(userInfo) :
                 null;
