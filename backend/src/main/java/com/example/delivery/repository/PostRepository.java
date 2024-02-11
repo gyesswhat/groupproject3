@@ -3,6 +3,7 @@ package com.example.delivery.repository;
 import com.example.delivery.dto.ParticipantListDto;
 import com.example.delivery.dto.PostDetailDto;
 import com.example.delivery.dto.PostListDto;
+import com.example.delivery.dto.UserPartPostList;
 import com.example.delivery.entity.Post;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -57,4 +58,10 @@ public interface PostRepository extends CrudRepository<Post, Integer>{
             "JOIN User u ON pr.userId = u.userId " + // 유저 쪽 완성되면...
             "WHERE pr.postId = :postId")
     List<ParticipantListDto> findParticipants(@Param("postId") Integer postId);
+
+    @Query(value = "SELECT new com.example.delivery.dto.UserPartPostList(p.createdAt, p.restaurant, p.menu, p.price, p.partNum, u.nickname)" +
+                    "FROM Post p" +
+                    "JOIN Participant pr ON pr.postId = p.postId" +
+                    "AND pr.userId = :userId")
+    ArrayList<UserPartPostList> findUserPartPostList(@Param("userId") Long userId);
 }

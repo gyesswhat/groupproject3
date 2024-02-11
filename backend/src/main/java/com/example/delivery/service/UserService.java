@@ -1,10 +1,8 @@
 package com.example.delivery.service;
 
-import com.example.delivery.dto.LoginDto;
-import com.example.delivery.dto.UserDto;
-import com.example.delivery.dto.UserEditDto;
-import com.example.delivery.dto.UserDetailDto;
+import com.example.delivery.dto.*;
 import com.example.delivery.entity.User;
+import com.example.delivery.repository.PostRepository;
 import com.example.delivery.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,18 +10,21 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     public boolean emailCheck(String email){
         User user = userRepository.findByEmail(email).orElse(null);
-        if(user==null)
-            return false;
-        else
-            return true;
+        return (user != null);
     }
 
     public User signup(UserDto userDto) throws NoSuchAlgorithmException {
@@ -57,6 +58,18 @@ public class UserService {
         target.update(userInfo);
         User updated = userRepository.save(target);
         return updated;
+    }
+
+    public List<UserPartPostList> showList(Long id){
+        List<UserPartPostList> list = postRepository.findUserPartPostList(id);
+        LocalTime now = LocalDateTime.now().toLocalTime();
+        for(UserPartPostList check : list){
+            LocalTime createdAt = check.getCreatedAt().toLocalDateTime().toLocalTime();
+            Duration diff = Duration.between(createdAt, now);
+            long diffMin = diff.toMinutes();
+            check.setOrdering(diffMin <= 30); // 30분 초과 시 바로 주문 취소? 그럼 부등호 '<' 로 해야하나?
+        }
+        return list;
     }
 
     public static String encrypt(String password) throws NoSuchAlgorithmException {
