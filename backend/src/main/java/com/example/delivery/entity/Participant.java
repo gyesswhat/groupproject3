@@ -3,21 +3,23 @@ package com.example.delivery.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
-
 @Entity
-@AllArgsConstructor // 생성자 자동 생성
-@NoArgsConstructor // 기본생성자 자동 생성
-@ToString // toString() 자동생성
+@AllArgsConstructor
+@NoArgsConstructor
 @Setter
-@Getter // 게터 만들어줌
+@Getter
 public class Participant {
     @Id
-    private Integer postId; // 외래 키 지정 어떻게?
+    @ManyToOne
+    @JoinColumn(name="post_postId")
+    private Post post;
     @Id
-    private Integer userId; // 외래 키 지정 어떻게?
-    @Column
-    private Timestamp joinedAt;
-    @Column
-    private String status;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+    @Column(nullable = false)
+    private String joinedAt;
+    @Column(nullable = false)
+    private Integer status;
+    // 0(방장), 1(입금전), 2(입금확인중), 3(입금확인완료)
 }
