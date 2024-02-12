@@ -1,16 +1,36 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './Login';
-import MainScreen from './MainScreen';
+import { useState, useEffect } from 'react';
+import { Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Main from './pages/main/Main';
+import Login from './pages/login/Login';
+import Register from './pages/login/Register';
+import getUser from './Fakeuser';
+import PostDetail from './pages/posts/PostDetail';
 
-// Router 추가 (시작화면=로그인 페이지)
+// TODO: Router 추가 (시작화면=로그인 페이지)
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(null);
+
+  useEffect(() => {
+    const checkUser = async () => {
+      const user = await getUser();
+      setLoggedIn(user);
+    };
+
+    checkUser();
+  }, []);
+
+  if (loggedIn === null) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/main" element={<MainScreen />} />
+        {loggedIn ? <Route path="/" element={<Main />} /> : <Route path="/" element={<Navigate to="/login" />} />}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/:postId" element={<PostDetail />} />
       </Routes>
     </Router>
   );
