@@ -1,6 +1,5 @@
 import '../../App.css';
 import Posts from './Posts';
-import FoodTypes from './FoodType';
 import Logo from './Logo';
 
 export default function Main() {
