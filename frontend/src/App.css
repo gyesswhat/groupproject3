@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid #ddd;
+  width: 100vw;
 }
 
 a {
@@ -49,7 +50,7 @@ p {
   margin-right: 100px;
 }
 
-button {
+/*button {
   background-color: #eee;
   border: 1px solid #eee;
   border-radius: 5px;
@@ -60,7 +61,7 @@ button {
 button img {
   width: 9px;
   height: 9px;
-}
+}*/
 
 #clickAvailable {
   cursor: pointer;
@@ -74,7 +75,7 @@ button img {
 #foodtype {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
   margin-right: 100px;
   margin-left: 100px;
 }
@@ -136,6 +137,8 @@ button img {
   padding: 12px;
   border-radius: 5px;
   height: 20px;
+  width: 80px;
+  margin-left: 15px;
 }
 
 #recruit-button > a {
@@ -329,6 +332,203 @@ body {
   height: 90vh; /* 부모 요소에 맞게 확장, 높이 조정 */
   display: flex;
   margin-right: 3vw;
+  align-items: center;
+  justify-content: center;
+}
+
+#register-box {
+  display: flex;
+  flex-direction: column;
+  font-family: 'Nunito';
+  align-items: center;
+  font-weight: 800;
+}
+
+#register {
+  display: flex;
+  flex-direction: column;
+}
+
+#register-title {
+  display: flex;
+}
+
+#register-title h2 {
+  align-self: flex-start; /* 수정된 부분 */
+}
+
+#register-form {
+  font-size: 1vw;
+  width: 30vw;
+}
+
+label {
+  margin-top: 2vh;
+  margin-bottom: 1vh;
+}
+
+#register-form > div {
+  display: flex;
+  flex-direction: column;
+  margin-top: 3vh;
+  margin-bottom: 1vh;
+}
+
+#register-submit {
+  width: 30vw;
+  margin-top: 5vh;
+  margin-bottom: 10vh;
+  background-color: darkgreen;
+  color: white;
+  padding-top: 2vh;
+  padding-bottom: 2vh;
+  border-radius: 8px;
+  font-size: 1vw;
+  font-weight: 800;
+}
+
+#wrap {
+  width: 50vw;
+  margin-top: 30px;
+}
+
+#inner-wrap {
+  display: flex;
+  flex-direction: column;
+  border: #ddd 1px solid;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+#root {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+button {
+  background-color: darkgreen;
+  border: none;
+  color: white;
+  size: 10px;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 5px;
+  height: 40px;
+  width: 90px;
+  margin-left: 20px;
+}
+
+#cost-recruit {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#participants {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+}
+
+#participant {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+#recruiter {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#statuslist {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+li {
+  font-size: 10px;
+}
+
+#participant-list {
+  width: 25%;
+}
+
+#statuslist > p {
+  margin-left: 20px;
+}
+
+#status {
+  margin-top: 87px;
+  margin-bottom: 0;
+}
+
+#where {
+  font-weight: 800;
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
+  margin-top: 10px;
+}
+
+#recruiter-cost > h4 {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+#main-content {
+  margin-bottom: 50px;
+}
+
+button[disabled] {
+  background-color: lightgray; /* 배경색 변경 */
+  color: gray; /* 텍스트 색상 변경 */
+  cursor: not-allowed; /* 마우스 커서 변경 */
+  /* 필요한 다른 스타일 추가 */
+}
+
+#bold-margin {
+  margin-right: 20px;
+}
+
+#comments {
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+}
+
+.comment-form {
+  margin-bottom: 20px; /* 댓글 작성란과 이전 댓글 사이의 간격 조절 */
+  display: flex;
+  flex-direction: row;
+}
+
+.comment-input {
+  width: 90%; /* 입력 필드 폭을 100%로 설정하여 전체 너비를 차지하도록 함 */
+  padding: 10px;
+  border: 1px solid #ccc; /* 테두리 설정 */
+  border-radius: 5px; /* 둥근 모서리 설정 */
+  font-size: 9px;
+  resize: none;
+}
+textarea {
+  height: 12px;
+}
+
+.comment-submit {
+  cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 상태로 표시 */
+  height: 34px;
+  width: 50px;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
