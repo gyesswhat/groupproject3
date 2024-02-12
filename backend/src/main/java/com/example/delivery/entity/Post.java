@@ -3,26 +3,26 @@ package com.example.delivery.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
-
 @Entity
-@AllArgsConstructor // 생성자 자동 생성
-@NoArgsConstructor // 기본생성자 자동 생성
-@ToString // toString() 자동생성
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Setter
-@Getter // 게터 만들어줌
+@Getter
+@Table(name="post")
 public class Post {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer postId; // null 때문에...
-    @Column private Integer userId;
-    @Column private String location;
-    @Column private String category;
-    @Column private String restaurant;
-    @Column private String menu;
-    @Column private int partNum;
-    @Column private int price;
+    private Long postId;
+    @ManyToOne
+    @JoinColumn(name = "user_id") private User user;
+    @Column(nullable = false) private String location;
+    @Column(nullable = false) private String category;
+    @Column(nullable = false) private String restaurant;
+    @Column(nullable = false) private String menu;
+    @Column(nullable = false) private int partNum;
+    @Column(nullable = false) private int price;
     @Column private String postBody;
-    @Column private Timestamp createdAt; // 사용법 확실히...
+    @Column(nullable = false) private String createdAt; // SimpleDateFormat 사용해서 자료형 String으로 변경
 
 }
