@@ -20,11 +20,14 @@ const PostContents = ({
   status,
 }) => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const [isJoined, setIsJoined] = useState(false);
 
   const handleButtonClick = () => {
     // 여기에 버튼 클릭 시 동작할 내용을 추가하세요.
     setButtonDisabled(true); // 버튼 비활성화
+    setIsJoined(true);
   };
+
   return (
     <div id="postcontent">
       <div id="main-content">
@@ -56,7 +59,11 @@ const PostContents = ({
         <div id="where">
           <p>배달받을 장소:</p> <p id="green">{building}</p>
         </div>
-        <p>계좌 정보: {account}</p>
+        {isJoined && (
+          <div id="where">
+            <p>계좌 정보:</p> <p id="green">{account}</p>
+          </div>
+        )}
         <p>{content}</p>
       </div>
 
@@ -64,12 +71,12 @@ const PostContents = ({
         <div id="participant-list">
           <h4>참여자 목록</h4>
           <div id="recruiter">
-            <p>방장</p>
+            <p id="role">방장</p>
             <p>{recruiter}</p>
           </div>
           {participants.map(participant => (
             <div id="participant">
-              <p>참여자</p>
+              <p id="role">참여자</p>
               <p>{participant}</p>
             </div>
           ))}
@@ -104,7 +111,6 @@ const PostDetail = () => {
     const dummyComments = [
       { id: 1, nickname: '폼폼푸린', time: 4, content: '계란초밥 3개 추가 가능합니까?' },
       { id: 2, nickname: '마이멜로디', time: 3, content: '요청사항 댓글 작성해주세요' },
-      // 필요한 정보에 따라 추가
     ];
 
     const selectedPost = dummyDeliveryRecruitments.filter(post => post.id === Number(postId));
@@ -165,7 +171,7 @@ const PostDetail = () => {
                       <p id="bold-margin">{comment.nickname}</p>
                       <p>{comment.time}분 전</p>
                     </div>
-                    <p>{comment.content}</p>
+                    <p id="darkgray">{comment.content}</p>
                   </div>
                 ))}
               </div>
