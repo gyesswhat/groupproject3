@@ -4,26 +4,13 @@ import { dummyDeliveryRecruitments } from '../main/posts.const';
 import Topbar from '../main/Topbar';
 import StatusList from './Status';
 import CommentForm from './Comment';
+import { PARTICIPANTS } from './part.const';
 
-const PostContents = ({
-  restaurant,
-  menu,
-  timer,
-  recruit,
-  recruited,
-  cost,
-  recruiter,
-  building,
-  account,
-  content,
-  participants,
-  status,
-}) => {
+const PostContents = ({ restaurant, menu, timer, recruit, recruited, cost, building, account, content }) => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
   const [isJoined, setIsJoined] = useState(false);
 
   const handleButtonClick = () => {
-    // 여기에 버튼 클릭 시 동작할 내용을 추가하세요.
     setButtonDisabled(true); // 버튼 비활성화
     setIsJoined(true);
   };
@@ -66,27 +53,6 @@ const PostContents = ({
         )}
         <p>{content}</p>
       </div>
-
-      <div id="participants">
-        <div id="participant-list">
-          <h4>참여자 목록</h4>
-          <div id="recruiter">
-            <p id="role">방장</p>
-            <p>{recruiter}</p>
-          </div>
-          {participants.map(participant => (
-            <div id="participant">
-              <p id="role">참여자</p>
-              <p>{participant}</p>
-            </div>
-          ))}
-        </div>
-        <div id="status">
-          {status.map(num => (
-            <StatusList status={num} />
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
@@ -128,40 +94,37 @@ const PostDetail = () => {
         <div id="inner-wrap">
           {post ? (
             <>
-              {post.map(
-                ({
-                  id,
-                  restaurant,
-                  menu,
-                  recruiter,
-                  recruit,
-                  recruited,
-                  timer,
-                  cost,
-                  content,
-                  participants,
-                  building,
-                  account,
-                  status,
-                }) => (
-                  <PostContents
-                    key={id}
-                    id={id}
-                    restaurant={restaurant}
-                    menu={menu}
-                    recruiter={recruiter}
-                    recruit={recruit}
-                    recruited={recruited}
-                    timer={timer}
-                    cost={cost}
-                    content={content}
-                    participants={participants}
-                    building={building}
-                    account={account}
-                    status={status}
-                  />
-                ),
-              )}
+              {post.map(({ id, restaurant, menu, recruit, recruited, timer, cost, content, building, account }) => (
+                <PostContents
+                  key={id}
+                  id={id}
+                  restaurant={restaurant}
+                  menu={menu}
+                  recruit={recruit}
+                  recruited={recruited}
+                  timer={timer}
+                  cost={cost}
+                  content={content}
+                  building={building}
+                  account={account}
+                />
+              ))}
+              <div id="part-wrap">
+                <h4>참여자 목록</h4>
+                {PARTICIPANTS.map((participant, index) => (
+                  <div id="participants">
+                    <div id="participant-list">
+                      <div key={index} id="participant">
+                        <p id="role">{index === 0 ? '방장' : '참여자'}</p>
+                        <p>{participant.nickname}</p>
+                      </div>
+                    </div>
+
+                    <div id="status">{index === 0 ? null : <StatusList status={participant.status} />}</div>
+                  </div>
+                ))}
+              </div>
+
               <h4>댓글</h4>
               <div id="comments">
                 <CommentForm />

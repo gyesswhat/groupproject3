@@ -418,7 +418,6 @@ button {
 #participants {
   display: flex;
   flex-direction: row;
-  margin-bottom: 30px;
   font-weight: 800;
 }
 
@@ -434,6 +433,7 @@ button {
   color: #666;
   font-size: 8px;
   display: flex;
+  width: 30px;
 }
 
 #recruiter {
@@ -467,7 +467,7 @@ li {
 }
 
 #status {
-  margin-top: 86px;
+  /*margin-top: 86px;*/
   margin-bottom: 0;
 }
 
@@ -534,4 +534,8 @@ textarea {
 
 #darkgray {
   color: #666;
+}
+
+#part-wrap {
+  margin-bottom: 20px;
 }

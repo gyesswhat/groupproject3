@@ -15,6 +15,13 @@ function App() {
     const checkUser = async () => {
       const user = await getUser();
       setLoggedIn(user);
+
+      if (user) {
+        const userNickname = user.nickname; // 사용자 닉네임 호출
+        console.log(`사용자 닉네임: ${userNickname}`);
+      } else {
+        console.log('사용자 데이터를 가져올 수 없습니다.');
+      }
     };
 
     checkUser();
