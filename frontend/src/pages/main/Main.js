@@ -1,9 +1,8 @@
 import '../../App.css';
 import Posts from './Posts';
-import FoodTypes from './FoodType';
 import Logo from './Logo';
 
-export default function Main() {
+export function Main() {
   return (
     <>
       <div id="topbar">
@@ -18,7 +17,6 @@ export default function Main() {
         </ul>
       </div>
       <div id="container">
-        <FoodTypes />
         <div id="posts">
           <div id="post">
             <Posts />

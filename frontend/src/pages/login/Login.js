@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../main';
+import Logo from '../main/Logo';
 
-export default function Login() {
+export function Login() {
   const [inputs, setInputs] = useState({
     userId: '',
     userPw: '',
