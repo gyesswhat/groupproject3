@@ -1,9 +1,9 @@
-package com.example.delivery.api;
+package com.example.delivery.controller;
 
 import com.example.delivery.dto.LoginDto;
 import com.example.delivery.dto.UserDto;
 import com.example.delivery.dto.UserEditDto;
-import com.example.delivery.dto.UserShowDto;
+import com.example.delivery.dto.UserDetailDto;
 import com.example.delivery.entity.User;
 import com.example.delivery.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -14,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UserApiController {
+public class UserController {
     @Autowired
     private UserService userService;
     @Autowired
@@ -23,30 +23,30 @@ public class UserApiController {
     @PostMapping("/signup")
     public ResponseEntity<Long> signUp(@RequestBody UserDto userDto, HttpServletRequest request) throws Exception {
         if(userService.emailCheck(userDto.getEmail()))
-            return null;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         User user = userService.signup(userDto);
         session = request.getSession();
         session.setAttribute("userId",user.getId());
-        return ResponseEntity.status(HttpStatus.OK).body(user.getId());
+        return ResponseEntity.status(HttpStatus.OK).header(session.getId()).body(user.getId());
     }
 
     @PostMapping("/login")
     public ResponseEntity<Long> login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws Exception {
         User user = userService.login(loginDto);
         if(user==null)
-            return null;
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         session = request.getSession();
         session.setAttribute("userId",user.getId());
-        return ResponseEntity.status(HttpStatus.OK).body(user.getId());
+        return ResponseEntity.status(HttpStatus.OK).header(session.getId()).body(user.getId());
     }
 
     @GetMapping("/user")
-    public ResponseEntity<UserShowDto> show(){
+    public ResponseEntity<UserDetailDto> show(){
         Long id = Long.valueOf(String.valueOf(session.getAttribute("userId")));
-        UserShowDto userInfo = userService.show(id);
+        UserDetailDto userInfo = userService.show(id);
         return (userInfo!=null) ?
                 ResponseEntity.status(HttpStatus.OK).body(userInfo) :
-                null;
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @PatchMapping("/user")
@@ -54,8 +54,8 @@ public class UserApiController {
         Long id = Long.valueOf(String.valueOf(session.getAttribute("userId")));
         User updated = userService.update(id, userEditDto);
         return (updated!=null) ?
-                ResponseEntity.status(HttpStatus.OK).body("200") :
-                null;
+                ResponseEntity.status(HttpStatus.OK).build() :
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
 
     @GetMapping("/user/posts")

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class UserShowDto {
+public class UserDetailDto {
     private String email;
 
     private String nickname;
@@ -17,7 +17,7 @@ public class UserShowDto {
     private String bank;
 
     @Builder
-    public UserShowDto(User user){
+    public UserDetailDto(User user){
         this.email = user.getEmail();
         this.nickname = user.getNickname();
         this.account = user.getAccount();
