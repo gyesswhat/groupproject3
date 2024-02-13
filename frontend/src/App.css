@@ -154,7 +154,7 @@ p {
 
 #delivery-recruitment-item {
   width: 38.9vw; /*480px*/
-  height: 90px;
+  height: 97px;
   padding: 10px;
   margin: 5px 10px 5px 10px;
   border: #ddd 1px solid;
@@ -218,6 +218,7 @@ body {
 
 #login-page-whole {
   height: 100vh;
+  width: 100vw;
   overflow: hidden;
   background: linear-gradient(to right, white 50%, #087112 50%);
 }
@@ -238,6 +239,7 @@ body {
 #login {
   display: flex;
   flex-direction: column;
+  margin-right: 240px;
 }
 
 #id-pw {
@@ -289,6 +291,7 @@ body {
   padding-bottom: 2vh;
   border-radius: 8px;
   font-size: 1vw;
+  width: 100%;
 }
 
 #register-button {
@@ -312,6 +315,8 @@ body {
 
 #login-right {
   height: 100%;
+  width: 100%;
+  background-color: #087112;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -377,7 +382,7 @@ label {
 }
 
 #wrap {
-  width: 50vw;
+  width: 700px;
   margin-top: 30px;
 }
 
@@ -405,7 +410,8 @@ button {
   border-radius: 5px;
   height: 40px;
   width: 90px;
-  margin-left: 20px;
+  /*margin-left: 20px;*/
+  cursor: pointer;
 }
 
 #cost-recruit {
@@ -413,6 +419,7 @@ button {
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
+  gap: 20px;
 }
 
 #participants {
@@ -509,6 +516,7 @@ button[disabled] {
   margin-bottom: 20px;
   display: flex;
   flex-direction: row;
+  gap: 10px;
 }
 
 .comment-input {
@@ -530,6 +538,7 @@ textarea {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: 500;
 }
 
 #darkgray {
