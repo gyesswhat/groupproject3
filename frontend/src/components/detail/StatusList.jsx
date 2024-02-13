@@ -1,6 +1,6 @@
 import React from 'react';
 
-function StatusList({ status }) {
+export function StatusList({ status }) {
   return (
     <div id="statuslist">
       <p style={{ color: status === 0 ? 'green' : status === null ? 'white' : 'black' }}>입금 전</p>
@@ -9,5 +9,3 @@ function StatusList({ status }) {
     </div>
   );
 }
-
-export default StatusList;

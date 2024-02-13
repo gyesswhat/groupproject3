@@ -1,6 +1,6 @@
-import Logo from './Logo';
+import { Logo } from './Logo';
 
-export function TopBar() {
+export function Header() {
   return (
     <div id="topbar">
       <a href="/">

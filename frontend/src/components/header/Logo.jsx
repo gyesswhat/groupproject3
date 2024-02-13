@@ -1,4 +1,4 @@
-export default function Logo() {
+export function Logo() {
   return (
     <div id="title">
       <h3>이화</h3>

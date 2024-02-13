@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Register, Login, Main, PostDetail } from './pages';
+import { Register, Login, Main, PostDetail } from './components';
 import getUser from './Fakeuser';
 import './App.css';
 
