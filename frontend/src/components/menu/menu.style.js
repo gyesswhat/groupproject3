@@ -21,21 +21,20 @@ export const FoodTypeItem = styled.div`
   padding: 20px 10px;
   background-color: #eee;
   font-weight: bold;
-  /* position: relative; */
 
   &.selected {
     color: darkgreen;
-    border: 2px solid green;
+    border: 1px solid green;
+    background-color: #fff;
   }
 
   &:hover {
     background-color: #fff;
     color: darkgreen;
-    border: 2px solid green;
+    border: 1px solid green;
   }
 
   & > img {
-    /* position: absolute; */
     width: 20px;
     height: 20px;
     margin-bottom: 5px;
