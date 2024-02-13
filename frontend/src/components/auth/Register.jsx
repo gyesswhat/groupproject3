@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Logo from '../main/Logo';
-import { BANK_LIST } from './bank.const';
+import { Logo } from '../header';
+import { BANK_LIST } from './auth.const';
 
 export const Register = () => {
   const navigate = useNavigate();

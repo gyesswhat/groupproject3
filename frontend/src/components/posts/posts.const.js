@@ -1,4 +1,4 @@
-export const dummyDeliveryRecruitments = [
+export const dummyDeliveryRecruitment = [
   {
     id: 1,
     restaurant: '여우골 서교점',

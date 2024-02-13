@@ -31,6 +31,7 @@
     "prefer-arrow-callback": "error", // Require using arrow functions for callbacks
     "require-await": "error",
     "import/export": "off",
+    "import/extensions": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "off",
     "arrow-parens": ["error", "as-needed"], // a => {}

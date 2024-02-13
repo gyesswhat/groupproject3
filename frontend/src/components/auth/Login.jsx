@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../main/Logo';
+import { Logo } from '../header';
 
 export function Login() {
   const [inputs, setInputs] = useState({
