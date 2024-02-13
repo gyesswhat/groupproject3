@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Main, Login, Register, PostDetail, Navigate } from './pages';
+import { useState, useEffect } from 'react';
+import { Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Register, Login, Main, PostDetail } from './pages';
+import getUser from './Fakeuser';
+import './App.css';
 
 // TODO: Router 추가 (시작화면=로그인 페이지)
 function App() {

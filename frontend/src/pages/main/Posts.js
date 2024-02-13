@@ -1,31 +1,35 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import DropdownExample from './PlaceDropdown';
 import FoodTypes from './FoodType';
 import { dummyDeliveryRecruitments } from './posts.const';
+import * as S from './main.style';
 
-const DeliveryRecruitmentItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
-  <a id="delivery-recruitment-item" href={`/${id}`}>
-    <h4>
-      [{restaurant}] {menu}
-    </h4>
-    <div id="info">
-      <p id="green">{timer}분</p>
-      <p> 뒤 주문 예정</p>
-      <p className="dot" id="green">
-        •
-      </p>
-      <p>모집 인원</p>
-      <p id="green">
-        {recruited}/{recruit}
-      </p>
-    </div>
-    <div id="recruiter-cost">
-      <p>{recruiter}</p>
-      <div id="cost">
-        <p id="green">배달비 포함</p> <h4>{cost}</h4> <p>원</p>
-      </div>
-    </div>
-  </a>
+const DeliveryItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
+  <Link to={`/${id}`}>
+    <S.DeliveryItem>
+      <h4>
+        [{restaurant}] {menu}
+      </h4>
+      <S.Info>
+        <p id="green">{timer}분</p>
+        <p> 뒤 주문 예정</p>
+        <p className="dot" id="green">
+          •
+        </p>
+        <p>모집 인원</p>
+        <p id="green">
+          {recruited}/{recruit}
+        </p>
+      </S.Info>
+      <S.PriceWrap>
+        <p>{recruiter}</p>
+        <S.Price>
+          <p id="green">배달비 포함</p> <h4>{cost}</h4> <p>원</p>
+        </S.Price>
+      </S.PriceWrap>
+    </S.DeliveryItem>
+  </Link>
 );
 
 const Posts = () => {
@@ -56,14 +60,14 @@ const Posts = () => {
           <DropdownExample onBuildingChange={handleBuildingChange} />
           <h2> 내에서 모집 중인 주문은...</h2>
         </div>
-        <div id="recruit-button">
-          <a href="/recruit">배달팟 모집</a>
-        </div>
+        <Link to="/recruit">
+          <div id="recruit-button">배달팟 모집</div>
+        </Link>
       </div>
       <div id="main-screen">
         <div id="delivery-recruitment-list">
           {filteredDeliveryRecruitments.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost }) => (
-            <DeliveryRecruitmentItem
+            <DeliveryItem
               key={id}
               id={id}
               restaurant={restaurant}

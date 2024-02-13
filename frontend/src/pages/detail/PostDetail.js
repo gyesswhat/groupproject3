@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { dummyDeliveryRecruitments } from '../main/posts.const';
-import Topbar from '../main/Topbar';
+import { TopBar } from '../main';
 import StatusList from './Status';
-import CommentForm from './Comment';
-import { PARTICIPANTS } from './part.const';
+import { CommentForm } from './CommentForm';
+import { PARTICIPANTS } from './detail.const';
 
 const PostContents = ({ restaurant, menu, timer, recruit, recruited, cost, building, account, content }) => {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
@@ -13,6 +13,7 @@ const PostContents = ({ restaurant, menu, timer, recruit, recruited, cost, build
   const handleButtonClick = () => {
     setButtonDisabled(true); // 버튼 비활성화
     setIsJoined(true);
+    // const userId = sessionStorage.getItem('userId');
   };
 
   return (
@@ -57,7 +58,7 @@ const PostContents = ({ restaurant, menu, timer, recruit, recruited, cost, build
   );
 };
 
-const PostDetail = () => {
+export const PostDetail = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
   const [comments, setComments] = useState([]);
@@ -75,8 +76,18 @@ const PostDetail = () => {
     //   .catch(error => console.error('Error fetching comments:', error));
 
     const dummyComments = [
-      { id: 1, nickname: '폼폼푸린', time: 4, content: '계란초밥 3개 추가 가능합니까?' },
-      { id: 2, nickname: '마이멜로디', time: 3, content: '요청사항 댓글 작성해주세요' },
+      {
+        id: 1,
+        nickname: '폼폼푸린',
+        time: 4,
+        content: '계란초밥 3개 추가 가능합니까?',
+      },
+      {
+        id: 2,
+        nickname: '마이멜로디',
+        time: 3,
+        content: '요청사항 댓글 작성해주세요',
+      },
     ];
 
     const selectedPost = dummyDeliveryRecruitments.filter(post => post.id === Number(postId));
@@ -89,7 +100,7 @@ const PostDetail = () => {
 
   return (
     <>
-      <Topbar />
+      <TopBar />
       <div id="wrap">
         <div id="inner-wrap">
           {post ? (
@@ -111,16 +122,15 @@ const PostDetail = () => {
               ))}
               <div id="part-wrap">
                 <h4>참여자 목록</h4>
-                {PARTICIPANTS.map((participant, index) => (
-                  <div id="participants">
+                {PARTICIPANTS.map(({ nickname, status }, index) => (
+                  <div id="participants" key={nickname}>
                     <div id="participant-list">
-                      <div key={index} id="participant">
+                      <div id="participant">
                         <p id="role">{index === 0 ? '방장' : '참여자'}</p>
-                        <p>{participant.nickname}</p>
+                        <p>{nickname}</p>
                       </div>
                     </div>
-
-                    <div id="status">{index === 0 ? null : <StatusList status={participant.status} />}</div>
+                    <div id="status">{index === 0 ? null : <StatusList status={status} />}</div>
                   </div>
                 ))}
               </div>
@@ -128,13 +138,13 @@ const PostDetail = () => {
               <h4>댓글</h4>
               <div id="comments">
                 <CommentForm />
-                {comments.map(comment => (
-                  <div key={comment.id}>
+                {comments.map(({ id, nickname, time, content }) => (
+                  <div key={id}>
                     <div id="place-text">
-                      <p id="bold-margin">{comment.nickname}</p>
-                      <p>{comment.time}분 전</p>
+                      <p id="bold-margin">{nickname}</p>
+                      <p>{time}분 전</p>
                     </div>
-                    <p id="darkgray">{comment.content}</p>
+                    <p id="darkgray">{content}</p>
                   </div>
                 ))}
               </div>
@@ -147,5 +157,3 @@ const PostDetail = () => {
     </>
   );
 };
-
-export default PostDetail;

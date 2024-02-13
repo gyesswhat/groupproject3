@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Logo from '../main/Logo';
 import { BANK_LIST } from './bank.const';
 
-const Register = () => {
+export const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: '',
@@ -99,4 +99,3 @@ const Register = () => {
     </>
   );
 };
-export default Register;

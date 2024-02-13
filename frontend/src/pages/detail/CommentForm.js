@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-const CommentForm = ({ onCommentSubmit }) => {
+export const CommentForm = ({ onCommentSubmit }) => {
   const [comment, setComment] = useState('');
 
   const handleSubmit = e => {
@@ -24,5 +24,3 @@ const CommentForm = ({ onCommentSubmit }) => {
     </form>
   );
 };
-
-export default CommentForm;

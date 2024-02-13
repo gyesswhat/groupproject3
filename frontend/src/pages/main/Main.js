@@ -2,7 +2,7 @@ import '../../App.css';
 import Posts from './Posts';
 import Logo from './Logo';
 
-export default function Main() {
+export function Main() {
   return (
     <>
       <div id="topbar">

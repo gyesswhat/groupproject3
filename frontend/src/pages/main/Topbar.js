@@ -1,6 +1,6 @@
 import Logo from './Logo';
 
-export default function Topbar() {
+export function TopBar() {
   return (
     <div id="topbar">
       <a href="/">
