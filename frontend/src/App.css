@@ -17,10 +17,11 @@ p {
 }
 
 #topbar a {
-  color: #666;
+  color: black;
   text-decoration: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   margin-right: 20px;
+  font-weight: 800;
 }
 
 #title {
@@ -49,19 +50,6 @@ p {
   list-style: none;
   margin-right: 100px;
 }
-
-/*button {
-  background-color: #eee;
-  border: 1px solid #eee;
-  border-radius: 5px;
-  padding: 5px 8px;
-  cursor: pointer;
-}
-
-button img {
-  width: 9px;
-  height: 9px;
-}*/
 
 #clickAvailable {
   cursor: pointer;
@@ -184,6 +172,7 @@ button img {
 #info {
   display: flex;
   flex-direction: row;
+  margin-bottom: 10px;
 }
 
 .dot {
@@ -313,12 +302,12 @@ body {
 }
 
 #register-button > #green {
-  margin-top: 1vh; /* 1%의 뷰포트 높이로 조절 */
-  margin-left: 0.5vw; /* 뷰포트 너비의 0.5%로 조절 */
+  margin-top: 1vh;
+  margin-left: 0.5vw;
 }
 
 #login-register {
-  width: 30vw; /* 40%의 뷰포트 너비로 조절 */
+  width: 30vw;
 }
 
 #login-right {
@@ -329,7 +318,7 @@ body {
 }
 
 #login-right-img {
-  height: 90vh; /* 부모 요소에 맞게 확장, 높이 조정 */
+  height: 90vh;
   display: flex;
   margin-right: 3vw;
   align-items: center;
@@ -354,7 +343,7 @@ body {
 }
 
 #register-title h2 {
-  align-self: flex-start; /* 수정된 부분 */
+  align-self: flex-start;
 }
 
 #register-form {
@@ -430,6 +419,7 @@ button {
   display: flex;
   flex-direction: row;
   margin-bottom: 30px;
+  font-weight: 800;
 }
 
 #participant {
@@ -437,11 +427,20 @@ button {
   flex-direction: row;
   gap: 10px;
   flex-wrap: wrap;
+  align-items: center;
 }
+
+#role {
+  color: #666;
+  font-size: 8px;
+  display: flex;
+}
+
 #recruiter {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 18px;
+  align-items: center;
 }
 
 ul {
@@ -468,7 +467,7 @@ li {
 }
 
 #status {
-  margin-top: 87px;
+  margin-top: 86px;
   margin-bottom: 0;
 }
 
@@ -477,7 +476,7 @@ li {
   display: flex;
   flex-direction: row;
   gap: 3px;
-  margin-top: 10px;
+  margin-bottom: 0;
 }
 
 #recruiter-cost > h4 {
@@ -490,10 +489,9 @@ li {
 }
 
 button[disabled] {
-  background-color: lightgray; /* 배경색 변경 */
-  color: gray; /* 텍스트 색상 변경 */
-  cursor: not-allowed; /* 마우스 커서 변경 */
-  /* 필요한 다른 스타일 추가 */
+  background-color: lightgray;
+  color: gray;
+  cursor: not-allowed;
 }
 
 #bold-margin {
@@ -504,19 +502,20 @@ button[disabled] {
   display: flex;
   gap: 10px;
   flex-direction: column;
+  font-weight: 800;
 }
 
 .comment-form {
-  margin-bottom: 20px; /* 댓글 작성란과 이전 댓글 사이의 간격 조절 */
+  margin-bottom: 20px;
   display: flex;
   flex-direction: row;
 }
 
 .comment-input {
-  width: 90%; /* 입력 필드 폭을 100%로 설정하여 전체 너비를 차지하도록 함 */
+  width: 90%;
   padding: 10px;
-  border: 1px solid #ccc; /* 테두리 설정 */
-  border-radius: 5px; /* 둥근 모서리 설정 */
+  border: 1px solid #ccc;
+  border-radius: 5px;
   font-size: 9px;
   resize: none;
 }
@@ -525,10 +524,14 @@ textarea {
 }
 
 .comment-submit {
-  cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 상태로 표시 */
+  cursor: pointer;
   height: 34px;
   width: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#darkgray {
+  color: #666;
 }
