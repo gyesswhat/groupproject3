@@ -21,9 +21,9 @@ public class UserController {
     private HttpSession session;
 
     @PostMapping("/signup")
-    public ResponseEntity<Long> signUp(@RequestBody UserDto userDto, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> signUp(@RequestBody UserDto userDto, HttpServletRequest request) throws Exception {
         if(userService.emailCheck(userDto.getEmail()))
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이미 존재하는 이메일입니다.");
         User user = userService.signup(userDto);
         session = request.getSession();
         session.setAttribute("userId",user.getId());
@@ -31,22 +31,22 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Long> login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws Exception {
+    public ResponseEntity<?> login(@RequestBody LoginDto loginDto, HttpServletRequest request) throws Exception {
         User user = userService.login(loginDto);
         if(user==null)
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("이메일이 존재하지 않거나 비밀번호가 일치하지 않습니다.");
         session = request.getSession();
         session.setAttribute("userId",user.getId());
         return ResponseEntity.status(HttpStatus.OK).header(session.getId()).body(user.getId());
     }
 
     @GetMapping("/user")
-    public ResponseEntity<UserDetailDto> show(){
+    public ResponseEntity<?> show(){
         Long id = Long.valueOf(String.valueOf(session.getAttribute("userId")));
         UserDetailDto userInfo = userService.show(id);
         return (userInfo!=null) ?
                 ResponseEntity.status(HttpStatus.OK).body(userInfo) :
-                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("유저를 찾을 수 없습니다.");
     }
 
     @PatchMapping("/user")
@@ -55,7 +55,7 @@ public class UserController {
         User updated = userService.update(id, userEditDto);
         return (updated!=null) ?
                 ResponseEntity.status(HttpStatus.OK).build() :
-                ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("유저를 찾을 수 없습니다.");
     }
 
     @GetMapping("/user/posts")
