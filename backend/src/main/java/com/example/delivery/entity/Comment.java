@@ -4,35 +4,26 @@ import com.example.delivery.dto.CommentDto;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
-
 @Entity
-@AllArgsConstructor // 생성자 자동 생성
-@NoArgsConstructor // 기본생성자 자동 생성
-@ToString // toString() 자동생성
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Setter
-@Getter // 게터 만들어줌
+@Getter
 public class Comment {
-    // - comment_id(댓글 아이디): INT
-    //    - PRIMARY KEY
-    //- post_id(게시글 아이디): INT
-    //    - 외래 키
-    //- user_id(유저 아이디): INT
-    //    - 외래 키
-    //- comment_body(댓글 내용): VARCHAR(255)
-    //- created_at(생성 시간): TIMESTAMP
-
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer commentId;
-    @Column
-    private Integer postId;
-    @Column
-    private Integer userId;
-    @Column
+    private Long commentId;
+    @ManyToOne
+    @JoinColumn(name="post_postId")
+    private Post post;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private User user;
+    @Column(nullable = false)
     private String commentBody;
-    @Column
-    private Timestamp createdAt;
+    @Column(nullable = false)
+    private String createdAt;
 
     public void patch(CommentDto dto) {
         // 예외 발생

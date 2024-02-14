@@ -17,7 +17,7 @@ public class CommentController {
     CommentService commentService;
 
     // POST
-    @PostMapping("/posts/{PostId}/comment")
+    @PostMapping("/posts/{postId}/comment")
     public ResponseEntity<Comment> createComment(@RequestBody CommentDto dto) {
         Comment comment = commentService.createComment(dto);
         return (comment != null) ?
@@ -26,25 +26,25 @@ public class CommentController {
     }
 
     // GET
-    @GetMapping("/posts/{PostId}/comments")
-    public ResponseEntity<List<CommentListDto>> showComments(@PathVariable Integer PostId) {
-        List<CommentListDto> responses = commentService.showComments(PostId);
+    @GetMapping("/posts/{postId}/comments")
+    public ResponseEntity<List<CommentListDto>> showComments(@PathVariable Long postId) {
+        List<CommentListDto> responses = commentService.showComments(postId);
         return ResponseEntity.status(HttpStatus.OK).body(responses);
     }
 
     // PATCH
-    @PatchMapping("/posts/{PostId}/comments/{CommentId}")
-    public ResponseEntity<CommentDto> patchComment(@PathVariable Integer CommentId, @RequestBody CommentDto dto) {
-        CommentDto patched = commentService.patchComment(CommentId, dto);
+    @PatchMapping("/posts/{postId}/comments/{commentId}")
+    public ResponseEntity<CommentDto> patchComment(@PathVariable Long commentId, @RequestBody CommentDto dto) {
+        CommentDto patched = commentService.patchComment(commentId, dto);
         return (patched != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(patched) :
                 null;
     }
 
     // DELETE
-    @DeleteMapping("/posts/{PostId}/comments/{CommentId}")
-    public ResponseEntity<CommentDto> deleteComment(@PathVariable Integer CommentId) {
-        CommentDto deleted = commentService.deleteComment(CommentId);
+    @DeleteMapping("/posts/{postId}/comments/{commentId}")
+    public ResponseEntity<CommentDto> deleteComment(@PathVariable Long commentId) {
+        CommentDto deleted = commentService.deleteComment(commentId);
         return (deleted != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(deleted) :
                 null;
