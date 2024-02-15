@@ -24,5 +24,6 @@ public class Post {
     @Column(nullable = false) private int price;
     @Column private String postBody;
     @Column(nullable = false) private String createdAt; // SimpleDateFormat 사용해서 자료형 String으로 변경
+    @Column(nullable = false) private int isValid;
 
 }

@@ -20,8 +20,9 @@ public class PostDto {
     private int price;
     private String postBody;
     private String createdAt;
+    private int isValid;
 
     public Post toEntity(User user) {
-        return new Post(postId, user, location, category, restaurant, menu, partNum, price, postBody, createdAt);
+        return new Post(postId, user, location, category, restaurant, menu, partNum, price, postBody, createdAt, 4);
     }
 }
