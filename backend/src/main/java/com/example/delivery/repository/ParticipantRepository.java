@@ -1,9 +1,9 @@
 package com.example.delivery.repository;
 
 import com.example.delivery.entity.Participant;
-import com.example.delivery.entity.Post;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -20,7 +20,9 @@ public interface ParticipantRepository extends CrudRepository<Participant, Long>
             "WHERE p.post = :postId")
     List<Participant> findByPostId(Long postId);
 
-    int getPartNum(Post post);
+    @Query(name="Participant.getPartNum", nativeQuery = true)
+    Integer getPartNum(@Param("postId") Long postId);
 
-    int getDepositCheckedNum(Post post);
+    @Query(name="Participant.getDepositCheckedNum", nativeQuery = true)
+    Integer getDepositCheckedNum(@Param("postId") Long postId);
 }

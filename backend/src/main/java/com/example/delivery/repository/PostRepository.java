@@ -14,24 +14,15 @@ import java.util.List;
 
 @Repository
 public interface PostRepository extends CrudRepository<Post, Long>{
-    @Query("SELECT new com.example.delivery.dto.PostListDto(p.createdAt, p.restaurant, p.menu, p.price, p.partNum, u.nickname) " +
-            "FROM Post p " +
-            "JOIN User u ON p.user.id = u.id")
+    @Query(name="Post.findPostList", nativeQuery = true)
     ArrayList<PostListDto> findPostList();
 
-    @Query("SELECT new com.example.delivery.dto.PostDetailDto(p.location, p.restaurant, p.menu, p.partNum, p.price, p.postBody)" +
-            "FROM Post p " +
-            "WHERE p.postId = :PostId")
+    @Query(name="Post.findPostDetail", nativeQuery = true)
     PostDetailDto findPostDetail(@Param("postId") Long PostId);
 
-    @Query("SELECT new com.example.delivery.dto.ParticipantListDto(u.nickname, pr.joinedAt, pr.status)" +
-            "FROM Participant pr " +
-            "JOIN User u ON pr.user.id = u.id " +
-            "WHERE pr.post.postId = :postId")
+    @Query(name="Post.findParticipants", nativeQuery = true)
     List<ParticipantListDto> findParticipants(@Param("postId") Long postId);
 
-    @Query("SELECT p " +
-            "FROM Post p " +
-            "WHERE CAST(p.createdAt AS String) <= :checkBy")
-    List<Post> findExpiredPosts(String checkBy);
+    @Query(name="Post.findPostIdsToCheck", nativeQuery = true)
+    List<Long> findPostIdsToCheck(@Param("checkBy") String checkBy);
 }
