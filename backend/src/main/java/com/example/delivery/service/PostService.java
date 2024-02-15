@@ -89,39 +89,4 @@ public class PostService {
         participant.setStatus(3);
         return msg;
     }
-
-//    public List<Post> findPostsToCheck(Timestamp timestamp) {
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//        String checkBy = simpleDateFormat.format(timestamp);
-//        return postRepository.findExpiredPosts(checkBy);
-//    }
-//
-//    public CancelHostDto cancelHost(Post expiredPost) {
-//        Long postId = expiredPost.getPostId();  // 1) 취소 예정 Post
-//        Long userId = expiredPost.getUser().getId(); // 2) 취소 예정 Post의 방장 ID
-//        List<String> accountInfo = null; // 3) 취소 예정 Post의 참여자 계좌 정보 리스트
-//        List<Participant> participants = participantRepository.findByPostId(postId);
-//        for (Participant participant : participants) {
-//            if (participant.getStatus()==0) continue; // 방장이면 빼기
-//            String bank = participant.getUser().getBank();
-//            String account = participant.getUser().getAccount();
-//            accountInfo.add(bank + account);
-//        }
-//        CancelHostDto forHost = new CancelHostDto(postId, userId, accountInfo);
-//        return forHost;
-//    }
-//
-//    public List<CancelPartDto> cancelPart(Post expiredPost) {
-//        List<CancelPartDto> forPart = null;
-//        Long postId = expiredPost.getPostId();
-//        List<Participant> participants = participantRepository.findByPostId(postId);
-//        for (Participant participant : participants) {
-//            if (participant.getStatus()==0) continue; // 방장이면 빼기
-//            CancelPartDto user = new CancelPartDto(
-//                    participant.getPost().getPostId(),
-//                    participant.getUser().getId()); // DTO 생성
-//            forPart.add(user); // DTO list에 추가
-//        }
-//        return forPart;
-//    }
 }
