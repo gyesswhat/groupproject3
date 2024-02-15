@@ -9,7 +9,7 @@ public class PostListDto {
     private String createdAt;
     private String restaurant;
     private String menu;
-    private int price;
-    private int partNum;
+    private Integer price;
+    private Integer partNum;
     private String nickname;
 }

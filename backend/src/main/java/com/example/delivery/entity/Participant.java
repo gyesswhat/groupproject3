@@ -8,6 +8,36 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 @Getter
+@NamedNativeQueries({
+        @NamedNativeQuery(
+                name = "Participant.getPartNum",
+                query = "SELECT COUNT(*) " +
+                        "FROM participant " +
+                        "WHERE postId = :postId",
+                resultSetMapping = "partNumMapper"
+        ),
+        @NamedNativeQuery(
+                name = "Participant.getDepositCheckedNum",
+                query = "SELECT COUNT(*) " +
+                        "FROM participant " +
+                        "WHERE postId = :postId AND status = 3",
+                resultSetMapping = "depositCheckedNumMapper"
+        )
+})
+@SqlResultSetMappings({
+        @SqlResultSetMapping(
+                name = "partNumMapper",
+                columns = {
+                        @ColumnResult(name="partNum", type=Integer.class)
+                }
+        ),
+        @SqlResultSetMapping(
+                name = "depositCheckedNumMapper",
+                columns = {
+                        @ColumnResult(name="depositCheckedNum", type= Integer.class)
+                }
+        )
+})
 public class Participant {
     @Id
     @ManyToOne

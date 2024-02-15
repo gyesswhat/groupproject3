@@ -6,5 +6,5 @@ import lombok.AllArgsConstructor;
 public class ParticipantListDto {
     private String nickname;
     private String joinedAt;
-    private int status;
+    private Integer status;
 }
