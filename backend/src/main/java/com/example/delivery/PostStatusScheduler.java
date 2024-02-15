@@ -41,7 +41,7 @@ public class PostStatusScheduler {
         for (Long postId : postIdsToCheck) {
             Post post = postRepository.findById(postId).orElse(null);
             int targetPartNum = post.getPartNum();
-            int nowPartNum = participantRepository.getPartNum(post);
+            int nowPartNum = participantRepository.getPartNum(postId);
 
             if (targetPartNum > nowPartNum) post.setIsValid(2); // 주문 실패(인원 못 채움)
             else {

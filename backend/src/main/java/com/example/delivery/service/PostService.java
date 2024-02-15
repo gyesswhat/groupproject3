@@ -63,7 +63,7 @@ public class PostService {
         Post post = postRepository.findById(postId).orElse(null);
         User user = userRepository.findById(userId).orElse(null);
         // 3. 참여 가능 여부 확인
-        if (post.getPartNum() <= participantRepository.getPartNum(post)) return "참여인원이 꽉 찼습니다.";
+        if (post.getPartNum() <= participantRepository.getPartNum(postId)) return "참여인원이 꽉 찼습니다.";
         // 4. 참여
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
