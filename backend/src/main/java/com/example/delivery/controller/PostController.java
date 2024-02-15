@@ -22,33 +22,39 @@ public class PostController {
     private HttpSession session;
 
     @PostMapping("/post")
-    public ResponseEntity<Post> create(@RequestBody PostDto dto) {
+    public ResponseEntity<?> create(@RequestBody PostDto dto) {
         Post created = postService.create(dto);
-        return (created != null) ? // 생성하면 정상, 실패하면 오류
+        return (created != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(created) : // 성공시
-                null; // 실패시
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("저장에 실패했습니다.");
     }
 
     @GetMapping("/posts")
-    public ResponseEntity<List<PostListDto>> showPosts() {
+    public ResponseEntity<?> showPosts() {
         List<PostListDto> responses = postService.showPosts();
-        return ResponseEntity.status(HttpStatus.OK).body(responses);
+        return (responses != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(responses) :
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("게시글 불러오기에 실패했습니다.");
     }
 
     @GetMapping("/posts/{postId}")
-    public ResponseEntity<PostDetailDto> showPostDetail(@PathVariable Long postId) {
+    public ResponseEntity<?> showPostDetail(@PathVariable Long postId) {
         PostDetailDto response = postService.showPostDetail(postId);
-        return ResponseEntity.status(HttpStatus.OK).body(response);
+        return (response != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(response) :
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("게시글 불러오기에 실패했습니다.");
     }
 
     @GetMapping("/posts/{postId}/participants")
-    public ResponseEntity<List<ParticipantListDto>> showParticipants(@PathVariable Long postId) {
+    public ResponseEntity<?> showParticipants(@PathVariable Long postId) {
         List<ParticipantListDto> responses = postService.showParticipants(postId);
-        return ResponseEntity.status(HttpStatus.OK).body(responses);
+        return (responses != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(responses) :
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("참여자 불러오기에 실패했습니다.");
     }
 
     @PostMapping("/posts/{postId}/join")
-    public ResponseEntity<String> join(@PathVariable Long postId) {
+    public ResponseEntity<?> join(@PathVariable Long postId) {
         Long userId = Long.valueOf(String.valueOf(session.getAttribute("userId")));
         String msg = postService.joinPost(postId, userId);
         return (msg == null) ?

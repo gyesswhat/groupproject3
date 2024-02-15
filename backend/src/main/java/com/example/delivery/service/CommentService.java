@@ -27,21 +27,20 @@ public class CommentService {
     }
 
     public List<CommentListDto> showComments(Long postId) {
-        List<CommentListDto> responses = commentRepository.findCommentList(postId);
-        return responses;
+        return commentRepository.findCommentList(postId);
     }
 
     public CommentDto patchComment(Long commentId, CommentDto dto) {
-        Comment target = commentRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("대상 댓글이 없는 경우"));
+        Comment target = commentRepository.findById(commentId).orElse(null);
+        if (target==null) return null;
         target.patch(dto);
         Comment updated = commentRepository.save(target);
         return CommentDto.createCommentDto(updated);
     }
 
     public CommentDto deleteComment(Long commentId) {
-        Comment target = commentRepository.findById(commentId)
-                .orElseThrow(() -> new IllegalArgumentException("대상 댓글이 없는 경우"));
+        Comment target = commentRepository.findById(commentId).orElse(null);
+        if (target==null) return null;
         commentRepository.delete(target);
         return CommentDto.createCommentDto(target);
     }

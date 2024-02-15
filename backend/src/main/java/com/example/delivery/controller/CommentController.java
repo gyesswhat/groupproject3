@@ -18,35 +18,37 @@ public class CommentController {
 
     // POST
     @PostMapping("/posts/{postId}/comment")
-    public ResponseEntity<Comment> createComment(@RequestBody CommentDto dto) {
+    public ResponseEntity<?> createComment(@RequestBody CommentDto dto) {
         Comment comment = commentService.createComment(dto);
         return (comment != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(comment) :
-                null;
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 작성에 실패했습니다.");
     }
 
     // GET
     @GetMapping("/posts/{postId}/comments")
-    public ResponseEntity<List<CommentListDto>> showComments(@PathVariable Long postId) {
+    public ResponseEntity<?> showComments(@PathVariable Long postId) {
         List<CommentListDto> responses = commentService.showComments(postId);
-        return ResponseEntity.status(HttpStatus.OK).body(responses);
+        return (responses != null) ?
+                ResponseEntity.status(HttpStatus.OK).body(responses) :
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 조회에 실패했습니다.");
     }
 
     // PATCH
     @PatchMapping("/posts/{postId}/comments/{commentId}")
-    public ResponseEntity<CommentDto> patchComment(@PathVariable Long commentId, @RequestBody CommentDto dto) {
+    public ResponseEntity<?> patchComment(@PathVariable Long commentId, @RequestBody CommentDto dto) {
         CommentDto patched = commentService.patchComment(commentId, dto);
         return (patched != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(patched) :
-                null;
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).body("대상 댓글이 없습니다.");
     }
 
     // DELETE
     @DeleteMapping("/posts/{postId}/comments/{commentId}")
-    public ResponseEntity<CommentDto> deleteComment(@PathVariable Long commentId) {
+    public ResponseEntity<?> deleteComment(@PathVariable Long commentId) {
         CommentDto deleted = commentService.deleteComment(commentId);
         return (deleted != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(deleted) :
-                null;
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).body("대상 댓글이 없습니다.");
     }
 }
