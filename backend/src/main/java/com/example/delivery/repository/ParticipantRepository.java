@@ -10,14 +10,15 @@ import java.util.List;
 
 @Repository
 public interface ParticipantRepository extends CrudRepository<Participant, Long> {
-    @Query("SELECT p " +
-            "FROM Participant p " +
-            "WHERE p.user = :userId AND p.post = :postId")
+    @Query(value = "SELECT *" +
+            "FROM participant" +
+            "WHERE postId = :postId" +
+            "AND userId = :userId", nativeQuery = true)
     Participant findByPostIdAndUserId(Long postId, Long userId);
 
-    @Query("SELECT p " +
-            "FROM Participant p " +
-            "WHERE p.post = :postId")
+    @Query(value = "SELECT *" +
+            "FROM participant" +
+            "WHERE postId = :postId", nativeQuery = true)
     List<Participant> findByPostId(Long postId);
 
     @Query(name="Participant.getPartNum", nativeQuery = true)

@@ -2,6 +2,7 @@ package com.example.delivery.service;
 
 import com.example.delivery.dto.*;
 import com.example.delivery.entity.Participant;
+import com.example.delivery.entity.ParticipantPK;
 import com.example.delivery.entity.Post;
 import com.example.delivery.entity.User;
 import com.example.delivery.repository.ParticipantRepository;
@@ -37,7 +38,8 @@ public class PostService {
         if (post.getPostId() != null) return null;
         // 4. 방장 participant에 추가 + 생성된 post 리턴
         Post created = postRepository.save(post);
-        participantRepository.save(new Participant(post, user, createdAt, 1));
+        ParticipantPK pk = new ParticipantPK(post.getPostId(), user.getId());
+        participantRepository.save(new Participant(pk, post, user, createdAt, 1));
         return created;
     }
 
@@ -68,7 +70,8 @@ public class PostService {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String joinedAt = simpleDateFormat.format(timestamp);
-        Participant participant = new Participant(post, user, joinedAt, 1);
+        ParticipantPK pk = new ParticipantPK(post.getPostId(), user.getId());
+        Participant participant = new Participant(pk, post, user, joinedAt, 1);
         participantRepository.save(participant);
 
         return msg;

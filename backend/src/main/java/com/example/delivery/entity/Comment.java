@@ -1,6 +1,7 @@
 package com.example.delivery.entity;
 
 import com.example.delivery.dto.CommentDto;
+import com.example.delivery.dto.CommentListDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,6 +11,25 @@ import lombok.*;
 @ToString
 @Setter
 @Getter
+@NamedNativeQuery(
+        name = "Comment.findCommentList",
+        query = "SELECT u.nickname, c.commentBody, c.createdAt" +
+                "FROM Comment c" +
+                "JOIN User u ON c.user.id = u.id" +
+                "WHERE c.post.postId = :postId",
+        resultSetMapping = "commentListMapper"
+)
+@SqlResultSetMapping(
+        name = "commentListMapper",
+        classes = @ConstructorResult(
+                targetClass = CommentListDto.class,
+                columns = {
+                        @ColumnResult(name = "nickname",type = String.class),
+                        @ColumnResult(name = "commentBody",type = String.class),
+                        @ColumnResult(name = "createdAt", type = String.class)
+                }
+        )
+)
 public class Comment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
