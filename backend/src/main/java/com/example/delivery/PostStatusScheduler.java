@@ -36,9 +36,10 @@ public class PostStatusScheduler {
         Timestamp timestamp = new Timestamp(System.currentTimeMillis() - 30*60*1000);
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String checkBy = simpleDateFormat.format(timestamp);
-        List<Post> postsToCheck = postRepository.findPostsToCheck(checkBy);
+        List<Long> postIdsToCheck = postRepository.findPostIdsToCheck(checkBy);
         // 2. Post 상태변경
-        for (Post post : postsToCheck) {
+        for (Long postId : postIdsToCheck) {
+            Post post = postRepository.findById(postId).orElse(null);
             int targetPartNum = post.getPartNum();
             int nowPartNum = participantRepository.getPartNum(post);
 
