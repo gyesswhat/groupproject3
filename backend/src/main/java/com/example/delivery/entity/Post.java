@@ -17,7 +17,7 @@ import lombok.*;
 @NamedNativeQueries({
         @NamedNativeQuery(
                 name = "Post.findPostList",
-                query = "SELECT p.createdAt, p.restaurant, p.menu, p.price, p.part_num, u.nickname " +
+                query = "SELECT p.createdAt, p.restaurant, p.menu, p.price, p.partNum, u.nickname " +
                         "FROM post p " +
                         "JOIN user u ON p.userId = u.id",
                 resultSetMapping = "postListMapper"
@@ -31,7 +31,7 @@ import lombok.*;
         ),
         @NamedNativeQuery(
                 name = "Post.findParticipants",
-                query = "SELECT u.nickname, pr.joinedAt, pr.status " +
+                query = "SELECT u.nickname, pr.joinedAt, pr.status, u.account, u.bank " +
                         "FROM participant pr " +
                         "JOIN user u ON pr.user.id = u.id " +
                         "WHERE pr.post.id = :postId",
@@ -82,7 +82,9 @@ import lombok.*;
                         columns = {
                                 @ColumnResult(name="nickname", type=String.class),
                                 @ColumnResult(name="joinedAt", type=String.class),
-                                @ColumnResult(name="status", type=Integer.class)
+                                @ColumnResult(name="status", type=Integer.class),
+                                @ColumnResult(name="account", type=String.class),
+                                @ColumnResult(name="bank", type=String.class)
                         }
                 )
         ),
