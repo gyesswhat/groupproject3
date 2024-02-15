@@ -7,4 +7,6 @@ public class ParticipantListDto {
     private String nickname;
     private String joinedAt;
     private Integer status;
+    private String account;
+    private String bank;
 }
