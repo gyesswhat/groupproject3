@@ -17,7 +17,7 @@ import lombok.*;
 @NamedNativeQueries({
         @NamedNativeQuery(
                 name = "Post.findPostList",
-                query = "SELECT p.createdAt, p.restaurant, p.menu, p.price, p.part_num, u.nickname " +
+                query = "SELECT p.createdAt, p.restaurant, p.menu, p.price, p.partNum, u.nickname " +
                         "FROM post p " +
                         "JOIN user u ON p.userId = u.id",
                 resultSetMapping = "postListMapper"
