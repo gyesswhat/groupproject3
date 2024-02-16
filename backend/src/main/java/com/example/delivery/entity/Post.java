@@ -46,10 +46,10 @@ import lombok.*;
         ),
         @NamedNativeQuery(
                 name = "Post.findPostListInMyPage",
-                query = "SELECT p.restaurant, p.menu, p.price, p.partNum, u.nickname, p.createdAt, p.isValid" +
-                        "FROM post p" +
-                        "JOIN user u ON p.user.id = :userId" +
-                        "WHERE p.isValid = 1" +
+                query = "SELECT p.restaurant, p.menu, p.price, p.partNum, u.nickname, p.createdAt, p.isValid " +
+                        "FROM post p " +
+                        "JOIN user u ON p.user.id = :userId " +
+                        "WHERE p.isValid = 1 " +
                         "OR p.isValid = 4",
                 resultSetMapping = "postListMapper"
         )
