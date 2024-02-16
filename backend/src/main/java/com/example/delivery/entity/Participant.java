@@ -39,17 +39,16 @@ import lombok.*;
         )
 })
 public class Participant {
-    @EmbeddedId
-    private ParticipantPK participantPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long participantId;
 
     @ManyToOne
     @JoinColumn(name="post_postId")
-    @MapsId("postId")
     private Post post;
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    @MapsId("userId")
     private User user;
 
     @Column(nullable = false)
