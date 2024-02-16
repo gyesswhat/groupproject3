@@ -11,9 +11,6 @@ import java.util.List;
 
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
-    @Query("SELECT new com.example.delivery.dto.CommentListDto(u.nickname, c.commentBody, c.createdAt) " +
-            "FROM Comment c " +
-            "JOIN User u ON c.user.id = u.id " +
-            "WHERE c.post.postId = :postId")
+    @Query(name = "Comment.findCommentList", nativeQuery = true)
     List<CommentListDto> findCommentList(@Param("postId") Long postId);
 }
