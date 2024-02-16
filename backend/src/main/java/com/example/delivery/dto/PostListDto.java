@@ -12,4 +12,5 @@ public class PostListDto {
     private Integer price;
     private Integer partNum;
     private String nickname;
+    private Integer isValid;
 }
