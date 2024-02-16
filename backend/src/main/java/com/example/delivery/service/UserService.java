@@ -1,10 +1,8 @@
 package com.example.delivery.service;
 
-import com.example.delivery.dto.LoginDto;
-import com.example.delivery.dto.UserDto;
-import com.example.delivery.dto.UserEditDto;
-import com.example.delivery.dto.UserDetailDto;
+import com.example.delivery.dto.*;
 import com.example.delivery.entity.User;
+import com.example.delivery.repository.PostRepository;
 import com.example.delivery.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,11 +10,14 @@ import org.springframework.stereotype.Service;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.List;
 
 @Service
 public class UserService {
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PostRepository postRepository;
 
     public boolean emailCheck(String email){
         User user = userRepository.findByEmail(email).orElse(null);
@@ -54,6 +55,11 @@ public class UserService {
         target.update(userInfo);
         User updated = userRepository.save(target);
         return updated;
+    }
+
+    public List<PostListInMyPage> getPost(Long id){
+        List<PostListInMyPage> posts = postRepository.findPostListInMyPage(id);
+        return posts;
     }
 
     public static String encrypt(String password) throws NoSuchAlgorithmException {

@@ -38,8 +38,7 @@ public class PostService {
         if (post.getPostId() != null) return null;
         // 4. 방장 participant에 추가 + 생성된 post 리턴
         Post created = postRepository.save(post);
-        ParticipantPK pk = new ParticipantPK(post.getPostId(), user.getId());
-        participantRepository.save(new Participant(pk, post, user, createdAt, 1));
+        participantRepository.save(new Participant(new ParticipantPK(post.getPostId(), user.getId()), post, user, createdAt, 1));
         return created;
     }
 

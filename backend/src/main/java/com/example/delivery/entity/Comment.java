@@ -14,8 +14,8 @@ import lombok.*;
 @NamedNativeQuery(
         name = "Comment.findCommentList",
         query = "SELECT u.nickname, c.commentBody, c.createdAt" +
-                "FROM Comment c" +
-                "JOIN User u ON c.user.id = u.id" +
+                "FROM comment c" +
+                "JOIN user u ON c.user.id = u.id" +
                 "WHERE c.post.postId = :postId",
         resultSetMapping = "commentListMapper"
 )
