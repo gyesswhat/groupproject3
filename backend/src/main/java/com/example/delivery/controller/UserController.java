@@ -59,12 +59,11 @@ public class UserController {
     }
 
     @GetMapping("/user/posts")
-    public ResponseEntity<List<PostListInMyPage>> showPost(){
+    public ResponseEntity<List<PostListDto>> showPost(){
         Long id = Long.valueOf(String.valueOf(session.getAttribute("userId")));
-        List<PostListInMyPage> posts = userService.getPost(id);
-//        return (posts!=null) ?
-//                ResponseEntity.status(HttpStatus.OK).body(posts) :
-//                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        return ResponseEntity.status(HttpStatus.OK).body(posts);
+        List<PostListDto> posts = userService.getPost(id);
+        return (posts!=null) ?
+                ResponseEntity.status(HttpStatus.OK).body(posts) :
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 }

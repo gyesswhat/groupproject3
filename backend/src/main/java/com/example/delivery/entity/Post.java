@@ -3,7 +3,6 @@ package com.example.delivery.entity;
 import com.example.delivery.dto.ParticipantListDto;
 import com.example.delivery.dto.PostDetailDto;
 import com.example.delivery.dto.PostListDto;
-import com.example.delivery.dto.PostListInMyPage;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -52,7 +51,7 @@ import lombok.*;
                         "JOIN user u ON p.user.id = :userId" +
                         "WHERE p.isValid = 1" +
                         "OR p.isValid = 4",
-                resultSetMapping = "postListInMyPageMapper"
+                resultSetMapping = "postListMapper"
         )
 })
 @SqlResultSetMappings({
@@ -104,21 +103,6 @@ import lombok.*;
                 columns = {
                         @ColumnResult(name="postId", type=Long.class)
                 }
-        ),
-        @SqlResultSetMapping(
-                name="postListInMyPageMapper",
-                classes = @ConstructorResult(
-                        targetClass = PostListInMyPage.class,
-                        columns = {
-                                @ColumnResult(name="restaurant", type = String.class),
-                                @ColumnResult(name = "menu",type = String.class),
-                                @ColumnResult(name="price",type = Integer.class),
-                                @ColumnResult(name = "partNum",type = Integer.class),
-                                @ColumnResult(name="nickname",type = String.class),
-                                @ColumnResult(name = "createdAt", type = String.class),
-                                @ColumnResult(name = "isValid",type = Integer.class)
-                        }
-                )
         )
 })
 public class Post {
