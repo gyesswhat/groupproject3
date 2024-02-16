@@ -1,9 +1,6 @@
 package com.example.delivery.controller;
 
-import com.example.delivery.dto.LoginDto;
-import com.example.delivery.dto.UserDto;
-import com.example.delivery.dto.UserEditDto;
-import com.example.delivery.dto.UserDetailDto;
+import com.example.delivery.dto.*;
 import com.example.delivery.entity.User;
 import com.example.delivery.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 
 @RestController
 public class UserController {
@@ -59,7 +59,11 @@ public class UserController {
     }
 
     @GetMapping("/user/posts")
-    public ResponseEntity<Long> showPost(){
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+    public ResponseEntity<List<PostListDto>> showPost(){
+        Long id = Long.valueOf(String.valueOf(session.getAttribute("userId")));
+        List<PostListDto> posts = userService.getPost(id);
+        return (posts!=null) ?
+                ResponseEntity.status(HttpStatus.OK).body(posts) :
+                ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
 }

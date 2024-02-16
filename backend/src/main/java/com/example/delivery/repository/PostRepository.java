@@ -25,4 +25,7 @@ public interface PostRepository extends CrudRepository<Post, Long>{
 
     @Query(name="Post.findPostIdsToCheck", nativeQuery = true)
     List<Long> findPostIdsToCheck(@Param("checkBy") String checkBy);
+
+    @Query(name = "Post.findPostListInMyPage", nativeQuery = true)
+    List<PostListDto> findPostListInMyPage(@Param("userId") Long userId);
 }
