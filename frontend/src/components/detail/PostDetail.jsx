@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Menu } from '../menu';
+import { Header } from '../header/Header';
 import { dummyDeliveryRecruitment } from '../posts';
 import { CommentForm } from './CommentForm';
 import { PostContents } from './PostContents';
@@ -49,7 +49,7 @@ export const PostDetail = () => {
 
   return (
     <>
-      <Menu />
+      <Header />
       <div id="wrap">
         <div id="inner-wrap">
           {post ? (

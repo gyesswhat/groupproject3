@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import * as S from '../main/main.style';
 
 export const DeliveryItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
-  <Link to={`/${id}`}>
+  <Link to={`post/${id}`}>
     <S.DeliveryItem>
       <h4>
         [{restaurant}] {menu}
