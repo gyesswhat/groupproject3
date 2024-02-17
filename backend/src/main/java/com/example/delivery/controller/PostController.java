@@ -25,7 +25,7 @@ public class PostController {
     public ResponseEntity<?> create(@RequestBody PostDto dto) {
         Post created = postService.create(dto);
         return (created != null) ?
-                ResponseEntity.status(HttpStatus.OK).build() : // 성공시
+                ResponseEntity.status(HttpStatus.OK).body(created) : // 성공시
                 ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("저장에 실패했습니다.");
     }
 
