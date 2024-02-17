@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 
 export const DeliveryItem = styled.div`
-  width: 38.9vw; /*480px*/
-  height: 97px;
-  padding: 10px;
+  width: 410px;
+  height: 80px;
+  padding: 15px;
   margin: 5px 10px 5px 10px;
   border: #ddd 1px solid;
   border-radius: 10px;
   color: black;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 
   & > h4 {
     width: 100%;
@@ -24,7 +27,6 @@ export const DeliveryItem = styled.div`
 export const Info = styled.div`
   display: flex;
   flex-direction: row;
-  margin-bottom: 10px;
 `;
 
 export const PriceWrap = styled.div`

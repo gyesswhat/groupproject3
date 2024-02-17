@@ -14,29 +14,34 @@ export const FoodTypeItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: darkgreen solid 1px;
-  width: 120px;
-  height: 70px;
+  border: darkgreen solid 1.3px;
+  width: 130px;
+  height: 65px;
   border-radius: 10px;
-  padding: 20px 10px;
+  padding: 10px 10px;
   background-color: #eee;
   font-weight: bold;
+  justify-content: center;
 
   &.selected {
     color: darkgreen;
-    border: 1px solid green;
+    border: 2px solid green;
     background-color: #fff;
   }
 
   &:hover {
     background-color: #fff;
     color: darkgreen;
-    border: 1px solid green;
+    border: 2px solid green;
   }
 
   & > img {
     width: 20px;
     height: 20px;
     margin-bottom: 5px;
+  }
+
+  & > p {
+    margin: 0;
   }
 `;

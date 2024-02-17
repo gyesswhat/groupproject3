@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, PlaceDropdown } from '../menu';
+import { PlaceDropdown } from '../menu';
+import { Menu } from '../menu';
 import { DeliveryItem } from './DeliveryItem';
 import { dummyDeliveryRecruitment } from './posts.const';
 

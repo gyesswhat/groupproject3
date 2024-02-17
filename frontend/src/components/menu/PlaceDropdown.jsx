@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { BUILDING_LIST } from '../main/main.const';
 
-// TODO: window.location.href switch문 삭제 ('Posts.js'에 필터링 함수 추가):
 export function PlaceDropdown({ onBuildingChange }) {
   const [selectedBuilding, setSelectedBuilding] = useState('');
 
