@@ -1,9 +1,9 @@
 const fakeUser = {
-  username: 'john_doe',
+  nickname: 'john_doe',
   email: 'john@example.com',
   loggedIn: true,
 };
 
-const getUser = () => fakeUser.loggedIn;
+const getUser = () => fakeUser;
 
 export default getUser;
