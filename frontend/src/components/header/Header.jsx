@@ -1,20 +1,21 @@
 import { Logo } from './Logo';
+import { Link } from 'react-router-dom';
 
 export function Header() {
   return (
     <div id="topbar">
-      <a href="/">
+      <Link to="/">
         <Logo />
-      </a>
+      </Link>
       <ul id="topmenu">
         <li>
-          <a href="login">로그아웃</a>
+          <Link to="login">로그아웃</Link>
         </li>
         <li>
-          <a href="/">홈</a>
+          <Link to="/">홈</Link>
         </li>
         <li>
-          <a href="/mypage">마이페이지</a>
+          <Link to="/mypage">마이페이지</Link>
         </li>
       </ul>
     </div>
