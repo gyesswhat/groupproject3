@@ -15,8 +15,8 @@ export const FoodTypeItem = styled.div`
   flex-direction: column;
   align-items: center;
   border: darkgreen solid 1.3px;
-  width: 130px;
-  height: 65px;
+  width: 160px;
+  height: 72px;
   border-radius: 10px;
   padding: 10px 10px;
   background-color: #eee;
