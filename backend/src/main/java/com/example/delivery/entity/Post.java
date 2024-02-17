@@ -17,40 +17,40 @@ import lombok.*;
 @NamedNativeQueries({
         @NamedNativeQuery(
                 name = "Post.findPostList",
-                query = "SELECT p.createdAt, p.restaurant, p.menu, p.price, p.partNum, u.nickname, p.isValid " +
+                query = "SELECT p.created_at, p.restaurant, p.menu, p.price, p.part_num, u.nickname, p.is_valid " +
                         "FROM post p " +
-                        "JOIN user u ON p.userId = u.id",
+                        "JOIN user u ON p.user_id = u.id",
                 resultSetMapping = "postListMapper"
         ),
         @NamedNativeQuery(
                 name = "Post.findPostDetail",
-                query = "SELECT user.id, location, restaurant, menu, partNum, price, postBody " +
+                query = "SELECT user_id, location, restaurant, menu, part_num, price, post_body " +
                         "FROM post " +
-                        "WHERE postId = :postId",
+                        "WHERE post_id = :postId",
                 resultSetMapping = "postDetailMapper"
         ),
         @NamedNativeQuery(
                 name = "Post.findParticipants",
-                query = "SELECT u.nickname, pr.joinedAt, pr.status, u.account, u.bank " +
+                query = "SELECT u.nickname, pr.joined_at, pr.status, u.account, u.bank " +
                         "FROM participant pr " +
-                        "JOIN user u ON pr.user.id = u.id " +
-                        "WHERE pr.post.id = :postId",
+                        "JOIN user u ON pr.user_id = u.id " +
+                        "WHERE pr.post_post_id = :postId",
                 resultSetMapping = "participantsMapper"
         ),
         @NamedNativeQuery(
                 name = "Post.findPostIdsToCheck",
-                query = "SELECT postId " +
+                query = "SELECT post_id " +
                         "FROM post " +
-                        "WHERE createdAt <= :checkBy",
+                        "WHERE created_at <= :checkBy",
                 resultSetMapping = "postIdsToCheckMapper"
         ),
         @NamedNativeQuery(
                 name = "Post.findPostListInMyPage",
-                query = "SELECT p.restaurant, p.menu, p.price, p.partNum, u.nickname, p.createdAt, p.isValid " +
+                query = "SELECT p.restaurant, p.menu, p.price, p.part_num, u.nickname, p.created_at, p.is_valid " +
                         "FROM post p " +
-                        "JOIN user u ON p.user.id = :userId " +
-                        "WHERE p.isValid = 1 " +
-                        "OR p.isValid = 4",
+                        "JOIN user u ON p.user_id = :userId " +
+                        "WHERE p.is_valid = 1 " +
+                        "OR p.is_valid = 4",
                 resultSetMapping = "postListMapper"
         )
 })
@@ -60,13 +60,13 @@ import lombok.*;
                 classes = @ConstructorResult(
                         targetClass = PostListDto.class,
                         columns = {
-                                @ColumnResult(name="createdAt", type=String.class),
+                                @ColumnResult(name="created_at", type=String.class),
                                 @ColumnResult(name="restaurant", type=String.class),
                                 @ColumnResult(name="menu", type=String.class),
                                 @ColumnResult(name="price", type=Integer.class),
-                                @ColumnResult(name="partNum", type=Integer.class),
+                                @ColumnResult(name="part_num", type=Integer.class),
                                 @ColumnResult(name="nickname", type=String.class),
-                                @ColumnResult(name="isValid", type=Integer.class)
+                                @ColumnResult(name="is_valid", type=Integer.class)
                         }
                 )
         ),
@@ -75,13 +75,13 @@ import lombok.*;
                 classes = @ConstructorResult(
                         targetClass = PostDetailDto.class,
                         columns = {
-                                @ColumnResult(name="userId", type=Long.class),
+                                @ColumnResult(name="user_id", type=Long.class),
                                 @ColumnResult(name="location", type=String.class),
                                 @ColumnResult(name="restaurant", type=String.class),
                                 @ColumnResult(name="menu", type=String.class),
-                                @ColumnResult(name="partNum", type=Integer.class),
+                                @ColumnResult(name="part_num", type=Integer.class),
                                 @ColumnResult(name="price", type=Integer.class),
-                                @ColumnResult(name="postBody", type=String.class)
+                                @ColumnResult(name="post_body", type=String.class)
                         }
                 )
         ),
@@ -91,7 +91,7 @@ import lombok.*;
                         targetClass = ParticipantListDto.class,
                         columns = {
                                 @ColumnResult(name="nickname", type=String.class),
-                                @ColumnResult(name="joinedAt", type=String.class),
+                                @ColumnResult(name="joined_at", type=String.class),
                                 @ColumnResult(name="status", type=Integer.class),
                                 @ColumnResult(name="account", type=String.class),
                                 @ColumnResult(name="bank", type=String.class)
@@ -101,7 +101,7 @@ import lombok.*;
         @SqlResultSetMapping(
                 name = "postIdsToCheckMapper",
                 columns = {
-                        @ColumnResult(name="postId", type=Long.class)
+                        @ColumnResult(name="post_id", type=Long.class)
                 }
         )
 })
