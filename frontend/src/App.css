@@ -44,6 +44,8 @@ p {
 #green {
   color: green;
   font-weight: bolder;
+  margin-right: 3px;
+  margin-left: 3px;
 }
 
 #topmenu {
@@ -63,6 +65,7 @@ p {
   margin-right: 100px;
   padding: 10px;
   justify-content: space-between;
+  width: 880px;
 }
 
 #place-text {
@@ -167,10 +170,6 @@ h5 {
   margin: 5px;
 }
 
-#cost > #green {
-  margin-right: 5px;
-}
-
 /* 로그인 페이지*/
 body {
   margin: 0;
@@ -235,8 +234,8 @@ body {
 
 #id,
 #pw {
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+  padding-top: 1.8vh;
+  padding-bottom: 1.8vh;
   padding-left: 1.5vw;
   border: 1px #ccc solid;
   border-radius: 8px;
@@ -481,15 +480,17 @@ button[disabled] {
 }
 
 .comment-input {
-  width: 90%;
+  height: 12px;
+}
+
+.comment-input,
+#write-content {
+  width: 618px;
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 8px;
   font-size: 9px;
   resize: none;
-}
-textarea {
-  height: 12px;
 }
 
 .comment-submit {
@@ -508,4 +509,66 @@ textarea {
 
 #part-wrap {
   margin-bottom: 20px;
+}
+
+/**/
+
+#flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+#flex-col {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
+#recruit-form {
+  margin-bottom: 1vh;
+}
+
+#dropdown {
+  width: 250px;
+}
+
+#dropdown,
+#flex-col > input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  border: 1px #ccc solid;
+  border-radius: 8px;
+}
+
+#flex-col > label {
+  font-size: 10px;
+  font-weight: 800;
+}
+
+#write-content {
+  height: 150px;
+}
+
+#margin-top {
+  margin-top: 50px;
+}
+
+#margin-top > h3 {
+  margin-bottom: 25px;
+}
+
+#write-bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: solid 1px #ccc;
+}
+
+#write-bottom > p {
+  font-size: 12px;
 }
