@@ -13,10 +13,10 @@ import lombok.*;
 @Getter
 @NamedNativeQuery(
         name = "Comment.findCommentList",
-        query = "SELECT u.nickname, c.commentBody, c.createdAt" +
-                "FROM comment c" +
-                "JOIN user u ON c.user.id = u.id" +
-                "WHERE c.post.postId = :postId",
+        query = "SELECT u.nickname, c.comment_body, c.created_at " +
+                "FROM comment c " +
+                "JOIN user u ON c.user_id = u.id " +
+                "WHERE c.post_post_id = :postId",
         resultSetMapping = "commentListMapper"
 )
 @SqlResultSetMapping(
@@ -25,8 +25,8 @@ import lombok.*;
                 targetClass = CommentListDto.class,
                 columns = {
                         @ColumnResult(name = "nickname",type = String.class),
-                        @ColumnResult(name = "commentBody",type = String.class),
-                        @ColumnResult(name = "createdAt", type = String.class)
+                        @ColumnResult(name = "comment_body",type = String.class),
+                        @ColumnResult(name = "created_at", type = String.class)
                 }
         )
 )

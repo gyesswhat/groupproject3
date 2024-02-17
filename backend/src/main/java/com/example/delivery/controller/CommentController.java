@@ -27,7 +27,7 @@ public class CommentController {
 
     // GET
     @GetMapping("/posts/{postId}/comments")
-    public ResponseEntity<?> showComments(@PathVariable Long postId) {
+    public ResponseEntity<?> showComments(@PathVariable(name = "postId") Long postId) {
         List<CommentListDto> responses = commentService.showComments(postId);
         return (responses != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(responses) :
@@ -36,7 +36,7 @@ public class CommentController {
 
     // PATCH
     @PatchMapping("/posts/{postId}/comments/{commentId}")
-    public ResponseEntity<?> patchComment(@PathVariable Long commentId, @RequestBody CommentDto dto) {
+    public ResponseEntity<?> patchComment(@PathVariable(name = "commentId") Long commentId, @RequestBody CommentDto dto) {
         CommentDto patched = commentService.patchComment(commentId, dto);
         return (patched != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(patched) :
@@ -45,7 +45,7 @@ public class CommentController {
 
     // DELETE
     @DeleteMapping("/posts/{postId}/comments/{commentId}")
-    public ResponseEntity<?> deleteComment(@PathVariable Long commentId) {
+    public ResponseEntity<?> deleteComment(@PathVariable(name = "commentId") Long commentId) {
         CommentDto deleted = commentService.deleteComment(commentId);
         return (deleted != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(deleted) :

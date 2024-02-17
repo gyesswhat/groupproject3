@@ -5,9 +5,11 @@ import com.example.delivery.entity.Post;
 import com.example.delivery.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 @Getter
 public class CommentDto {
