@@ -37,7 +37,7 @@ public class PostService {
         if (post.getPostId() != null) return null;
         // 4. 방장 participant에 추가 + 생성된 post 리턴
         Post created = postRepository.save(post);
-        participantRepository.save(new Participant(null, post, user, createdAt, 1));
+        participantRepository.save(new Participant(null, post, user, createdAt, 0));
         return created;
     }
 
@@ -79,6 +79,7 @@ public class PostService {
         Participant participant = participantRepository.findByPostIdAndUserId(postId, userId);
         if (participant==null) return "존재하지 않는 사용자입니다.";
         participant.setStatus(2);
+        participantRepository.save(participant);
         return msg;
     }
 
@@ -87,6 +88,7 @@ public class PostService {
         Participant participant = participantRepository.findByPostIdAndUserId(postId, participantId);
         if (participant==null) return "존재하지 않는 사용자입니다.";
         participant.setStatus(3);
+        participantRepository.save(participant);
         return msg;
     }
 }

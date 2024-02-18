@@ -1,11 +1,10 @@
 package com.example.delivery.dto;
 
 import com.example.delivery.entity.User;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Getter
+@Data
+@AllArgsConstructor
 @NoArgsConstructor
 public class UserDetailDto {
     private String email;

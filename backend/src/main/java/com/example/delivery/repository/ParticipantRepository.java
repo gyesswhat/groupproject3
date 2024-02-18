@@ -10,18 +10,20 @@ import java.util.List;
 
 @Repository
 public interface ParticipantRepository extends CrudRepository<Participant, Long> {
-    @Query(value = "SELECT *" +
-            "FROM participant" +
-            "WHERE postId = :postId" +
-            "AND userId = :userId", nativeQuery = true)
-    Participant findByPostIdAndUserId(Long postId, Long userId);
+    @Query(value = "SELECT * " +
+            "FROM participant " +
+            "WHERE post_post_id = :postId " +
+            "AND user_id = :userId", nativeQuery = true)
+    Participant findByPostIdAndUserId(@Param("postId") Long postId, @Param("userId") Long userId);
 
-    @Query(value = "SELECT *" +
-            "FROM participant" +
-            "WHERE postId = :postId", nativeQuery = true)
-    List<Participant> findByPostId(Long postId);
+    @Query(value = "SELECT * " +
+            "FROM participant " +
+            "WHERE post_post_id = :postId", nativeQuery = true)
+    List<Participant> findByPostId(@Param("postId") Long postId);
 
-    @Query(name="Participant.getPartNum", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) " +
+            "FROM participant " +
+            "WHERE post_post_id = :postId", nativeQuery = true)
     Integer getPartNum(@Param("postId") Long postId);
 
     @Query(name="Participant.getDepositCheckedNum", nativeQuery = true)

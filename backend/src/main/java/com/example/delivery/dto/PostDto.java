@@ -2,15 +2,11 @@ package com.example.delivery.dto;
 
 import com.example.delivery.entity.Post;
 import com.example.delivery.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
-@Getter
 public class PostDto {
     private Long userId;
     private String location;

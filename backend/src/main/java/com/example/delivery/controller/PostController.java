@@ -38,7 +38,7 @@ public class PostController {
     }
 
     @GetMapping("/posts/{postId}")
-    public ResponseEntity<?> showPostDetail(@PathVariable Long postId) {
+    public ResponseEntity<?> showPostDetail(@PathVariable(name = "postId") Long postId) {
         PostDetailDto response = postService.showPostDetail(postId);
         return (response != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(response) :
@@ -46,7 +46,7 @@ public class PostController {
     }
 
     @GetMapping("/posts/{postId}/participants")
-    public ResponseEntity<?> showParticipants(@PathVariable Long postId) {
+    public ResponseEntity<?> showParticipants(@PathVariable(name = "postId") Long postId) {
         List<ParticipantListDto> responses = postService.showParticipants(postId);
         return (responses != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(responses) :
@@ -54,7 +54,7 @@ public class PostController {
     }
 
     @PostMapping("/posts/{postId}/join")
-    public ResponseEntity<?> join(@PathVariable Long postId) {
+    public ResponseEntity<?> join(@PathVariable(name = "postId") Long postId) {
         Long userId = Long.valueOf(String.valueOf(session.getAttribute("userId")));
         String msg = postService.joinPost(postId, userId);
         return (msg == null) ?
@@ -63,7 +63,7 @@ public class PostController {
     }
 
     @PostMapping("/posts/{postId}/deposit")
-    public ResponseEntity<String> deposit(@PathVariable Long postId) {
+    public ResponseEntity<String> deposit(@PathVariable(name = "postId") Long postId) {
         Long userId = Long.valueOf(String.valueOf(session.getAttribute("userId")));
         String msg = postService.depositPost(postId, userId);
         return (msg == null) ?
@@ -71,8 +71,8 @@ public class PostController {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body(msg);
     }
 
-    @PostMapping("/posts/{postId}/check/{ParticipantId}")
-    public ResponseEntity<String> check(@PathVariable Long postId, @PathVariable Long ParticipantId) {
+    @PostMapping("/posts/{postId}/check/{participantId}")
+    public ResponseEntity<String> check(@PathVariable(name = "postId") Long postId, @PathVariable(name = "participantId") Long ParticipantId) {
         String msg = postService.checkPost(postId, ParticipantId);
         return (msg == null) ?
                 ResponseEntity.status(HttpStatus.OK).build() :
