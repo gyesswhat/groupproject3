@@ -4,6 +4,8 @@ import com.example.delivery.entity.User;
 import lombok.*;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
     private String email;
 
