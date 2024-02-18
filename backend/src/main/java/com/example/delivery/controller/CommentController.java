@@ -18,8 +18,8 @@ public class CommentController {
 
     // POST
     @PostMapping("/posts/{postId}/comment")
-    public ResponseEntity<?> createComment(@RequestBody CommentDto dto) {
-        Comment comment = commentService.createComment(dto);
+    public ResponseEntity<?> createComment(@PathVariable("postId") Long postId, @RequestBody CommentDto dto) {
+        Comment comment = commentService.createComment(postId, dto);
         return (comment != null) ?
                 ResponseEntity.status(HttpStatus.OK).body(comment) :
                 ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("댓글 작성에 실패했습니다.");

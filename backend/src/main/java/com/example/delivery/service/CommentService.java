@@ -25,9 +25,9 @@ public class CommentService {
     private PostRepository postRepository;
     @Autowired
     private UserRepository userRepository;
-    public Comment createComment(CommentDto dto) {
+    public Comment createComment(Long postId, CommentDto dto) {
         // 1. 엔티티 생성
-        Post post = postRepository.findById(dto.getPostId()).orElse(null);
+        Post post = postRepository.findById(postId).orElse(null);
         User user = userRepository.getReferenceById(dto.getUserId());
         Comment comment = dto.toEntity(post, user);
         // 2. createdAt 설정
