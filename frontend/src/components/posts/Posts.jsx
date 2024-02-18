@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { PlaceDropdown } from '../menu';
 import { Menu } from '../menu';
@@ -9,6 +10,21 @@ export const Posts = () => {
   const [selectedBuilding, setSelectedBuilding] = useState('');
   const [selectedFoodType, setSelectedFoodType] = useState('');
 
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const response = await axios.get('/posts');
+        setPosts(response.data);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      }
+    }
+
+    fetchPosts();
+  }, []);
+
   const handleBuildingChange = selectedValue => {
     setSelectedBuilding(selectedValue);
   };
@@ -18,9 +34,9 @@ export const Posts = () => {
   };
 
   const filteredDeliveryRecruitment = dummyDeliveryRecruitment.filter(
-    deliveryRecruitment =>
-      (!selectedBuilding || deliveryRecruitment.building === selectedBuilding) &&
-      (!selectedFoodType || deliveryRecruitment.foodtype === selectedFoodType),
+    DeliveryR =>
+      (!selectedBuilding || DeliveryR.building === selectedBuilding) &&
+      (!selectedFoodType || DeliveryR.foodtype === selectedFoodType),
   );
 
   return (

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const DeliveryItem = styled.div`
-  width: 500px;
+  width: 470px;
   height: 86px;
   padding: 25px;
   margin: 5px 10px 5px 10px;
