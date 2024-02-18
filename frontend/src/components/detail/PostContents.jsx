@@ -27,6 +27,7 @@ export const PostContents = ({ restaurant, menu, timer, recruit, recruited, cost
           </div>
         </div>
         <div id="info">
+          <img src="/assets/timer-icon.svg" alt="timer" />
           <p id="green">{timer}분</p>
           <p> 뒤 주문 예정</p>
           <p className="dot" id="green">
@@ -45,7 +46,8 @@ export const PostContents = ({ restaurant, menu, timer, recruit, recruited, cost
             <p>계좌 정보:</p> <p id="green">{account}</p>
           </div>
         )}
-        <p>{content}</p>
+
+        <p id="post-content">{content}</p>
       </div>
     </div>
   );

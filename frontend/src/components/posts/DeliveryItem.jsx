@@ -8,6 +8,7 @@ export const DeliveryItem = ({ id, restaurant, menu, timer, recruit, recruited, 
         [{restaurant}] {menu}
       </h4>
       <S.Info>
+        <img src="/assets/timer-icon.svg" alt="timer" />
         <p id="green">{timer}분</p>
         <p> 뒤 주문 예정</p>
         <p className="dot" id="green">

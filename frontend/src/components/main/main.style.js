@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const DeliveryItem = styled.div`
-  width: 410px;
-  height: 80px;
-  padding: 15px;
+  width: 500px;
+  height: 86px;
+  padding: 25px;
   margin: 5px 10px 5px 10px;
   border: #ddd 1px solid;
   border-radius: 10px;
@@ -15,18 +15,27 @@ export const DeliveryItem = styled.div`
   & > h4 {
     width: 100%;
     height: fit-content;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-size: 18px;
+    margin-top: 0;
   }
 
   &:hover {
-    border: 1px solid darkgreen;
+    border: 1px solid #087112;
   }
 `;
 
 export const Info = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  color: #83859c;
+
+  & > img {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+  }
 `;
 
 export const PriceWrap = styled.div`
@@ -35,6 +44,10 @@ export const PriceWrap = styled.div`
   justify-content: space-between;
   align-items: baseline;
   height: fit-content;
+  & > p {
+    margin-bottom: 0;
+    color: #83859c;
+  }
 `;
 
 export const Price = styled.div`
@@ -44,5 +57,11 @@ export const Price = styled.div`
 
   & > h4 {
     margin: 5px;
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+
+  & > p {
+    margin-bottom: 0;
   }
 `;

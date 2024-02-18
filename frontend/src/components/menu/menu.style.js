@@ -14,14 +14,16 @@ export const FoodTypeItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: darkgreen solid 1.3px;
+  border: darkgreen solid 1.5px;
   width: 160px;
   height: 72px;
-  border-radius: 10px;
+  border-radius: 14px;
   padding: 10px 10px;
   background-color: #eee;
   font-weight: bold;
   justify-content: center;
+  color: #545563;
+  font-weight: 700;
 
   &.selected {
     color: darkgreen;
@@ -36,9 +38,9 @@ export const FoodTypeItem = styled.div`
   }
 
   & > img {
-    width: 20px;
-    height: 20px;
-    margin-bottom: 5px;
+    width: 24px;
+    height: 24px;
+    margin-bottom: 9px;
   }
 
   & > p {

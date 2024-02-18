@@ -76,26 +76,34 @@ export const PostDetail = () => {
                     <div id="participant-list">
                       <div id="participant">
                         <p id="role">{index === 0 ? '방장' : '참여자'}</p>
-                        <p>{nickname}</p>
+                        <p id="nickname">{nickname}</p>
                       </div>
                     </div>
                     <div id="status">{index === 0 ? null : <StatusList status={status} />}</div>
                   </div>
                 ))}
               </div>
-
-              <h4>댓글</h4>
-              <div id="comments">
-                <CommentForm />
-                {comments.map(({ id, nickname, time, content }) => (
-                  <div key={id}>
-                    <div id="place-text">
-                      <p id="bold-margin">{nickname}</p>
-                      <p>{time}분 전</p>
+              <div id="com-wrap">
+                <h4>댓글</h4>
+                <div id="comments">
+                  <CommentForm />
+                  {comments.map(({ id, nickname, time, content }) => (
+                    <div key={id} id="comment">
+                      <div id="place-text">
+                        <p id="bold-margin">{nickname}</p>
+                        <p id="role">{time}분 전</p>
+                      </div>
+                      <p
+                        id="darkgray"
+                        style={{
+                          color: PARTICIPANTS[0].nickname === nickname ? 'green' : '#334253',
+                          fontWeight: PARTICIPANTS[0].nickname === nickname ? '800' : '500',
+                        }}>
+                        {content}
+                      </p>
                     </div>
-                    <p id="darkgray">{content}</p>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </>
           ) : (
