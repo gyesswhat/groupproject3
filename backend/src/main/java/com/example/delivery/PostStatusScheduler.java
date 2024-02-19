@@ -43,11 +43,20 @@ public class PostStatusScheduler {
             int targetPartNum = post.getPartNum();
             int nowPartNum = participantRepository.getPartNum(postId);
 
-            if (targetPartNum > nowPartNum) post.setIsValid(2); // 주문 실패(인원 못 채움)
+            if (targetPartNum > nowPartNum) {
+                post.setIsValid(2); // 주문 실패(인원 못 채움)
+                postRepository.save(post);
+            }
             else {
                 int depositCheckedNum = participantRepository.getDepositCheckedNum(postId);
-                if (targetPartNum == depositCheckedNum) post.setIsValid(1); // 주문 성공
-                else post.setIsValid(3); // 주문 실패(입금 안 함)
+                if (targetPartNum == depositCheckedNum) {
+                    post.setIsValid(1); // 주문 성공
+                    postRepository.save(post);
+                }
+                else {
+                    post.setIsValid(3); // 주문 실패(입금 안 함)
+                    postRepository.save(post);
+                }
             }
         }
     }
