@@ -400,23 +400,29 @@ span {
 
 .snackbar {
   position: fixed;
-  bottom: 20px;
-  left: 20px;
+  bottom: 40px;
+  left: 40px;
   background-color: green;
   color: white;
   padding: 15px;
-  border-radius: 5px;
+  border-radius: 10px;
+  font-size: 14px;
+  width: 260px;
 }
 
 .snackbar button#x {
   position: absolute;
-  top: 5px;
-  right: 10px;
+  top: 2px;
+  right: 7px;
   background: none;
   border: none;
   color: white;
   cursor: pointer;
   font-size: 16px;
+  padding: 0;
+  height: fit-content;
+  width: fit-content;
+  font-weight: 100;
 }
 
 #wrap {

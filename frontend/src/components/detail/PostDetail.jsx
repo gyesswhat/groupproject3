@@ -152,7 +152,7 @@ export const PostDetail = () => {
               <div id="com-wrap">
                 <h4>댓글</h4>
                 <div id="comments">
-                  <CommentForm />
+                  <CommentForm postId={postId} />
                   {comments.map(({ id, nickname, time, content }) => (
                     <div key={id} id="comment">
                       <div id="place-text">

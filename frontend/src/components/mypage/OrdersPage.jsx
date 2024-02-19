@@ -1,9 +1,27 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import { MyPage } from './MyPage';
 import { dummyDeliveryRecruitment } from '../posts/posts.const';
 import { DeliveryItem } from '../posts/DeliveryItem';
 import { Header } from '../header';
 
 export const OrdersPage = () => {
+  const [post, setPost] = useState(null);
+
+  const currentId = sessionStorage.getItem('userId');
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get(`/user/${currentId}`);
+        setPost(response.data);
+      } catch (error) {
+        console.error('Error fetching post:', error);
+      }
+    };
+    fetchPost();
+  }, []);
+
   return (
     <div>
       <Header />
@@ -13,22 +31,20 @@ export const OrdersPage = () => {
           <h3>주문 히스토리</h3>
           <div id="main-screen">
             <div id="delivery-recruitment-list">
-              {dummyDeliveryRecruitment.map(
-                ({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost, isValid }) => (
-                  <DeliveryItem
-                    key={id}
-                    id={id}
-                    restaurant={restaurant}
-                    menu={menu}
-                    recruiter={recruiter}
-                    recruit={recruit}
-                    recruited={recruited}
-                    timer={isValid === 3 ? timer : null}
-                    cost={cost}
-                    isValid={isValid}
-                  />
-                ),
-              )}
+              {post.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost, isValid }) => (
+                <DeliveryItem
+                  key={id}
+                  id={id}
+                  restaurant={restaurant}
+                  menu={menu}
+                  recruiter={recruiter}
+                  recruit={recruit}
+                  recruited={recruited}
+                  timer={isValid === 3 ? timer : null}
+                  cost={cost}
+                  isValid={isValid}
+                />
+              ))}
             </div>
           </div>
         </div>

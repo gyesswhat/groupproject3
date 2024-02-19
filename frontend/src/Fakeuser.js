@@ -1,5 +1,5 @@
 export const fakeUser = {
-  username: 'john_doe',
+  nickname: 'john_doe',
   email: 'john@example.com',
   loggedIn: true,
   bank: '신한은행',
