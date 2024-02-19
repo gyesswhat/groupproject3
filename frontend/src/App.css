@@ -810,3 +810,7 @@ ul {
   margin-top: 30px;
   margin-right: 5px;
 }
+
+body {
+  font-family: Nunito;
+}

@@ -98,7 +98,7 @@ export const PostDetail = () => {
 
   useEffect(() => {
     if (post && remainingTime === 0 && post.recruit !== part.length) {
-      <Link to="/order-failed" />;
+      <Link to={`/post/${postId}/order-failed`} />;
     }
   }, [post, part, remainingTime]);
 
