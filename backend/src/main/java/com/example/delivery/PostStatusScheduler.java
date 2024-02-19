@@ -15,6 +15,8 @@ import java.util.List;
 @Service
 public class PostStatusScheduler {
     @Autowired
+    PostService postService;
+    @Autowired
     PostRepository postRepository;
     @Autowired
     ParticipantRepository participantRepository;
