@@ -17,7 +17,7 @@ import lombok.*;
 @NamedNativeQueries({
         @NamedNativeQuery(
                 name = "Post.findPostList",
-                query = "SELECT p.created_at, p.restaurant, p.menu, p.price, p.part_num, u.nickname, p.is_valid " +
+                query = "SELECT p.post_id p.created_at, p.restaurant, p.menu, p.price, p.part_num, u.nickname, p.is_valid " +
                         "FROM post p " +
                         "JOIN user u ON p.user_id = u.id",
                 resultSetMapping = "postListMapper"
@@ -60,6 +60,7 @@ import lombok.*;
                 classes = @ConstructorResult(
                         targetClass = PostListDto.class,
                         columns = {
+                                @ColumnResult(name="post_id", type=Long.class),
                                 @ColumnResult(name="created_at", type=String.class),
                                 @ColumnResult(name="restaurant", type=String.class),
                                 @ColumnResult(name="menu", type=String.class),
