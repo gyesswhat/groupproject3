@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Register, Login, Main, PostDetail, PostForm } from './components';
+import { Register, Login, Main, PostDetail, PostForm, OrderFailed } from './components';
 import getUser from './Fakeuser';
 import './App.css';
 
@@ -35,6 +35,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/recruit" element={<PostForm />} />
+        <Route path="/post/:postId/order-failed" element={<OrderFailed />} />
       </Routes>
     </Router>
   );

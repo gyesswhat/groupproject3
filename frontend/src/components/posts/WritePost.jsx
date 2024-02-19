@@ -30,7 +30,7 @@ export function PostForm() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/api/posts', {
+      const response = await axios.post('/post', {
         userId,
         location,
         category,

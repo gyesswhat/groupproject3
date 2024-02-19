@@ -36,7 +36,8 @@ export const Posts = () => {
   const filteredDeliveryRecruitment = dummyDeliveryRecruitment.filter(
     DeliveryR =>
       (!selectedBuilding || DeliveryR.building === selectedBuilding) &&
-      (!selectedFoodType || DeliveryR.foodtype === selectedFoodType),
+      (!selectedFoodType || DeliveryR.foodtype === selectedFoodType) &&
+      DeliveryR.isValid === 3,
   );
 
   return (

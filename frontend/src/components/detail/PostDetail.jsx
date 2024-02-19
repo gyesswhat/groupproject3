@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Header } from '../header/Header';
 import { CommentForm } from './CommentForm';
 import { PostContents } from './PostContents';
@@ -20,10 +20,8 @@ export const PostDetail = () => {
   const handleButtonClick = () => {
     setButtonDisabled(true); // 버튼 비활성화
     setIsJoined(true);
-    // const userId = sessionStorage.getItem('userId');
   };
 
-  sessionStorage.setItem('userId', '1');
   const currentUserId = sessionStorage.getItem('userId');
   const isCaptain = post.userId === currentUserId;
 
@@ -72,39 +70,45 @@ export const PostDetail = () => {
     fetchPart();
   }, [postId]);
 
+  useEffect(() => {
+    if (post && remainingTime === 0 && post.recruit !== part.length) {
+      <Link to="/order-failed" />;
+    }
+  }, [post, part, remainingTime]);
+
   return (
     <>
       <Header />
       <div id="wrap">
         <div id="inner-wrap">
-          {dummyDeliveryRecruitment[0] && (
+          {post && (
             <>
-              {dummyDeliveryRecruitment[0].map(
-                ({ userId, location, restaurant, menu, partNum, price, postBody, click }) => (
-                  <PostContents
-                    key={userId}
-                    id={userId}
-                    restaurant={restaurant}
-                    menu={menu}
-                    recruit={partNum}
-                    recruited={part.length}
-                    timer={remainingTime}
-                    cost={price}
-                    content={postBody}
-                    building={location}
-                    account={part.account}
-                    isJoined={isJoined}
-                    click={handleButtonClick}
-                    disabled={isButtonDisabled}
-                  />
-                ),
-              )}
+              {post.map(({ location, restaurant, menu, partNum, price, postBody }) => (
+                <PostContents
+                  key={postId}
+                  id={postId}
+                  restaurant={restaurant}
+                  menu={menu}
+                  recruit={partNum}
+                  recruited={part.length}
+                  timer={
+                    <>
+                      <p id="green">{remainingTime}</p> <p>분 뒤 주문 예정</p>
+                    </>
+                  }
+                  cost={price}
+                  content={postBody}
+                  building={location}
+                  account={part.account}
+                  isJoined={isJoined}
+                  click={handleButtonClick}
+                  disabled={isButtonDisabled}
+                />
+              ))}
               <div id="part-wrap">
-                {
-                  isCaptain ? null : isJoined ? ( // 만약 방장이 아니라면
-                    <button>입금 완료</button>
-                  ) : null // 참여자이고 입금이 완료되었을 경우 버튼을 렌더링
-                }
+                {isCaptain ? null : isJoined ? ( // 만약 방장이 아니라면
+                  <button>입금 완료</button>
+                ) : null}
                 {part.map(({ nickname, status }, index) => (
                   <div id="participants" key={nickname}>
                     <div id="participant-list">
