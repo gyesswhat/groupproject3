@@ -11,19 +11,19 @@
 
 ## 🍀 기술 소개
 ### UI/UX
-| SPEC |  |  |
-|:---:|:---:|:---:|
-| **Description** | | 
+| SPEC | <img src="https://cdn.sanity.io/images/599r6htc/localized/46a76c802176eb17b04e12108de7e7e0f3736dc6-1024x1024.png?w=804&h=804&q=75&fit=max&auto=format" width="50" height="50"/> |
+|:---:|:---:|
+| **Description** | Figma | 
 
 ### Front-end
-| SPEC |  |  |
-|:---:|:---:|:---:|
-| **Description** | |
+| SPEC | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/768px-JavaScript-logo.png" width="50" height="50"/> | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/CSS3_logo_and_wordmark.svg/1200px-CSS3_logo_and_wordmark.svg.png" width="40" height="50"/> | <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/61/HTML5_logo_and_wordmark.svg/512px-HTML5_logo_and_wordmark.svg.png" width="50" height="50" /> |
+|:---:|:---:|:---:|:---:|
+| **Description** | JavaScript | CSS | HTML |
 
 ### Back-end
-| SPEC |  |  |
+| SPEC | <img src="https://taetaetae.github.io/images/spring-boot-eclipse/spring-boot-logo.jpg" width="50" height="50"/> | <img src="https://upload.wikimedia.org/wikipedia/labs/8/8e/Mysql_logo.png" width="80" height="50"/> |
 |:---:|:---:|:---:|
-| **Description** | |
+| **Description** | Spring boot | MySQL |
 
 ## 🍏 관련 링크
 [🌱 팀 노션](https://www.notion.so/suuujin-kim/3-e5ffe9bb462e424a9fca2be7512f8bc0) <br>
