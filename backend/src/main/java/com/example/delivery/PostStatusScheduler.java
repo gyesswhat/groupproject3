@@ -28,7 +28,7 @@ public class PostStatusScheduler {
     //4. 주문 진행중
     //    → 글을 올린지 30분이 지나지 않은 경우
 
-    @Scheduled(fixedDelay = 10)
+    @Scheduled(fixedDelay = 1000*60)
     public void changePostStatus() {
         // 1. 상태 확인할 Post 리스트 가져오기
         Timestamp timestamp = new Timestamp(System.currentTimeMillis() - 30*60*1000);
