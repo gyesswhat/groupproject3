@@ -6,7 +6,7 @@ export const dummyDeliveryRecruitment = [
     menu: '연어 세트',
     timer: 2,
     recruited: 3,
-    partNum: 4,
+    recruit: 4,
     cost: 12800,
     recruiter: '마이멜로디',
     foodtype: 'japanese',

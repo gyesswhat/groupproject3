@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '../header';
-import { BANK_LIST } from './auth.const';
+import { BankOptions } from './BankOptions';
 import axios from 'axios';
 
 export const Register = () => {
@@ -58,16 +58,6 @@ export const Register = () => {
       console.error('Registration failed:', error);
     }
   };
-
-  const BankOptions = () => (
-    <>
-      {BANK_LIST.map((bank, index) => (
-        <option key={index} value={bank}>
-          {bank}
-        </option>
-      ))}
-    </>
-  );
 
   return (
     <>
@@ -133,7 +123,7 @@ export const Register = () => {
                 <option selected hidden value="select">
                   은행 선택
                 </option>
-                {BankOptions()}
+                <BankOptions />
               </select>
             </div>
             {(!emailValid || !nickValid) && <span>입력한 정보를 확인하세요.</span>}
@@ -145,7 +135,9 @@ export const Register = () => {
       </div>
       {isSnackbarOpen && (
         <div className="snackbar">
-          <button onClick={handleSnackbarClose}>X</button>
+          <button onClick={handleSnackbarClose} id="x">
+            X
+          </button>
           회원가입에 성공했습니다.
         </div>
       )}

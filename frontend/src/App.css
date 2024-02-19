@@ -713,3 +713,100 @@ button[disabled] {
   font-size: 20px;
   font-weight: 600;
 }
+
+#mypage {
+  width: 350px;
+  margin-left: 100px;
+}
+
+ul {
+  width: fit-content;
+  margin-left: 100px;
+  padding: 0;
+}
+
+#flex-row > #inner-wrap {
+  margin-top: 30px;
+}
+
+#nav {
+  box-sizing: border-box;
+  cursor: pointer;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  border: #ccc 1px solid;
+  width: 350px;
+  height: 72px;
+  border-radius: 14px;
+  padding: 10px 10px;
+  background-color: white;
+  font-weight: bold;
+  align-items: center;
+  color: #545563;
+  font-weight: 700;
+}
+
+#nav > div > h2,
+#nav > div > p {
+  margin: 0px;
+  margin-left: 10px;
+}
+#nav > div > p {
+  font-weight: 400;
+  font-size: 13px;
+}
+
+#nav > div > h2 {
+  margin-bottom: 3px;
+  font-weight: 700;
+  color: black;
+  font-size: 14px;
+}
+
+#nav-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background-color: #ccc;
+}
+
+#nav > div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#nav-icon > img {
+  height: 50%;
+}
+
+.active > #nav {
+  border: #087112 2px solid;
+  background-color: #f3f4ff;
+}
+
+.active > #nav > #nav-icon {
+  background-color: #087112;
+}
+
+#inner-wrap > #main-screen {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#flex-row > #inner-wrap > h3 {
+  width: fit-content;
+  margin-top: 0;
+}
+
+#flex-row > #inner-wrap {
+  width: 600px;
+}
+
+#profile-bottom {
+  display: flex;
+  justify-content: end;
+  margin-top: 30px;
+  margin-right: 5px;
+}

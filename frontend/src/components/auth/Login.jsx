@@ -27,11 +27,12 @@ export function Login() {
     try {
       const response = await axios.post('/login', { userId, userPw });
 
-      if (response.status === 200) {
+      if (response.statusCode === 200) {
+        sessionStorage.setItem('userId', response.userId);
         navigate('/');
       }
 
-      if (response.status === 300 || response.status === 400) {
+      if (response.statusCode === 300 || response.status === 400) {
         setSuccess(false);
       }
     } catch (error) {

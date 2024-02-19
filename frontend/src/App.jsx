@@ -1,7 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { Register, Login, Main, PostDetail, PostForm, OrderFailed } from './components';
-import getUser from './Fakeuser';
+import {
+  Register,
+  Login,
+  Main,
+  PostDetail,
+  PostForm,
+  OrderFailed,
+  MyPage,
+  ProfilePage,
+  OrdersPage,
+} from './components';
+import { fakeUser } from './Fakeuser';
 import './App.css';
 
 function App() {
@@ -9,7 +19,7 @@ function App() {
 
   useEffect(() => {
     const checkUser = async () => {
-      const user = await getUser();
+      const user = await fakeUser.loggedIn;
       setLoggedIn(user);
 
       if (user) {
@@ -36,6 +46,8 @@ function App() {
         <Route path="/post/:postId" element={<PostDetail />} />
         <Route path="/recruit" element={<PostForm />} />
         <Route path="/post/:postId/order-failed" element={<OrderFailed />} />
+        <Route path="/mypage/profile" element={<ProfilePage />} />
+        <Route path="/mypage/orders" element={<OrdersPage />} />
       </Routes>
     </Router>
   );

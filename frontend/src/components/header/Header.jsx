@@ -15,7 +15,7 @@ export function Header() {
           <Link to="/">홈</Link>
         </li>
         <li>
-          <Link to="/mypage">마이페이지</Link>
+          <Link to="/mypage/profile">마이페이지</Link>
         </li>
       </ul>
     </div>

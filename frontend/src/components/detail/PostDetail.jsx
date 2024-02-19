@@ -17,12 +17,38 @@ export const PostDetail = () => {
   const [isJoined, setIsJoined] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
-  const handleButtonClick = () => {
-    setButtonDisabled(true); // 버튼 비활성화
-    setIsJoined(true);
+  const sendJoinRequest = async userId => {
+    try {
+      const response = await axios.post(`/posts/${postId}/join`, userId);
+      console.log('Join request successful:', response.data);
+    } catch (error) {
+      console.error('Join request failed:', error);
+    }
   };
 
   const currentUserId = sessionStorage.getItem('userId');
+
+  const handleButtonClick = () => {
+    setButtonDisabled(true);
+    setIsJoined(true);
+    sendJoinRequest(currentUserId);
+  };
+
+  const handleDepositButtonClick = () => {
+    const currentUserId = sessionStorage.getItem('userId');
+    sendDepositRequest(currentUserId);
+    setButtonDisabled(true);
+  };
+
+  const sendDepositRequest = async userId => {
+    try {
+      const response = await axios.post(`/posts/${postId}/deposit`, userId);
+      console.log('Deposit request successful:', response.data);
+    } catch (error) {
+      console.error('Deposit request failed:', error);
+    }
+  };
+
   const isCaptain = post.userId === currentUserId;
 
   useEffect(() => {
@@ -106,8 +132,10 @@ export const PostDetail = () => {
                 />
               ))}
               <div id="part-wrap">
-                {isCaptain ? null : isJoined ? ( // 만약 방장이 아니라면
-                  <button>입금 완료</button>
+                {isCaptain ? null : isJoined ? (
+                  <button onClick={handleDepositButtonClick} disabled={isButtonDisabled}>
+                    입금 완료
+                  </button>
                 ) : null}
                 {part.map(({ nickname, status }, index) => (
                   <div id="participants" key={nickname}>
