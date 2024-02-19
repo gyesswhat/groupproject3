@@ -15,8 +15,6 @@ import java.util.List;
 @Service
 public class PostStatusScheduler {
     @Autowired
-    PostService postService;
-    @Autowired
     PostRepository postRepository;
     @Autowired
     ParticipantRepository participantRepository;
@@ -30,7 +28,7 @@ public class PostStatusScheduler {
     //4. 주문 진행중
     //    → 글을 올린지 30분이 지나지 않은 경우
 
-    @Scheduled(fixedDelay = 1000*60)
+    @Scheduled(fixedDelay = 10)
     public void changePostStatus() {
         // 1. 상태 확인할 Post 리스트 가져오기
         Timestamp timestamp = new Timestamp(System.currentTimeMillis() - 30*60*1000);
@@ -43,11 +41,20 @@ public class PostStatusScheduler {
             int targetPartNum = post.getPartNum();
             int nowPartNum = participantRepository.getPartNum(postId);
 
-            if (targetPartNum > nowPartNum) post.setIsValid(2); // 주문 실패(인원 못 채움)
+            if (targetPartNum > nowPartNum) {
+                post.setIsValid(2); // 주문 실패(인원 못 채움)
+                postRepository.save(post);
+            }
             else {
                 int depositCheckedNum = participantRepository.getDepositCheckedNum(postId);
-                if (targetPartNum == depositCheckedNum) post.setIsValid(1); // 주문 성공
-                else post.setIsValid(3); // 주문 실패(입금 안 함)
+                if (targetPartNum == depositCheckedNum) {
+                    post.setIsValid(1); // 주문 성공
+                    postRepository.save(post);
+                }
+                else {
+                    post.setIsValid(3); // 주문 실패(입금 안 함)
+                    postRepository.save(post);
+                }
             }
         }
     }
