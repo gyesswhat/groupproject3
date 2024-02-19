@@ -17,16 +17,16 @@ export const PostDetail = () => {
   const [isJoined, setIsJoined] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
-  const sendJoinRequest = async userId => {
+  const currentUserId = sessionStorage.getItem('userId');
+
+  const sendJoinRequest = async () => {
     try {
-      const response = await axios.post(`/posts/${postId}/join`, userId);
+      const response = await axios.post(`/posts/${postId}/join`, currentUserId);
       console.log('Join request successful:', response.data);
     } catch (error) {
       console.error('Join request failed:', error);
     }
   };
-
-  const currentUserId = sessionStorage.getItem('userId');
 
   const handleButtonClick = () => {
     setButtonDisabled(true);
@@ -35,21 +35,18 @@ export const PostDetail = () => {
   };
 
   const handleDepositButtonClick = () => {
-    const currentUserId = sessionStorage.getItem('userId');
     sendDepositRequest(currentUserId);
     setButtonDisabled(true);
   };
 
-  const sendDepositRequest = async userId => {
+  const sendDepositRequest = async () => {
     try {
-      const response = await axios.post(`/posts/${postId}/deposit`, userId);
+      const response = await axios.post(`/posts/${postId}/deposit`, currentUserId);
       console.log('Deposit request successful:', response.data);
     } catch (error) {
       console.error('Deposit request failed:', error);
     }
   };
-
-  const isCaptain = post.userId === currentUserId;
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -101,6 +98,8 @@ export const PostDetail = () => {
       <Link to={`/post/${postId}/order-failed`} />;
     }
   }, [post, part, remainingTime]);
+
+  const isCaptain = post.userId === currentUserId;
 
   return (
     <>

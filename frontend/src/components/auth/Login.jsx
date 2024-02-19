@@ -4,6 +4,7 @@ import { Logo } from '../header';
 import axios from 'axios';
 
 export function Login() {
+  sessionStorage.clear();
   const [inputs, setInputs] = useState({
     userId: '',
     userPw: '',
