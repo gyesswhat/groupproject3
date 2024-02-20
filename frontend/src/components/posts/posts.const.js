@@ -10,7 +10,7 @@ export const dummyDeliveryRecruitment = [
     cost: 12800,
     recruiter: '마이멜로디',
     foodtype: 'japanese',
-    location: '한우리집',
+    building: '한우리집',
     participants: ['폼폼푸린', '토니토니쵸파'],
     postBody: '함께 드실 분',
     account: 123456,

@@ -6,15 +6,13 @@ import { DeliveryItem } from '../posts/DeliveryItem';
 import { Header } from '../header';
 
 export const OrdersPage = () => {
-  const [post, setPost] = useState(null);
-
-  const currentId = sessionStorage.getItem('userId');
+  const [posts, setPosts] = useState(null);
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get(`/user/${currentId}`);
-        setPost(response.data);
+        const response = await axios.get('/user');
+        setPosts(response.data);
       } catch (error) {
         console.error('Error fetching post:', error);
       }
@@ -31,7 +29,7 @@ export const OrdersPage = () => {
           <h3>주문 히스토리</h3>
           <div id="main-screen">
             <div id="delivery-recruitment-list">
-              {post.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost, isValid }) => (
+              {posts.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost, isValid }) => (
                 <DeliveryItem
                   key={id}
                   id={id}
