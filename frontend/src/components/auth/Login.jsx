@@ -87,11 +87,12 @@ export function Login() {
         </div>
       </div>
       <div id="login-right">
-        <img src="/assets/login-right-img1.svg" id="login-right-img1" alt="Login" />
+        {/*<img src="/assets/login-right-img1.svg" id="login-right-img1" alt="Login" />
         <img src="/assets/login-right-img3.svg" id="login-right-img2" alt="Login" />
         <h3>배달비 걱정 없이 주문하세요!</h3>
         <p>이화 공유배달은 배달 주문을 다른 사람과 공유하여 음식을 남긴다는 걱정 없이</p>
-        <p>배달비는 절감할 수 있는 신개념 공유 배달 시스템입니다.</p>
+  <p>배달비는 절감할 수 있는 신개념 공유 배달 시스템입니다.</p>*/}
+        <img src="/assets/login-right-img.svg" id="login-right-img" alt="Login" />
       </div>
     </div>
   );

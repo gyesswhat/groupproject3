@@ -5,8 +5,6 @@ import { Menu, PlaceDropdown } from '../menu';
 import { DeliveryItem } from './DeliveryItem';
 import { dummyDeliveryRecruitment } from './posts.const';
 
-const API_URL = 'http://15.164.98.46:8080';
-
 export const Posts = () => {
   const [selectedBuilding, setSelectedBuilding] = useState('');
   const [selectedFoodType, setSelectedFoodType] = useState('');
@@ -16,7 +14,7 @@ export const Posts = () => {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await axios.get(`${API_URL}/posts`);
+        const response = await axios.get(`/posts`);
         console.log(123, response);
         setPosts(response);
       } catch (error) {

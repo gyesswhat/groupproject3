@@ -22,7 +22,7 @@ export const dummyDeliveryRecruitment = [
     userId: 2,
     restaurant: 'BBQ 신촌점',
     menu: '황금올리브치킨',
-    timer: 5,
+    timer: 6,
     recruited: 2,
     recruit: 3,
     cost: 8500,
@@ -33,6 +33,6 @@ export const dummyDeliveryRecruitment = [
     content: '함께 드실 분',
     account: 123456,
     status: [],
-    isValid: 1,
+    isValid: 3,
   },
 ];
