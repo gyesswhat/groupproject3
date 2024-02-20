@@ -1,15 +1,18 @@
 import { useState } from 'react';
 
-export const PostContents = ({ restaurant, menu, timer, recruit, recruited, cost, building, account, content }) => {
-  const [isButtonDisabled, setButtonDisabled] = useState(false);
-  const [isJoined, setIsJoined] = useState(false);
-
-  const handleButtonClick = () => {
-    setButtonDisabled(true); // 버튼 비활성화
-    setIsJoined(true);
-    // const userId = sessionStorage.getItem('userId');
-  };
-
+export const PostContents = ({
+  click,
+  disabled,
+  restaurant,
+  menu,
+  timer,
+  recruit,
+  recruited,
+  cost,
+  building,
+  account,
+  content,
+}) => {
   return (
     <div id="postcontent">
       <div id="main-content">
@@ -21,7 +24,7 @@ export const PostContents = ({ restaurant, menu, timer, recruit, recruited, cost
             <div id="cost">
               <p id="green">배달비 포함</p> <h4>{cost}</h4> <p>원</p>
             </div>
-            <button type="submit" onClick={handleButtonClick} disabled={isButtonDisabled}>
+            <button type="submit" onClick={click} disabled={disabled}>
               참여하기
             </button>
           </div>
@@ -41,7 +44,7 @@ export const PostContents = ({ restaurant, menu, timer, recruit, recruited, cost
         <div id="where">
           <p>배달받을 장소:</p> <p id="green">{building}</p>
         </div>
-        {isJoined && (
+        {disabled && (
           <div id="where">
             <p>계좌 정보:</p> <p id="green">{account}</p>
           </div>

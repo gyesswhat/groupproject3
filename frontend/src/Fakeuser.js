@@ -1,9 +1,7 @@
-const fakeUser = {
-  username: 'john_doe',
+export const fakeUser = {
+  nickname: 'john_doe',
   email: 'john@example.com',
   loggedIn: true,
+  bank: '신한은행',
+  account: 1234,
 };
-
-const getUser = () => fakeUser.loggedIn;
-
-export default getUser;

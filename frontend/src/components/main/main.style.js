@@ -1,28 +1,46 @@
 import styled from 'styled-components';
 
 export const DeliveryItem = styled.div`
-  width: 500px;
+  width: 470px;
   height: 86px;
   padding: 25px;
   margin: 5px 10px 5px 10px;
   border: #ddd 1px solid;
-  border-radius: 10px;
+  border-radius: 16px;
   color: black;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  position: relative;
 
   & > h4 {
-    width: 100%;
+    width: 80%;
     height: fit-content;
     margin-bottom: 8px;
     font-size: 18px;
     margin-top: 0;
+    display: flex;
   }
 
   &:hover {
     border: 1px solid #087112;
   }
+`;
+
+export const Badge = styled.div`
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  background-color: #ef5656;
+  color: white;
+  width: 78px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0px 16px 0px 16px;
+  font-size: 11px;
+  font-weight: 700;
 `;
 
 export const Info = styled.div`
@@ -32,7 +50,6 @@ export const Info = styled.div`
   color: #83859c;
 
   & > img {
-    margin-bottom: 10px;
     display: flex;
     align-items: center;
   }

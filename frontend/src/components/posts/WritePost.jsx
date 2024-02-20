@@ -1,19 +1,22 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { PlaceDropdownW } from './PlaceDropdownW';
 import { MenuDropdownW } from './MenuDropdown';
 import { Header } from '../header';
 
 export function PostForm() {
   const [inputs, setInputs] = useState({
+    userId: '',
+    location: '',
+    category: '',
     restaurant: '',
     menu: '',
-    recruit: '',
-    location: '',
-    cost: '',
-    content: '',
+    partNum: '',
+    price: '',
+    postBody: '',
   });
 
-  const { restaurant, menu, recruit, location, category, cost, content } = inputs;
+  const { userId, location, category, restaurant, menu, partNum, price, postBody } = inputs;
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -23,9 +26,37 @@ export function PostForm() {
     }));
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    console.log(inputs);
+
+    try {
+      const response = await axios.post('/post', {
+        userId,
+        location,
+        category,
+        restaurant,
+        menu,
+        partNum,
+        price,
+        postBody,
+      });
+
+      console.log(response.data);
+
+      // 입력 필드 초기화
+      setInputs({
+        userId: '',
+        location: '',
+        category: '',
+        restaurant: '',
+        menu: '',
+        partNum: '',
+        price: '',
+        postBody: '',
+      });
+    } catch (error) {
+      console.error('Error creating post:', error);
+    }
   };
 
   return (
@@ -60,17 +91,17 @@ export function PostForm() {
               <div id="flex-row">
                 <div id="flex-col">
                   <label>모집 인원</label>
-                  <input id="id" type="number" name="recruit" value={recruit} onChange={handleInputChange} />
+                  <input id="id" type="number" name="recruit" value={partNum} onChange={handleInputChange} />
                 </div>
 
                 <div id="flex-col">
                   <label id="green">배달비 포함 가격</label>
-                  <input id="id" type="text" name="cost" value={cost} onChange={handleInputChange} />
+                  <input id="id" type="text" name="cost" value={price} onChange={handleInputChange} />
                 </div>
               </div>
               <div id="margin-top">
                 <h3>게시될 내용을 작성해주세요.</h3>
-                <textarea id="write-content" name="content" value={content} onChange={handleInputChange} />
+                <textarea id="write-content" name="content" value={postBody} onChange={handleInputChange} />
               </div>
               <div id="write-bottom">
                 <p>※ 게시된 글은 수정이 불가합니다.</p>

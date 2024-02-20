@@ -1,12 +1,15 @@
 import { Link } from 'react-router-dom';
 import * as S from '../main/main.style';
 
-export const DeliveryItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter }) => (
+export const DeliveryItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter, isValid }) => (
   <Link to={`post/${id}`}>
     <S.DeliveryItem>
+      {timer <= 5 && isValid !== 0 && isValid !== 1 && <S.Badge>마감 임박</S.Badge>}
+      {isValid === 3 && <S.Badge>진행 중</S.Badge>}
       <h4>
         [{restaurant}] {menu}
       </h4>
+
       <S.Info>
         <img src="/assets/timer-icon.svg" alt="timer" />
         <p id="green">{timer}분</p>

@@ -1,11 +1,22 @@
 import { useState } from 'react';
+import axios from 'axios';
 
-export const CommentForm = ({ onCommentSubmit }) => {
+export const CommentForm = ({ onCommentSubmit, postId }) => {
   const [comment, setComment] = useState('');
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    onCommentSubmit(comment);
+    try {
+      const response = await axios.post(`/posts/${postId}/comment`, { comment });
+      if (response.status === 200) {
+        console.log('Comment sent');
+        onCommentSubmit();
+      } else {
+        console.error('Comment sending failed');
+      }
+    } catch (error) {
+      console.error('Comment Error', error);
+    }
     setComment('');
   };
 

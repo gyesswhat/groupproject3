@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Logo } from '../header';
+import axios from 'axios';
 
 export function Login() {
+  sessionStorage.clear();
   const [inputs, setInputs] = useState({
     userId: '',
     userPw: '',
@@ -19,9 +21,25 @@ export function Login() {
     }));
   };
 
-  const handleSubmit = e => {
+  const [success, setSuccess] = useState(true);
+
+  const handleSubmit = async e => {
     e.preventDefault();
-    navigate('/');
+    try {
+      const response = await axios.post('/login', { userId, userPw });
+
+      if (response.statusCode === 200) {
+        sessionStorage.setItem('userId', response.userId);
+        navigate('/');
+      }
+
+      if (response.statusCode === 300 || response.status === 400) {
+        setSuccess(false);
+      }
+    } catch (error) {
+      setSuccess(false);
+      console.error('Login failed:', error);
+    }
   };
 
   return (
@@ -56,13 +74,14 @@ export function Login() {
                   value={userPw}
                   onChange={handleInputChange}
                 />
+                {!success && <span>아이디 또는 비밀번호를 확인하세요.</span>}
                 <button type="submit" id="login-button">
                   로그인
                 </button>
               </form>
 
               <Link to="/register" id="register-button">
-                <span>아직 계정이 없으신가요?</span> <div id="green">회원가입</div>
+                <p>아직 계정이 없으신가요?</p> <div id="green">회원가입</div>
               </Link>
             </div>
           </div>

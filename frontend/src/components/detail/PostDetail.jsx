@@ -1,77 +1,142 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import axios from 'axios';
+import { useParams, Link } from 'react-router-dom';
 import { Header } from '../header/Header';
-import { dummyDeliveryRecruitment } from '../posts';
 import { CommentForm } from './CommentForm';
 import { PostContents } from './PostContents';
 import { StatusList } from './StatusList';
-import { PARTICIPANTS } from './detail.const';
+import { dummyDeliveryRecruitment } from '../posts/posts.const';
 
 export const PostDetail = () => {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
-  const [comments, setComments] = useState([]);
+  const [comments, setComments] = useState(null);
+  const [part, setPart] = useState(null);
+  const [remainingTime, setRemainingTime] = useState(null);
+
+  const [isJoined, setIsJoined] = useState(false);
+  const [isButtonDisabled, setButtonDisabled] = useState(false);
+
+  const currentUserId = sessionStorage.getItem('userId');
+
+  const sendJoinRequest = async () => {
+    try {
+      const response = await axios.post(`/posts/${postId}/join`, currentUserId);
+      console.log('Join request successful:', response.data);
+    } catch (error) {
+      console.error('Join request failed:', error);
+    }
+  };
+
+  const handleButtonClick = () => {
+    setButtonDisabled(true);
+    setIsJoined(true);
+    sendJoinRequest(currentUserId);
+  };
+
+  const handleDepositButtonClick = () => {
+    sendDepositRequest(currentUserId);
+    setButtonDisabled(true);
+  };
+
+  const sendDepositRequest = async () => {
+    try {
+      const response = await axios.post(`/posts/${postId}/deposit`, currentUserId);
+      console.log('Deposit request successful:', response.data);
+    } catch (error) {
+      console.error('Deposit request failed:', error);
+    }
+  };
 
   useEffect(() => {
-    // postId를 사용하여 API를 호출
-    // fetch(`https://api.example.com/post/${postId}`)
-    //   .then(response => response.json())
-    //   .then(data => setPost(data))
-    //   .catch(error => console.error('Error fetching post:', error));
-    // comments 정보
-    // fetch(`https://api.example.com/post/${postId}/comments`)
-    //   .then(response => response.json())
-    //   .then(data => setComments(data))
-    //   .catch(error => console.error('Error fetching comments:', error));
+    const fetchPost = async () => {
+      try {
+        const response = await axios.get(`/posts/${postId}`);
+        setPost(response.data);
+      } catch (error) {
+        console.error('Error fetching post:', error);
+      }
+    };
 
-    const dummyComments = [
-      {
-        id: 1,
-        nickname: '폼폼푸린',
-        time: 4,
-        content: '계란초밥 3개 추가 가능합니까?',
-      },
-      {
-        id: 2,
-        nickname: '마이멜로디',
-        time: 3,
-        content: '요청사항 댓글 작성해주세요',
-      },
-    ];
+    const fetchComment = async () => {
+      try {
+        const response = await axios.get(`/posts/${postId}/comment`);
+        setComments(response.data);
+      } catch (error) {
+        console.error('Error fetching comment:', error);
+      }
+    };
 
-    const selectedPost = dummyDeliveryRecruitment.filter(post => post.id === Number(postId));
+    const fetchPart = async () => {
+      try {
+        const response = await axios.get(`/posts/${postId}/participants`);
+        setPart(response.data);
+      } catch (error) {
+        console.error('Error fetching participant:', error);
+      }
+    };
 
-    if (selectedPost.length > 0) {
-      setPost(selectedPost);
-      setComments(dummyComments);
-    }
+    const postDate = new Date(post.createdAt);
+    // 현재 시간
+    const currentDate = new Date();
+
+    // 현재 시간과 게시글 작성 시간의 차이 계산 (밀리초 단위)
+    const timeDiff = postDate - currentDate;
+
+    remainingTime = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+
+    // 상태 업데이트
+    setRemainingTime(remainingTime);
+
+    fetchPost();
+    fetchComment();
+    fetchPart();
   }, [postId]);
+
+  useEffect(() => {
+    if (post && remainingTime === 0 && post.recruit !== part.length) {
+      <Link to={`/post/${postId}/order-failed`} />;
+    }
+  }, [post, part, remainingTime]);
+
+  const isCaptain = post.userId === currentUserId;
 
   return (
     <>
       <Header />
       <div id="wrap">
         <div id="inner-wrap">
-          {post ? (
+          {post && (
             <>
-              {post.map(({ id, restaurant, menu, recruit, recruited, timer, cost, content, building, account }) => (
+              {post.map(({ location, restaurant, menu, partNum, price, postBody }) => (
                 <PostContents
-                  key={id}
-                  id={id}
+                  key={postId}
+                  id={postId}
                   restaurant={restaurant}
                   menu={menu}
-                  recruit={recruit}
-                  recruited={recruited}
-                  timer={timer}
-                  cost={cost}
-                  content={content}
-                  building={building}
-                  account={account}
+                  recruit={partNum}
+                  recruited={part.length}
+                  timer={
+                    <>
+                      <p id="green">{remainingTime}</p> <p>분 뒤 주문 예정</p>
+                    </>
+                  }
+                  cost={price}
+                  content={postBody}
+                  building={location}
+                  account={part.account}
+                  isJoined={isJoined}
+                  click={handleButtonClick}
+                  disabled={isButtonDisabled}
                 />
               ))}
               <div id="part-wrap">
-                <h4>참여자 목록</h4>
-                {PARTICIPANTS.map(({ nickname, status }, index) => (
+                {isCaptain ? null : isJoined ? (
+                  <button onClick={handleDepositButtonClick} disabled={isButtonDisabled}>
+                    입금 완료
+                  </button>
+                ) : null}
+                {part.map(({ nickname, status }, index) => (
                   <div id="participants" key={nickname}>
                     <div id="participant-list">
                       <div id="participant">
@@ -86,7 +151,7 @@ export const PostDetail = () => {
               <div id="com-wrap">
                 <h4>댓글</h4>
                 <div id="comments">
-                  <CommentForm />
+                  <CommentForm postId={postId} />
                   {comments.map(({ id, nickname, time, content }) => (
                     <div key={id} id="comment">
                       <div id="place-text">
@@ -96,8 +161,8 @@ export const PostDetail = () => {
                       <p
                         id="darkgray"
                         style={{
-                          color: PARTICIPANTS[0].nickname === nickname ? 'green' : '#334253',
-                          fontWeight: PARTICIPANTS[0].nickname === nickname ? '800' : '500',
+                          color: part[0].nickname === nickname ? 'green' : '#334253',
+                          fontWeight: part[0].nickname === nickname ? '800' : '500',
                         }}>
                         {content}
                       </p>
@@ -106,9 +171,8 @@ export const PostDetail = () => {
                 </div>
               </div>
             </>
-          ) : (
-            <p>Loading...</p>
-          )}
+          )}{' '}
+          : (<p>Loading...</p>)
         </div>
       </div>
     </>
