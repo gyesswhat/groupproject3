@@ -820,3 +820,13 @@ ul {
 body {
   font-family: Nunito;
 }
+
+#edit {
+  background-color: white;
+  color: #545454;
+  padding: 0;
+  margin-left: 10px;
+  font-size: 12px;
+  width: fit-content;
+  height: fit-content;
+}

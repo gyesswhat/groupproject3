@@ -5,14 +5,13 @@ import { Header } from '../header/Header';
 import { CommentForm } from './CommentForm';
 import { PostContents } from './PostContents';
 import { StatusList } from './StatusList';
-import { dummyDeliveryRecruitment } from '../posts/posts.const';
 
 export const PostDetail = () => {
   const { postId } = useParams();
-  const [post, setPost] = useState([]);
-  const [comments, setComments] = useState([]);
+  const [post, setPost] = useState(null);
+  const [comments, setComments] = useState(null);
   const [editedComment, setEditedComment] = useState('');
-  const [part, setPart] = useState([]);
+  const [part, setPart] = useState(null);
   const [remainingTime, setRemainingTime] = useState(null);
 
   const [isJoined, setIsJoined] = useState(false);
@@ -78,33 +77,34 @@ export const PostDetail = () => {
     }
   };
 
-  useEffect(() => {
-    const postDate = new Date(post.createdAt);
-    // 현재 시간
-    const currentDate = new Date();
-
-    // 현재 시간과 게시글 작성 시간의 차이 계산 (밀리초 단위)
-    const timeDiff = postDate - currentDate;
-
+  const calculateRemainingTime = createdAt => {
+    const timeDiff = new Date() - new Date(createdAt);
     const remainingTime = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+    return remainingTime;
+  };
 
-    // 상태 업데이트
-    setRemainingTime(remainingTime);
+  useEffect(() => {
+    if (post) {
+      const remainingTime = calculateRemainingTime(post.createdAt);
+      setRemainingTime(remainingTime);
+    }
+  }, [post]);
 
+  useEffect(() => {
     fetchPost();
     fetchComment();
     fetchPart();
   }, [postId]);
 
   useEffect(() => {
-    if (post && remainingTime === 0 && post.recruit !== part.length) {
+    if (post && remainingTime < 0 && post.recruit !== part.length) {
       <Link to={`/post/${postId}/order-failed`} />;
     }
   }, [post, part, remainingTime]);
 
   const handleEditSubmit = async (commentId, editedComment) => {
     try {
-      const response = await axios.put(`/posts/${postId}/comment/${comments[editIndex].commentId}`, {
+      const response = await axios.patch(`/posts/${postId}/comment/${commentId}`, {
         content: editedComment,
       });
       console.log('Comment updated successfully:', response.data);
@@ -112,7 +112,6 @@ export const PostDetail = () => {
       setEditIndex(null);
       setEditedComment('');
 
-      // 댓글 목록 다시 가져오기 (댓글 내용 업데이트 반영)
       fetchComment();
     } catch (error) {
       console.error('Error updating comment:', error);
@@ -123,11 +122,20 @@ export const PostDetail = () => {
     handleEditSubmit(commentId, editedComment);
   };
 
-  // 댓글 수정 버튼 클릭 이벤트 핸들러
   const handleEditClick = (commentId, content) => {
     setEditIndex(commentId);
-    // 수정된 내용을 해당 댓글의 내용으로 설정
     setEditedComment(content);
+  };
+
+  const handleDeleteComment = async commentId => {
+    try {
+      const response = await axios.delete(`/posts/${postId}/comment/${commentId}`);
+      console.log('Comment deleted successfully:', response.data);
+
+      fetchComment();
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+    }
   };
 
   const isCaptain = post.userId === currentUserId;
@@ -178,12 +186,17 @@ export const PostDetail = () => {
                 <h4>댓글</h4>
                 <div id="comments">
                   <CommentForm postId={postId} />
-                  {comments.map(({ id, nickname, time, content, index }) => (
-                    <div key={id} id="comment">
+                  {comments.map(({ CommentId, nickname, createdAt, content, index }) => (
+                    <div key={CommentId} id="comment">
                       <div id="place-text">
                         <p id="bold-margin">{nickname}</p>
-                        <p id="role">{time}분 전</p>
-                        <button onClick={() => handleEditClick(id, content)}>수정</button>
+                        <p id="role">{calculateRemainingTime(createdAt)}분 전</p>
+                        <button id="edit" onClick={() => handleEditClick(CommentId, content)}>
+                          수정
+                        </button>
+                        <button id="edit" onClick={() => handleDeleteComment(CommentId)}>
+                          삭제
+                        </button>
                       </div>
                       {editIndex !== null && editIndex === index ? (
                         // 수정 가능한 입력란 렌더링
@@ -204,9 +217,9 @@ export const PostDetail = () => {
                         </p>
                       )}
 
-                      {editIndex === id && (
+                      {editIndex === index && (
                         // 수정된 내용 저장 버튼
-                        <button onClick={() => handleSaveEdit(id)}>저장</button>
+                        <button onClick={() => handleSaveEdit(CommentId)}>저장</button>
                       )}
                     </div>
                   ))}
