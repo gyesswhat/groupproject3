@@ -61,7 +61,9 @@ export const Register = () => {
 
   return (
     <>
-      <Logo />
+      <div style={{ marginLeft: '100px', borderBottom: '1px solid #eee' }}>
+        <Logo />
+      </div>
       <div id="register-box">
         <div id="register">
           <div id="register-title">
