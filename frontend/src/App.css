@@ -734,12 +734,10 @@ button[disabled] {
 
 #mypage {
   width: 350px;
-  margin-left: 100px;
 }
 
 ul {
   width: fit-content;
-  margin-left: 100px;
   padding: 0;
 }
 
@@ -841,4 +839,10 @@ body {
   font-size: 12px;
   width: fit-content;
   height: fit-content;
+}
+
+#justify-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }

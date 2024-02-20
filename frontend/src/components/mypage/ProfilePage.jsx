@@ -57,7 +57,7 @@ export const ProfilePage = () => {
   return (
     <div>
       <Header />
-      <div id="flex-row">
+      <div id="flex-row" style={{ justifyContent: 'center' }}>
         <MyPage />
 
         <div id="inner-wrap">

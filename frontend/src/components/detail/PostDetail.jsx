@@ -162,6 +162,7 @@ export const PostDetail = () => {
                 isJoined={isJoined}
                 click={handleButtonClick}
                 disabled={isButtonDisabled}
+                isCaptain={isCaptain}
               />
               <div id="part-wrap">
                 {isCaptain ? null : isJoined ? (

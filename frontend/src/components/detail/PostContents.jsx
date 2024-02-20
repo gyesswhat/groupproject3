@@ -3,6 +3,8 @@ import { useState } from 'react';
 export const PostContents = ({
   click,
   disabled,
+  isCaptain,
+  isJoined,
   restaurant,
   menu,
   timer,
@@ -24,9 +26,11 @@ export const PostContents = ({
             <div id="cost">
               <p id="green">배달비 포함</p> <h4>{cost}</h4> <p>원</p>
             </div>
-            <button type="submit" onClick={click} disabled={disabled}>
-              참여하기
-            </button>
+            {isCaptain ? null : (
+              <button onClick={click} disabled={disabled}>
+                참여하기
+              </button>
+            )}
           </div>
         </div>
         <div id="info">

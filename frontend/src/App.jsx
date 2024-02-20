@@ -7,7 +7,7 @@ import { Login, Main, OrderFailed, OrdersPage, PostDetail, PostForm, ProfilePage
 function App() {
   const [loggedIn, setLoggedIn] = useState(null);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const checkUser = async () => {
       const user = await fakeUser.loggedIn;
       setLoggedIn(user);
@@ -21,7 +21,18 @@ function App() {
     };
 
     checkUser();
-  }, []);
+  }, []);*/
+
+  const currentUserId = sessionStorage.getItem('userId');
+  useEffect(() => {
+    if (currentUserId !== null) {
+      setLoggedIn(true);
+      console.log(currentUserId);
+      console.log(loggedIn);
+    } else {
+      setLoggedIn(false);
+    }
+  }, [currentUserId, loggedIn]);
 
   if (loggedIn === null) {
     return <div>Loading...</div>;

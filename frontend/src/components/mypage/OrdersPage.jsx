@@ -20,9 +20,9 @@ export const OrdersPage = () => {
   }, []);
 
   return (
-    <div>
+    <div id="justify-center">
       <Header />
-      <div id="flex-row">
+      <div id="flex-row" style={{ justifyContent: 'center' }}>
         <MyPage />
         <div id="inner-wrap">
           <h3>주문 히스토리</h3>
