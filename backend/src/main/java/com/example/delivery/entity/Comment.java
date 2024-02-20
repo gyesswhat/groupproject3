@@ -13,7 +13,7 @@ import lombok.*;
 @Getter
 @NamedNativeQuery(
         name = "Comment.findCommentList",
-        query = "SELECT u.nickname, c.comment_body, c.created_at " +
+        query = "SELECT c.comment_id, u.nickname, c.comment_body, c.created_at " +
                 "FROM comment c " +
                 "JOIN user u ON c.user_id = u.id " +
                 "WHERE c.post_post_id = :postId",
@@ -24,6 +24,7 @@ import lombok.*;
         classes = @ConstructorResult(
                 targetClass = CommentListDto.class,
                 columns = {
+                        @ColumnResult(name = "comment_id",type = Long.class),
                         @ColumnResult(name = "nickname",type = String.class),
                         @ColumnResult(name = "comment_body",type = String.class),
                         @ColumnResult(name = "created_at", type = String.class)

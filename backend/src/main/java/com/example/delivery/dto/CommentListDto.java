@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommentListDto {
+    private Long commentId;
     private String nickname;
     private String commentBody;
     private String createdAt;
