@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import { Header } from '../header/Header';
 import { CommentForm } from './CommentForm';
 import { PostContents } from './PostContents';

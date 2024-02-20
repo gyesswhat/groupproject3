@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { PlaceDropdown } from '../menu';
-import { Menu } from '../menu';
+import { Menu, PlaceDropdown } from '../menu';
 import { DeliveryItem } from './DeliveryItem';
 import { dummyDeliveryRecruitment } from './posts.const';
+
+const API_URL = 'http://15.164.98.46:8080';
 
 export const Posts = () => {
   const [selectedBuilding, setSelectedBuilding] = useState('');
@@ -15,8 +16,9 @@ export const Posts = () => {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await axios.get('/posts');
-        setPosts(response.data);
+        const response = await axios.get(`${API_URL}/posts`);
+        console.log(123, response);
+        setPosts(response);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
@@ -24,6 +26,8 @@ export const Posts = () => {
 
     fetchPosts();
   }, []);
+
+  console.log('posts:', posts);
 
   const handleBuildingChange = selectedValue => {
     setSelectedBuilding(selectedValue);
