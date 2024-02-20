@@ -199,9 +199,10 @@ body {
 }
 
 #login-page-whole {
-  height: 100vh;
-  /*background: linear-gradient(to right, white 550px, #087112 550px);*/
+  height: 100%;
+  background: linear-gradient(to right, white 550px, #087112 550px);
   display: flex;
+  /*justify-content: center;*/
   flex-direction: row;
 }
 
@@ -295,15 +296,12 @@ body {
   margin-left: 0.5vw;
 }
 
-#login-register {
-  width: 30vw;
-}
-
 #login-right {
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 #login-right > h3 {
