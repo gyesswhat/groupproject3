@@ -45,7 +45,7 @@ export function Login() {
   return (
     <div id="login-page-whole">
       <div id="login-left">
-        <div id="logo">
+        <div id="logo" style={{ marginLeft: '100px' }}>
           <Logo />
         </div>
         <div id="login-page">
