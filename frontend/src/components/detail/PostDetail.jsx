@@ -138,97 +138,104 @@ export const PostDetail = () => {
     }
   };
 
-  const isCaptain = post.userId === currentUserId;
+  const isCaptain = post?.userId === currentUserId;
+
+  if (!post) {
+    return (
+      <>
+        <Header />
+        <div id="wrap">
+          <div id="inner-wrap">
+            <p>오류가 발생했습니다. 잠시 후 다시 시도해주세요.</p>
+          </div>
+        </div>
+      </>
+    );
+  }
 
   return (
     <>
       <Header />
       <div id="wrap">
         <div id="inner-wrap">
-          {post ? (
-            <>
-              <PostContents
-                key={postId}
-                id={postId}
-                restaurant={post.restaurant}
-                menu={post.menu}
-                recruit={post.partNum}
-                recruited={part.length}
-                timer={remainingTime}
-                cost={post.price}
-                content={post.postBody}
-                building={post.location}
-                account={part.account}
-                isJoined={isJoined}
-                click={handleButtonClick}
-                disabled={isButtonDisabled}
-              />
-              <div id="part-wrap">
-                {isCaptain ? null : isJoined ? (
-                  <button onClick={handleDepositButtonClick} disabled={isButtonDisabled}>
-                    입금 완료
-                  </button>
-                ) : null}
-                <h4>참여자 목록</h4>
-                {part.map(({ nickname, status }, index) => (
-                  <div id="participants" key={nickname}>
-                    <div id="participant-list">
-                      <div id="participant">
-                        <p id="role">{index === 0 ? '방장' : '참여자'}</p>
-                        <p id="nickname">{nickname}</p>
-                      </div>
-                    </div>
-                    <div id="status">{index === 0 ? null : <StatusList status={status} />}</div>
+          <PostContents
+            key={postId}
+            id={postId}
+            restaurant={post.restaurant}
+            menu={post.menu}
+            recruit={post.partNum}
+            recruited={part.length}
+            timer={remainingTime}
+            cost={post.price}
+            content={post.postBody}
+            building={post.location}
+            account={part.account}
+            isJoined={isJoined}
+            click={handleButtonClick}
+            disabled={isButtonDisabled}
+          />
+          <div id="part-wrap">
+            {isCaptain ? null : isJoined ? (
+              <button onClick={handleDepositButtonClick} disabled={isButtonDisabled}>
+                입금 완료
+              </button>
+            ) : null}
+            <h4>참여자 목록</h4>
+            {part.map(({ nickname, status }, index) => (
+              <div id="participants" key={nickname}>
+                <div id="participant-list">
+                  <div id="participant">
+                    <p id="role">{index === 0 ? '방장' : '참여자'}</p>
+                    <p id="nickname">{nickname}</p>
                   </div>
-                ))}
-              </div>
-              <div id="com-wrap">
-                <h4>댓글</h4>
-                <div id="comments">
-                  <CommentForm postId={postId} />
-                  {comments.map(({ CommentId, nickname, createdAt, content, index }) => (
-                    <div key={CommentId} id="comment">
-                      <div id="place-text">
-                        <p id="bold-margin">{nickname}</p>
-                        <p id="role">{calculateRemainingTime(createdAt)}분 전</p>
-                        <button id="edit" onClick={() => handleEditClick(CommentId, content)}>
-                          수정
-                        </button>
-                        <button id="edit" onClick={() => handleDeleteComment(CommentId)}>
-                          삭제
-                        </button>
-                      </div>
-                      {editIndex !== null && editIndex === index ? (
-                        // 수정 가능한 입력란 렌더링
-                        <textarea
-                          value={editedComment} // 수정된 내용 표시
-                          onChange={e => setEditedComment(e.target.value)} // 수정된 내용 업데이트
-                          placeholder="댓글을 수정하세요..."
-                        />
-                      ) : (
-                        // 기존 댓글 내용 표시
-                        <p
-                          id="darkgray"
-                          style={{
-                            color: part[0].nickname === nickname ? 'green' : '#334253',
-                            fontWeight: part[0].nickname === nickname ? '800' : '500',
-                          }}>
-                          {content}
-                        </p>
-                      )}
-
-                      {editIndex === index && (
-                        // 수정된 내용 저장 버튼
-                        <button onClick={() => handleSaveEdit(CommentId)}>저장</button>
-                      )}
-                    </div>
-                  ))}
                 </div>
+                <div id="status">{index === 0 ? null : <StatusList status={status} />}</div>
               </div>
-            </>
-          ) : (
-            <p>Loading...</p>
-          )}
+            ))}
+          </div>
+          <div id="com-wrap">
+            <h4>댓글</h4>
+            <div id="comments">
+              <CommentForm postId={postId} />
+              {comments.map(({ CommentId, nickname, createdAt, content, index }) => (
+                <div key={CommentId} id="comment">
+                  <div id="place-text">
+                    <p id="bold-margin">{nickname}</p>
+                    <p id="role">{calculateRemainingTime(createdAt)}분 전</p>
+                    <button id="edit" onClick={() => handleEditClick(CommentId, content)}>
+                      수정
+                    </button>
+                    <button id="edit" onClick={() => handleDeleteComment(CommentId)}>
+                      삭제
+                    </button>
+                  </div>
+                  {editIndex !== null && editIndex === index ? (
+                    // 수정 가능한 입력란 렌더링
+                    <textarea
+                      value={editedComment} // 수정된 내용 표시
+                      onChange={e => setEditedComment(e.target.value)} // 수정된 내용 업데이트
+                      placeholder="댓글을 수정하세요..."
+                    />
+                  ) : (
+                    // 기존 댓글 내용 표시
+                    <p
+                      id="darkgray"
+                      style={{
+                        color: part[0].nickname === nickname ? 'green' : '#334253',
+                        fontWeight: part[0].nickname === nickname ? '800' : '500',
+                      }}>
+                      {content}
+                    </p>
+                  )}
+
+                  {editIndex === index && (
+                    // 수정된 내용 저장 버튼
+                    <button onClick={() => handleSaveEdit(CommentId)}>저장</button>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </>

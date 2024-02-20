@@ -1,18 +1,8 @@
-import { useState, useEffect } from 'react';
-import { Navigate, BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import {
-  Register,
-  Login,
-  Main,
-  PostDetail,
-  PostForm,
-  OrderFailed,
-  MyPage,
-  ProfilePage,
-  OrdersPage,
-} from './components';
-import { fakeUser } from './Fakeuser';
+import { useEffect, useState } from 'react';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
+import { fakeUser } from './Fakeuser';
+import { Login, Main, OrderFailed, OrdersPage, PostDetail, PostForm, ProfilePage, Register } from './components';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(null);

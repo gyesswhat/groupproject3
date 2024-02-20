@@ -1,7 +1,7 @@
+import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Logo } from '../header';
-import axios from 'axios';
 
 export function Login() {
   sessionStorage.clear();
@@ -79,7 +79,6 @@ export function Login() {
                   로그인
                 </button>
               </form>
-
               <Link to="/register" id="register-button">
                 <p>아직 계정이 없으신가요?</p> <div id="green">회원가입</div>
               </Link>

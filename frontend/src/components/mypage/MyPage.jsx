@@ -1,4 +1,3 @@
-import { Header } from '../header';
 import { Navigator } from './Navigator';
 
 export const MyPage = () => {
