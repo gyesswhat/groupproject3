@@ -4,7 +4,7 @@ body {
 
 #topbar {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-bottom: 1px solid #ddd;
   width: 100vw;
@@ -23,22 +23,35 @@ p {
   margin-bottom: 0;
 }
 
-#topbar a {
+#topbar > div {
+  display: flex;
+  flex-direction: row;
+  width: 1065px;
+  justify-content: space-between;
+}
+
+#topbar > div,
+#topmenu > li > a {
   color: black;
   text-decoration: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  margin-right: 28px;
+
   font-weight: 800;
   font-size: 14px;
+  align-items: center;
+}
+
+#topmenu {
+  gap: 28px;
 }
 
 #title {
   font-size: 17px;
   display: flex;
   flex-direction: column;
-  margin-left: 100px;
   margin-top: 10px;
   margin-bottom: 10px;
+  color: black;
 }
 
 #title h3 {
@@ -58,7 +71,6 @@ p {
   flex-direction: row;
   justify-content: flex-end;
   list-style: none;
-  margin-right: 100px;
 }
 
 #place {
@@ -112,7 +124,6 @@ p {
 #main-screen {
   display: flex;
   align-items: center;
-  justify-content: center;
   margin-left: 100px;
   margin-right: 100px;
   width: 1085px;
@@ -186,6 +197,13 @@ h5 {
 
 #cost > h4 {
   margin: 5px;
+}
+
+#align-center {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 로그인 페이지*/
@@ -517,10 +535,6 @@ ul {
   flex-direction: row;
   justify-content: space-around;
   flex-wrap: wrap;
-}
-
-li {
-  font-size: 10px;
 }
 
 #participant-list {

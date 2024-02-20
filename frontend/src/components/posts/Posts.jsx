@@ -45,31 +45,33 @@ export const Posts = () => {
   return (
     <>
       <Menu onFoodTypeChange={handleFoodTypeChange} />
-      <div id="place">
-        <div id="place-text">
-          <h2>현재, </h2>
-          <PlaceDropdown onBuildingChange={handleBuildingChange} />
-          <h2> 내에서 모집 중인 주문은...</h2>
+      <div id="align-center">
+        <div id="place">
+          <div id="place-text">
+            <h2>현재, </h2>
+            <PlaceDropdown onBuildingChange={handleBuildingChange} />
+            <h2> 내에서 모집 중인 주문은...</h2>
+          </div>
+          <Link to="/recruit">
+            <div id="recruit-button">배달팟 모집</div>
+          </Link>
         </div>
-        <Link to="/recruit">
-          <div id="recruit-button">배달팟 모집</div>
-        </Link>
-      </div>
-      <div id="main-screen">
-        <div id="delivery-recruitment-list">
-          {filteredDeliveryRecruitment.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost }) => (
-            <DeliveryItem
-              key={id}
-              id={id}
-              restaurant={restaurant}
-              menu={menu}
-              recruiter={recruiter}
-              recruit={recruit}
-              recruited={recruited}
-              timer={timer}
-              cost={cost}
-            />
-          ))}
+        <div id="main-screen">
+          <div id="delivery-recruitment-list">
+            {filteredDeliveryRecruitment.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost }) => (
+              <DeliveryItem
+                key={id}
+                id={id}
+                restaurant={restaurant}
+                menu={menu}
+                recruiter={recruiter}
+                recruit={recruit}
+                recruited={recruited}
+                timer={timer}
+                cost={cost}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </>
