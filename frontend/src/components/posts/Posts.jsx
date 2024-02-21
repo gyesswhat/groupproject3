@@ -14,7 +14,7 @@ export const Posts = () => {
   useEffect(() => {
     async function fetchPosts() {
       try {
-        const response = await axios.get(`/posts`);
+        const response = await axios.get('/posts');
         console.log(123, response);
         setPosts(response);
       } catch (error) {
@@ -35,12 +35,18 @@ export const Posts = () => {
     setSelectedFoodType(selectedValue);
   };
 
-  const filteredDeliveryRecruitment = dummyDeliveryRecruitment.filter(
-    DeliveryR =>
-      (!selectedBuilding || DeliveryR.building === selectedBuilding) &&
-      (!selectedFoodType || DeliveryR.foodtype === selectedFoodType) &&
-      DeliveryR.isValid === 3,
-  );
+  function filterData() {
+    if (posts.data.length !== 0) {
+      const filteredData = posts?.filter(
+        DeliveryR =>
+          (!selectedBuilding || DeliveryR?.building === selectedBuilding) &&
+          (!selectedFoodType || DeliveryR?.foodtype === selectedFoodType) &&
+          DeliveryR?.isValid === 3,
+      );
+      console.log(111, filteredData);
+      return filteredData;
+    }
+  }
 
   return (
     <>
@@ -56,24 +62,30 @@ export const Posts = () => {
             <div id="recruit-button">배달팟 모집</div>
           </Link>
         </div>
-        <div id="main-screen">
-          <div id="delivery-recruitment-list">
-            {filteredDeliveryRecruitment.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost }) => (
-              <DeliveryItem
-                key={id}
-                id={id}
-                restaurant={restaurant}
-                menu={menu}
-                recruiter={recruiter}
-                recruit={recruit}
-                recruited={recruited}
-                timer={timer}
-                cost={cost}
-              />
-            ))}
+        {posts.data.length !== 0 ? (
+          <div id="main-screen">
+            <div id="delivery-recruitment-list">
+              {filterData()?.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost }) => (
+                <DeliveryItem
+                  key={id}
+                  id={id}
+                  restaurant={restaurant}
+                  menu={menu}
+                  recruiter={recruiter}
+                  recruit={recruit}
+                  recruited={recruited}
+                  timer={timer}
+                  cost={cost}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </div>
+        ) : (
+          <h1 id="inner-wrap" style={{ color: 'darkgreen' }}>
+            아직 게시글이 없습니다.
+          </h1>
+        )}
+      </div>{' '}
     </>
   );
 };

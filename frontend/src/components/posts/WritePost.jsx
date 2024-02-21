@@ -30,7 +30,7 @@ export function PostForm() {
     e.preventDefault();
 
     try {
-      const response = await axios.post('/post', {
+      const response = await axios.post(`/post`, {
         userId,
         location,
         category,
@@ -91,17 +91,17 @@ export function PostForm() {
               <div id="flex-row">
                 <div id="flex-col">
                   <label>모집 인원</label>
-                  <input id="id" type="number" name="recruit" value={partNum} onChange={handleInputChange} />
+                  <input id="id" type="number" name="partNum" value={partNum} onChange={handleInputChange} />
                 </div>
 
                 <div id="flex-col">
                   <label id="green">배달비 포함 가격</label>
-                  <input id="id" type="text" name="cost" value={price} onChange={handleInputChange} />
+                  <input id="id" type="text" name="price" value={price} onChange={handleInputChange} />
                 </div>
               </div>
               <div id="margin-top">
                 <h3>게시될 내용을 작성해주세요.</h3>
-                <textarea id="write-content" name="content" value={postBody} onChange={handleInputChange} />
+                <textarea id="write-content" name="postBody" value={postBody} onChange={handleInputChange} />
               </div>
               <div id="write-bottom">
                 <p>※ 게시된 글은 수정이 불가합니다.</p>
