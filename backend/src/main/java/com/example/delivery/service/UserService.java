@@ -57,8 +57,8 @@ public class UserService {
         return updated;
     }
 
-    public List<PostListDto> getPost(Long id){
-        List<PostListDto> posts = postRepository.findPostListInMyPage(id);
+    public List<PostHistoryDto> getPost(Long id){
+        List<PostHistoryDto> posts = postRepository.findPostListInMyPage(id);
         return posts;
     }
 
