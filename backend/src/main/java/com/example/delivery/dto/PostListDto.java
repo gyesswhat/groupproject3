@@ -10,10 +10,13 @@ import lombok.NoArgsConstructor;
 public class PostListDto {
     private Long postId;
     private String createdAt;
+    private String location;
     private String restaurant;
     private String menu;
     private Integer price;
     private Integer partNum;
+    private Integer nowNum;
     private String nickname;
+    private String category;
     private Integer isValid;
 }
