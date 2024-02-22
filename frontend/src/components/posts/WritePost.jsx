@@ -53,8 +53,6 @@ export function PostForm() {
         postBody,
       });
 
-      console.log(response.data);
-
       // 입력 필드 초기화
       setInputs({
         location: '',

@@ -49,7 +49,7 @@ export const Register = () => {
 
     try {
       const response = await axios.post('/signup', formData);
-      console.log('Registration successful:', response.data);
+
       setIsSnackbarOpen(true); // 회원가입 성공 시 스낵바 열기
       sessionStorage.setItem('userId', response.data);
       //setTimeout(() => {
@@ -57,7 +57,6 @@ export const Register = () => {
       //}, 3000); // 3초 후에 자동으로 닫힘
       navigate('/');
     } catch (error) {
-      console.error('Registration failed:', error.response.data);
       setEmailExists(error.response.data !== '이미 존재하는 이메일입니다.');
     }
   };

@@ -129,10 +129,25 @@ p {
   width: 1085px;
 }
 
+#main-screen-mypage {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+
 #delivery-recruitment-list {
   display: flex;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
+}
+
+#delivery-recruitment-list-mypage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   flex-wrap: wrap;
 }
 

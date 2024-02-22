@@ -12,13 +12,27 @@ export const OrdersPage = () => {
       try {
         const response = await axios.get('/user/posts');
         setPosts(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Error fetching post:', error);
       }
     };
     fetchPost();
   }, []);
+
+  function calculatePostRemainingTime(createdAt) {
+    const now = new Date(); // 현재 시간
+
+    const createdDate = new Date(createdAt);
+
+    // 현재 시간에 30분을 더함
+    const deadline = new Date(createdDate.getTime() + 30 * 60000); // 30분 = 30 * 60 * 1000 밀리초
+
+    const remainingTime = deadline - now;
+
+    const remainingMinutes = Math.ceil(remainingTime / 60000);
+
+    return remainingMinutes;
+  }
 
   return (
     <div id="justify-center">
@@ -27,25 +41,33 @@ export const OrdersPage = () => {
         <MyPage />
         <div id="inner-wrap">
           <h3>주문 히스토리</h3>
-          {posts?.data === undefined ? (
+          {posts?.data !== undefined ? (
             <div>loading...</div>
           ) : posts?.length !== 0 ? (
-            <div id="main-screen">
-              <div id="delivery-recruitment-list">
-                {posts?.map(({ postId, restaurant, menu, nickname, partNum, timer, price, isValid }) => (
-                  <DeliveryItem
-                    key={postId}
-                    id={postId}
-                    restaurant={restaurant}
-                    menu={menu}
-                    recruiter={nickname}
-                    recruited={<p>없어</p>}
-                    recruit={partNum}
-                    timer={isValid === 3 ? timer : null}
-                    cost={price}
-                    isValid={isValid}
-                  />
-                ))}
+            <div id="main-screen-mypage">
+              <div id="delivery-recruitment-list-mypage">
+                {posts
+                  ?.slice()
+                  .reverse()
+                  .slice(0, 5)
+                  .map(({ postId, restaurant, menu, nickname, partNum, createdAt, price, isValid }) => (
+                    <DeliveryItem
+                      key={postId}
+                      id={postId}
+                      restaurant={restaurant}
+                      menu={menu}
+                      recruiter={nickname}
+                      recruited={'N'}
+                      recruit={partNum}
+                      timer={
+                        isValid === 4 && calculatePostRemainingTime(createdAt) > 0
+                          ? calculatePostRemainingTime(createdAt)
+                          : '0'
+                      }
+                      cost={price}
+                      isValid={isValid}
+                    />
+                  ))}
               </div>
             </div>
           ) : (

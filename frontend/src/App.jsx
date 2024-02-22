@@ -11,8 +11,6 @@ export function App() {
   useEffect(() => {
     if (currentUserId !== null) {
       setLoggedIn(true);
-      console.log(currentUserId);
-      console.log(loggedIn);
     } else {
       setLoggedIn(false);
     }

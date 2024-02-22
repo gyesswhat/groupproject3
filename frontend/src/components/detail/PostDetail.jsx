@@ -25,7 +25,7 @@ export const PostDetail = () => {
   const sendJoinRequest = async () => {
     try {
       const response = await axios.post(`/posts/${postId}/join`, currentUserId);
-      console.log('Join request successful:', response.data);
+
       localStorage.setItem('Joined', true);
       fetchPart();
     } catch (error) {
@@ -48,7 +48,7 @@ export const PostDetail = () => {
   const sendDepositRequest = async () => {
     try {
       const response = await axios.post(`/posts/${postId}/deposit`, currentUserId);
-      console.log('Deposit request successful:', response.data);
+
       fetchPart();
     } catch (error) {
       console.error('Deposit request failed:', error);
@@ -59,7 +59,6 @@ export const PostDetail = () => {
     try {
       const response = await axios.get(`/posts/${postId}`);
       setPost(response.data);
-      console.log('post:', response.data);
     } catch (error) {
       console.error('Error fetching post:', error);
     }
@@ -69,7 +68,6 @@ export const PostDetail = () => {
     try {
       const response = await axios.get(`/posts/${postId}/comments`);
       setComments(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error('Error fetching comment:', error);
     }
@@ -79,7 +77,6 @@ export const PostDetail = () => {
     try {
       const response = await axios.get(`/posts/${postId}/participants`);
       setPart(response.data);
-      console.log(response.data);
     } catch (error) {
       console.error('Error fetching participant:', error);
     }
@@ -116,13 +113,10 @@ export const PostDetail = () => {
   }, [post, part, remainingTime]);
 
   const handleEditSubmit = async (editIndex, editedComment) => {
-    console.log(editIndex, editedComment);
     try {
       const response = await axios.patch(`/posts/${postId}/comments/${editIndex}`, {
         commentBody: editedComment,
       });
-      console.log('Comment updated successfully:', response.data);
-      console.log(editIndex, editedComment);
 
       setEditIndex(null);
       setEditedComment('');
@@ -140,13 +134,11 @@ export const PostDetail = () => {
   const handleEditClick = (commentId, commentBody) => {
     setEditIndex(commentId);
     setEditedComment(commentBody);
-    console.log(commentId);
   };
 
   const handleDeleteComment = async commentId => {
     try {
       const response = await axios.delete(`/posts/${postId}/comments/${commentId}`);
-      console.log('Comment deleted successfully:', response.data);
 
       fetchComment();
     } catch (error) {
@@ -202,7 +194,7 @@ export const PostDetail = () => {
                   {isCaptain ? null : isJoined ? (
                     <button
                       onClick={handleDepositButtonClick}
-                      disabled={localStorage.getItem('DepositButton') === true}>
+                      disabled={localStorage.getItem('DepositButton') === 'true'}>
                       입금 완료
                     </button>
                   ) : null}
