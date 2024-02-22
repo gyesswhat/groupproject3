@@ -10,6 +10,7 @@ export const Posts = () => {
   const [selectedFoodType, setSelectedFoodType] = useState('');
 
   const [posts, setPosts] = useState([]);
+  const [part, setPart] = useState([]);
 
   useEffect(() => {
     async function fetchPosts() {
@@ -22,8 +23,18 @@ export const Posts = () => {
       }
     }
 
+    const fetchPart = async () => {
+      try {
+        const response = await axios.get(`/posts/${posts.postId}/participants`);
+        setPart(response.data);
+      } catch (error) {
+        console.error('Error fetching participant:', error);
+      }
+    };
+
     fetchPosts();
-  }, []);
+    fetchPart();
+  }, [posts?.postId]);
 
   console.log('posts:', posts);
 
@@ -36,16 +47,34 @@ export const Posts = () => {
   };
 
   function filterData() {
-    if (posts.data.length !== 0) {
-      const filteredData = posts?.filter(
-        DeliveryR =>
-          (!selectedBuilding || DeliveryR?.building === selectedBuilding) &&
-          (!selectedFoodType || DeliveryR?.foodtype === selectedFoodType) &&
-          DeliveryR?.isValid === 3,
-      );
-      console.log(111, filteredData);
-      return filteredData;
+    if (posts.data !== undefined) {
+      if (posts?.data.length !== 0) {
+        const filteredData = posts?.data.filter(
+          DeliveryR =>
+            (!selectedBuilding || DeliveryR?.building === selectedBuilding) &&
+            (!selectedFoodType || DeliveryR?.foodtype === selectedFoodType) &&
+            DeliveryR?.isValid === 4,
+        );
+        console.log(111, filteredData);
+        return filteredData;
+      }
+    } else {
+      return;
     }
+  }
+
+  function calculatePostRemainingTime(createdAt) {
+    const now = new Date(); // 현재 시간
+
+    const createdDate = new Date(createdAt);
+
+    const deadline = new Date(createdDate.getTime() + 30 * 60000); // 30분 = 30 * 60 * 1000 밀리초
+
+    const remainingTime = deadline - now;
+
+    const remainingMinutes = Math.ceil(remainingTime / 60000);
+
+    return remainingMinutes;
   }
 
   return (
@@ -62,20 +91,23 @@ export const Posts = () => {
             <div id="recruit-button">배달팟 모집</div>
           </Link>
         </div>
-        {posts.data.length !== 0 ? (
+
+        {posts.data === undefined ? (
+          <div>서버 통신 오류</div>
+        ) : posts?.data.length !== 0 ? (
           <div id="main-screen">
             <div id="delivery-recruitment-list">
-              {filterData()?.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost }) => (
+              {filterData()?.map(({ postId, restaurant, menu, nickname, partNum, createdAt, price }) => (
                 <DeliveryItem
-                  key={id}
-                  id={id}
+                  key={postId}
+                  id={postId}
                   restaurant={restaurant}
                   menu={menu}
-                  recruiter={recruiter}
-                  recruit={recruit}
-                  recruited={recruited}
-                  timer={timer}
-                  cost={cost}
+                  recruiter={nickname}
+                  recruit={partNum}
+                  recruited={part?.length}
+                  timer={calculatePostRemainingTime(createdAt)}
+                  cost={price}
                 />
               ))}
             </div>

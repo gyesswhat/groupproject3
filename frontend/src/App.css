@@ -519,6 +519,14 @@ button {
   font-weight: 400;
 }
 
+#time {
+  color: #666;
+  font-size: 11px;
+  display: flex;
+
+  font-weight: 400;
+}
+
 #recruiter {
   display: flex;
   flex-direction: row;
@@ -612,18 +620,20 @@ button[disabled] {
 }
 
 .comment-input {
-  height: 12px;
+  height: 35px;
   margin-bottom: 10px;
+  display: flex;
 }
 
 .comment-input,
 #write-content {
   width: 618px;
-  padding: 10px;
+  font-family: 'Nunito';
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size: 9px;
+  font-size: 14px;
   resize: none;
+  padding: 5px;
 }
 
 .comment-submit {

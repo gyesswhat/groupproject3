@@ -4,24 +4,8 @@ import './App.css';
 import { fakeUser } from './Fakeuser';
 import { Login, Main, OrderFailed, OrdersPage, PostDetail, PostForm, ProfilePage, Register } from './components';
 
-function App() {
+export function App() {
   const [loggedIn, setLoggedIn] = useState(null);
-
-  /*useEffect(() => {
-    const checkUser = async () => {
-      const user = await fakeUser.loggedIn;
-      setLoggedIn(user);
-
-      if (user) {
-        const userNickname = user.nickname;
-        console.log(`사용자 닉네임: ${userNickname}`);
-      } else {
-        console.log('사용자 데이터를 가져올 수 없습니다.');
-      }
-    };
-
-    checkUser();
-  }, []);*/
 
   const currentUserId = sessionStorage.getItem('userId');
   useEffect(() => {

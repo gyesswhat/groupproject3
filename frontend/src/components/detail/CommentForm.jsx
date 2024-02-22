@@ -3,19 +3,35 @@ import axios from 'axios';
 
 export const CommentForm = ({ onCommentSubmit, postId }) => {
   const [comment, setComment] = useState('');
+  const currentUserId = parseInt(sessionStorage.getItem('userId'));
+
+  const [formData, setFormData] = useState({
+    commentBody: '',
+    userId: currentUserId,
+  });
+
+  const handleChange = e => {
+    const { name, value } = e.target;
+
+    setFormData(prevState => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/posts/${postId}/comment`, { comment });
+      const response = await axios.post(`/posts/${postId}/comment`, formData);
       if (response.status === 200) {
         console.log('Comment sent');
-        onCommentSubmit();
       } else {
         console.error('Comment sending failed');
       }
     } catch (error) {
       console.error('Comment Error', error);
+      console.log(typeof comment);
+      console.log(typeof currentUserId);
     }
     setComment('');
   };
@@ -24,9 +40,9 @@ export const CommentForm = ({ onCommentSubmit, postId }) => {
     <form className="comment-form" onSubmit={handleSubmit}>
       <textarea
         className="comment-input"
-        value={comment}
-        onChange={e => setComment(e.target.value)}
-        placeholder="댓글을 입력하세요..."
+        name="commentBody"
+        value={formData.commentBody}
+        onChange={handleChange}
         required
       />
       <button className="comment-submit" type="submit">

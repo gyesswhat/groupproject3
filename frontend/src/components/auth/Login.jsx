@@ -1,17 +1,15 @@
 import axios from 'axios';
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, Redirect } from 'react-router-dom';
 import { Logo } from '../header';
 
 export function Login() {
-  sessionStorage.clear();
   const [inputs, setInputs] = useState({
-    userId: '',
-    userPw: '',
+    email: '',
+    password: '',
   });
 
-  const { userId, userPw } = inputs;
-  const navigate = useNavigate();
+  const { email, password } = inputs;
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -26,15 +24,18 @@ export function Login() {
   const handleSubmit = async e => {
     e.preventDefault();
     try {
-      const response = await axios.post('/login', { userId, userPw });
+      const response = await axios.post('/login', { email, password });
 
-      if (response.statusCode === 200) {
-        sessionStorage.setItem('userId', response.userId);
-        navigate('/');
+      console.log(response);
+      if (response.status === 200) {
+        sessionStorage.setItem('userId', response.data);
+        console.log('success');
+        window.location.href = '/';
       }
 
-      if (response.statusCode === 300 || response.status === 400) {
+      if (response.status === 300 || response.status === 400) {
         setSuccess(false);
+        console.log('error');
       }
     } catch (error) {
       setSuccess(false);
@@ -60,18 +61,18 @@ export function Login() {
                 <input
                   id="id"
                   type="text"
-                  name="userId"
+                  name="email"
                   placeholder="@ewhain.net"
-                  value={userId}
+                  value={email}
                   onChange={handleInputChange}
                 />
                 <p>비밀번호</p>
                 <input
                   id="pw"
                   type="password"
-                  name="userPw"
+                  name="password"
                   placeholder="비밀번호"
-                  value={userPw}
+                  value={password}
                   onChange={handleInputChange}
                 />
                 {!success && <span>아이디 또는 비밀번호를 확인하세요.</span>}

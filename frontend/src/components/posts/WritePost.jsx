@@ -5,6 +5,17 @@ import { MenuDropdownW } from './MenuDropdown';
 import { Header } from '../header';
 
 export function PostForm() {
+  const [selectedBuilding, setSelectedBuilding] = useState('');
+  const [selectedFoodType, setSelectedFoodType] = useState('');
+
+  const handleBuildingChange = selectedValue => {
+    setSelectedBuilding(selectedValue);
+  };
+
+  const handleFoodTypeChange = selectedValue => {
+    setSelectedFoodType(selectedValue);
+  };
+
   const [inputs, setInputs] = useState({
     userId: '',
     location: '',
@@ -16,7 +27,7 @@ export function PostForm() {
     postBody: '',
   });
 
-  const { userId, location, category, restaurant, menu, partNum, price, postBody } = inputs;
+  const { location, category, restaurant, menu, partNum, price, postBody } = inputs;
 
   const handleInputChange = e => {
     const { name, value } = e.target;
@@ -28,10 +39,11 @@ export function PostForm() {
 
   const handleSubmit = async e => {
     e.preventDefault();
+    const currentUserId = sessionStorage.getItem('userId');
 
     try {
-      const response = await axios.post(`/post`, {
-        userId,
+      const response = await axios.post('/post', {
+        userId: currentUserId,
         location,
         category,
         restaurant,
@@ -45,7 +57,6 @@ export function PostForm() {
 
       // 입력 필드 초기화
       setInputs({
-        userId: '',
         location: '',
         category: '',
         restaurant: '',
@@ -54,6 +65,7 @@ export function PostForm() {
         price: '',
         postBody: '',
       });
+      window.location.href = '/';
     } catch (error) {
       console.error('Error creating post:', error);
     }
@@ -70,11 +82,19 @@ export function PostForm() {
               <div id="flex-row">
                 <div id="flex-col">
                   <label>배달받을 장소</label>
-                  <PlaceDropdownW value={location} />
+                  <div>
+                    <select id="dropdown" value={location} onChange={handleInputChange} name="location">
+                      <PlaceDropdownW value={location} name="location" onChange={handleInputChange} />
+                    </select>
+                  </div>
                 </div>
                 <div id="flex-col">
                   <label id="green">카테고리 선택</label>
-                  <MenuDropdownW value={category} />
+                  <div>
+                    <select id="dropdown" value={category} onChange={handleInputChange} name="category">
+                      <MenuDropdownW />
+                    </select>
+                  </div>
                 </div>
               </div>
               <div id="flex-row">

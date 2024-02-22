@@ -16,6 +16,7 @@ export const PostDetail = () => {
 
   const [isJoined, setIsJoined] = useState(false);
   const [isButtonDisabled, setButtonDisabled] = useState(false);
+  const [isDepositButtonDisabled, setDepositButtonDisabled] = useState(false);
 
   const [editIndex, setEditIndex] = useState(null);
 
@@ -38,7 +39,7 @@ export const PostDetail = () => {
 
   const handleDepositButtonClick = () => {
     sendDepositRequest(currentUserId);
-    setButtonDisabled(true);
+    setDepositButtonDisabled(true);
   };
 
   const sendDepositRequest = async () => {
@@ -54,6 +55,7 @@ export const PostDetail = () => {
     try {
       const response = await axios.get(`/posts/${postId}`);
       setPost(response.data);
+      console.log('post:', post);
     } catch (error) {
       console.error('Error fetching post:', error);
     }
@@ -61,8 +63,9 @@ export const PostDetail = () => {
 
   const fetchComment = async () => {
     try {
-      const response = await axios.get(`/posts/${postId}/comment`);
+      const response = await axios.get(`/posts/${postId}/comments`);
       setComments(response.data);
+      console.log(comments);
     } catch (error) {
       console.error('Error fetching comment:', error);
     }
@@ -72,6 +75,7 @@ export const PostDetail = () => {
     try {
       const response = await axios.get(`/posts/${postId}/participants`);
       setPart(response.data);
+      console.log(part);
     } catch (error) {
       console.error('Error fetching participant:', error);
     }
@@ -138,7 +142,22 @@ export const PostDetail = () => {
     }
   };
 
-  const isCaptain = post?.userId === currentUserId;
+  function calculatePostRemainingTime(createdAt) {
+    const now = new Date(); // 현재 시간
+
+    const createdDate = new Date(createdAt);
+
+    // 현재 시간에 30분을 더함
+    const deadline = new Date(createdDate.getTime() + 30 * 60000); // 30분 = 30 * 60 * 1000 밀리초
+
+    const remainingTime = deadline - now;
+
+    const remainingMinutes = Math.ceil(remainingTime / 60000);
+
+    return remainingMinutes;
+  }
+
+  const isCaptain = post?.userId === parseInt(currentUserId);
 
   return (
     <>
@@ -153,25 +172,27 @@ export const PostDetail = () => {
                 restaurant={post.restaurant}
                 menu={post.menu}
                 recruit={post.partNum}
-                recruited={part.length}
-                timer={remainingTime}
+                recruited={part?.length}
+                timer={calculatePostRemainingTime(post.createdAt)}
                 cost={post.price}
                 content={post.postBody}
                 building={post.location}
-                account={part.account}
+                account={part?.account}
                 isJoined={isJoined}
                 click={handleButtonClick}
                 disabled={isButtonDisabled}
                 isCaptain={isCaptain}
               />
               <div id="part-wrap">
-                {isCaptain ? null : isJoined ? (
-                  <button onClick={handleDepositButtonClick} disabled={isButtonDisabled}>
-                    입금 완료
-                  </button>
-                ) : null}
-                <h4>참여자 목록</h4>
-                {part.map(({ nickname, status }, index) => (
+                <div id="flex-row" style={{ justifyContent: 'space-between', alignItems: 'center' }}>
+                  <h4>참여자 목록</h4>
+                  {isCaptain ? null : isJoined ? (
+                    <button onClick={handleDepositButtonClick} disabled={isDepositButtonDisabled}>
+                      입금 완료
+                    </button>
+                  ) : null}
+                </div>
+                {part?.map(({ nickname, status }, index) => (
                   <div id="participants" key={nickname}>
                     <div id="participant-list">
                       <div id="participant">
@@ -187,15 +208,15 @@ export const PostDetail = () => {
                 <h4>댓글</h4>
                 <div id="comments">
                   <CommentForm postId={postId} />
-                  {comments.map(({ CommentId, nickname, createdAt, content, index }) => (
-                    <div key={CommentId} id="comment">
+                  {comments?.map(({ commentId, nickname, createdAt, commentBody, index }) => (
+                    <div key={commentId} id="comment">
                       <div id="place-text">
                         <p id="bold-margin">{nickname}</p>
-                        <p id="role">{calculateRemainingTime(createdAt)}분 전</p>
-                        <button id="edit" onClick={() => handleEditClick(CommentId, content)}>
+                        <p id="time">{calculatePostRemainingTime(createdAt)}분 전</p>
+                        <button id="edit" onClick={() => handleEditClick(commentId, commentBody)}>
                           수정
                         </button>
-                        <button id="edit" onClick={() => handleDeleteComment(CommentId)}>
+                        <button id="edit" onClick={() => handleDeleteComment(commentId)}>
                           삭제
                         </button>
                       </div>
@@ -214,13 +235,13 @@ export const PostDetail = () => {
                             color: part[0].nickname === nickname ? 'green' : '#334253',
                             fontWeight: part[0].nickname === nickname ? '800' : '500',
                           }}>
-                          {content}
+                          {commentBody}
                         </p>
                       )}
 
                       {editIndex === index && (
                         // 수정된 내용 저장 버튼
-                        <button onClick={() => handleSaveEdit(CommentId)}>저장</button>
+                        <button onClick={() => handleSaveEdit(commentId)}>저장</button>
                       )}
                     </div>
                   ))}

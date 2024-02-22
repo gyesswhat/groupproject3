@@ -23,7 +23,8 @@ export const ProfilePage = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get('/user');
-        setUserData(response.data);
+        setUserData(response);
+        console.log(response);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -67,24 +68,24 @@ export const ProfilePage = () => {
               <div id="flex-row">
                 <div id="flex-col">
                   <label>이메일</label>
-                  <input id="id" readOnly value={fakeUser.email} disabled />
+                  <input id="id" readOnly value={userData.email} disabled />
                 </div>
               </div>
               <div id="flex-row">
                 <div id="flex-col">
                   <label>닉네임</label>
-                  <input id="id" type="text" name="nickname" value={fakeUser.nickname} onChange={handleInputChange} />
+                  <input id="id" type="text" name="nickname" value={userData.nickname} onChange={handleInputChange} />
                 </div>
               </div>
               <div id="flex-row">
                 <div id="flex-col">
                   <label>계좌 정보</label>
-                  <input id="id" type="number" name="account" value={fakeUser.account} onChange={handleInputChange} />
+                  <input id="id" type="number" name="account" value={userData.account} onChange={handleInputChange} />
                 </div>
 
                 <div id="flex-col">
                   <label>은행</label>
-                  <select name="bank" value={fakeUser.bank} id="id" onChange={handleInputChange}>
+                  <select name="bank" value={userData.bank} id="id" onChange={handleInputChange}>
                     <BankOptions />
                   </select>
                 </div>

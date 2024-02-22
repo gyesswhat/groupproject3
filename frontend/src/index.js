@@ -8,3 +8,5 @@ root.render(
     <App />
   </StrictMode>,
 );
+
+export * from './App';

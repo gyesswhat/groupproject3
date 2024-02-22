@@ -10,7 +10,7 @@ export const Register = () => {
     email: '',
     password: '',
     nickname: '',
-    accountNumber: '',
+    account: '',
     bank: '',
   });
 
@@ -47,7 +47,7 @@ export const Register = () => {
     }
 
     try {
-      const response = await axios.post('/register', formData);
+      const response = await axios.post('/signup', formData);
       console.log('Registration successful:', response.data);
       setIsSnackbarOpen(true); // 회원가입 성공 시 스낵바 열기
       setTimeout(() => {
@@ -110,14 +110,7 @@ export const Register = () => {
             </div>
             <div>
               <label>계좌번호</label>
-              <input
-                id="id"
-                type="text"
-                name="accountNumber"
-                value={formData.accountNumber}
-                onChange={handleChange}
-                required
-              />
+              <input id="id" type="text" name="account" value={formData.account} onChange={handleChange} required />
             </div>
             <div>
               <label>은행</label>
