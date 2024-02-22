@@ -24,7 +24,7 @@ import lombok.*;
         ),
         @NamedNativeQuery(
                 name = "Post.findPostDetail",
-                query = "SELECT user_id, location, restaurant, menu, part_num, price, post_body " +
+                query = "SELECT created_at, user_id, location, restaurant, menu, part_num, price, post_body " +
                         "FROM post " +
                         "WHERE post_id = :postId",
                 resultSetMapping = "postDetailMapper"
@@ -76,6 +76,7 @@ import lombok.*;
                 classes = @ConstructorResult(
                         targetClass = PostDetailDto.class,
                         columns = {
+                                @ColumnResult(name="created_at", type=String.class),
                                 @ColumnResult(name="user_id", type=Long.class),
                                 @ColumnResult(name="location", type=String.class),
                                 @ColumnResult(name="restaurant", type=String.class),
