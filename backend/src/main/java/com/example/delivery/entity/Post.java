@@ -17,9 +17,13 @@ import lombok.*;
 @NamedNativeQueries({
         @NamedNativeQuery(
                 name = "Post.findPostList",
-                query = "SELECT p.post_id, p.created_at, p.restaurant, p.menu, p.price, p.part_num, u.nickname, p.is_valid " +
+                query = "SELECT p.post_id, p.created_at, p.location, p.restaurant, p.menu, p.price, p.part_num, " +
+                        "COUNT(pt.post_post_id) AS now_num, " +
+                        "u.nickname, p.category, p.is_valid " +
                         "FROM post p " +
-                        "JOIN user u ON p.user_id = u.id",
+                        "JOIN user u ON p.user_id = u.id " +
+                        "LEFT JOIN participant pt ON p.post_id = pt.post_post_id " +
+                        "GROUP BY p.post_id",
                 resultSetMapping = "postListMapper"
         ),
         @NamedNativeQuery(
@@ -62,11 +66,14 @@ import lombok.*;
                         columns = {
                                 @ColumnResult(name="post_id", type=Long.class),
                                 @ColumnResult(name="created_at", type=String.class),
+                                @ColumnResult(name="location", type=String.class),
                                 @ColumnResult(name="restaurant", type=String.class),
                                 @ColumnResult(name="menu", type=String.class),
                                 @ColumnResult(name="price", type=Integer.class),
                                 @ColumnResult(name="part_num", type=Integer.class),
+                                @ColumnResult(name="now_num", type=Integer.class),
                                 @ColumnResult(name="nickname", type=String.class),
+                                @ColumnResult(name="category", type=String.class),
                                 @ColumnResult(name="is_valid", type=Integer.class)
                         }
                 )
