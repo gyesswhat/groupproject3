@@ -15,6 +15,7 @@ export const Register = () => {
   });
 
   const [emailValid, setEmailValid] = useState(true);
+  const [emailExists, setEmailExists] = useState(true);
   const [nickValid, setNickValid] = useState(true);
   const [isSnackbarOpen, setIsSnackbarOpen] = useState(false);
 
@@ -50,12 +51,14 @@ export const Register = () => {
       const response = await axios.post('/signup', formData);
       console.log('Registration successful:', response.data);
       setIsSnackbarOpen(true); // 회원가입 성공 시 스낵바 열기
-      setTimeout(() => {
-        setIsSnackbarOpen(false); // 일정 시간 후 스낵바 닫기
-      }, 3000); // 3초 후에 자동으로 닫힘
+      sessionStorage.setItem('userId', response.data);
+      //setTimeout(() => {
+      // setIsSnackbarOpen(false); // 일정 시간 후 스낵바 닫기
+      //}, 3000); // 3초 후에 자동으로 닫힘
       navigate('/');
     } catch (error) {
-      console.error('Registration failed:', error);
+      console.error('Registration failed:', error.response.data);
+      setEmailExists(error.response.data !== '이미 존재하는 이메일입니다.');
     }
   };
 
@@ -82,6 +85,7 @@ export const Register = () => {
                 required
               />
               {!emailValid && <span>이화인 이메일을 입력하세요.</span>}
+              {!emailExists && <span>이미 존재하는 이메일입니다.</span>}
             </div>
             <div>
               <label>비밀번호</label>

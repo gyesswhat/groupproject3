@@ -23,8 +23,8 @@ export const ProfilePage = () => {
     const fetchUserData = async () => {
       try {
         const response = await axios.get('/user');
-        setUserData(response);
-        console.log(response);
+        setUserData(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }

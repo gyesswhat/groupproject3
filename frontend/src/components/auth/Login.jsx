@@ -9,6 +9,9 @@ export function Login() {
     password: '',
   });
 
+  localStorage.setItem('DepositButton', false);
+  localStorage.setItem('Joined', false);
+
   const { email, password } = inputs;
 
   const handleInputChange = e => {

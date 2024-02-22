@@ -4,7 +4,7 @@ export const PostContents = ({
   click,
   disabled,
   isCaptain,
-  isJoined,
+  bank,
   restaurant,
   menu,
   timer,
@@ -14,6 +14,7 @@ export const PostContents = ({
   building,
   account,
   content,
+  isJoined,
 }) => {
   return (
     <div id="postcontent">
@@ -26,7 +27,9 @@ export const PostContents = ({
             <div id="cost">
               <p id="green">배달비 포함</p> <h4>{cost}</h4> <p>원</p>
             </div>
-            {isCaptain ? null : (
+            {isCaptain ? null : isJoined ? (
+              <button disabled>참여하기</button>
+            ) : (
               <button onClick={click} disabled={disabled}>
                 참여하기
               </button>
@@ -50,7 +53,10 @@ export const PostContents = ({
         </div>
         {disabled && (
           <div id="where">
-            <p>계좌 정보:</p> <p id="green">{account}</p>
+            <p>계좌 정보:</p>{' '}
+            <p id="green">
+              {bank} {account}
+            </p>
           </div>
         )}
 

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-export const CommentForm = ({ onCommentSubmit, postId }) => {
+export const CommentForm = ({ onCommentSubmit, postId, fetchComment }) => {
   const [comment, setComment] = useState('');
   const currentUserId = parseInt(sessionStorage.getItem('userId'));
 
@@ -25,6 +25,7 @@ export const CommentForm = ({ onCommentSubmit, postId }) => {
       const response = await axios.post(`/posts/${postId}/comment`, formData);
       if (response.status === 200) {
         console.log('Comment sent');
+        fetchComment();
       } else {
         console.error('Comment sending failed');
       }

@@ -46,23 +46,6 @@ export const Posts = () => {
     setSelectedFoodType(selectedValue);
   };
 
-  function filterData() {
-    if (posts.data !== undefined) {
-      if (posts?.data.length !== 0) {
-        const filteredData = posts?.data.filter(
-          DeliveryR =>
-            (!selectedBuilding || DeliveryR?.building === selectedBuilding) &&
-            (!selectedFoodType || DeliveryR?.foodtype === selectedFoodType) &&
-            DeliveryR?.isValid === 4,
-        );
-        console.log(111, filteredData);
-        return filteredData;
-      }
-    } else {
-      return;
-    }
-  }
-
   function calculatePostRemainingTime(createdAt) {
     const now = new Date(); // 현재 시간
 
@@ -75,6 +58,23 @@ export const Posts = () => {
     const remainingMinutes = Math.ceil(remainingTime / 60000);
 
     return remainingMinutes;
+  }
+
+  function filterData() {
+    if (posts.data !== undefined) {
+      if (posts?.data.length !== 0) {
+        const filteredData = posts?.data.filter(
+          DeliveryR =>
+            (!selectedBuilding || DeliveryR?.location === selectedBuilding) &&
+            (!selectedFoodType || DeliveryR?.category === selectedFoodType) &&
+            calculatePostRemainingTime(DeliveryR?.createdAt) >= 0,
+        );
+        console.log(111, filteredData);
+        return filteredData;
+      }
+    } else {
+      return;
+    }
   }
 
   return (
@@ -93,11 +93,11 @@ export const Posts = () => {
         </div>
 
         {posts.data === undefined ? (
-          <div>서버 통신 오류</div>
-        ) : posts?.data.length !== 0 ? (
+          <div>loading...</div>
+        ) : filterData().length !== 0 ? (
           <div id="main-screen">
             <div id="delivery-recruitment-list">
-              {filterData()?.map(({ postId, restaurant, menu, nickname, partNum, createdAt, price }) => (
+              {filterData()?.map(({ postId, restaurant, menu, nickname, partNum, nowNum, createdAt, price }) => (
                 <DeliveryItem
                   key={postId}
                   id={postId}
@@ -105,7 +105,7 @@ export const Posts = () => {
                   menu={menu}
                   recruiter={nickname}
                   recruit={partNum}
-                  recruited={part?.length}
+                  recruited={nowNum}
                   timer={calculatePostRemainingTime(createdAt)}
                   cost={price}
                 />

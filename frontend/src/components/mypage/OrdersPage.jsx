@@ -10,8 +10,9 @@ export const OrdersPage = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await axios.get('/user');
+        const response = await axios.get('/user/posts');
         setPosts(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error('Error fetching post:', error);
       }
@@ -26,24 +27,32 @@ export const OrdersPage = () => {
         <MyPage />
         <div id="inner-wrap">
           <h3>주문 히스토리</h3>
-          <div id="main-screen">
-            <div id="delivery-recruitment-list">
-              {posts?.map(({ id, restaurant, menu, recruiter, recruit, recruited, timer, cost, isValid }) => (
-                <DeliveryItem
-                  key={id}
-                  id={id}
-                  restaurant={restaurant}
-                  menu={menu}
-                  recruiter={recruiter}
-                  recruit={recruit}
-                  recruited={recruited}
-                  timer={isValid === 3 ? timer : null}
-                  cost={cost}
-                  isValid={isValid}
-                />
-              ))}
+          {posts?.data === undefined ? (
+            <div>loading...</div>
+          ) : posts?.length !== 0 ? (
+            <div id="main-screen">
+              <div id="delivery-recruitment-list">
+                {posts?.map(({ postId, restaurant, menu, nickname, partNum, timer, price, isValid }) => (
+                  <DeliveryItem
+                    key={postId}
+                    id={postId}
+                    restaurant={restaurant}
+                    menu={menu}
+                    recruiter={nickname}
+                    recruited={<p>없어</p>}
+                    recruit={partNum}
+                    timer={isValid === 3 ? timer : null}
+                    cost={price}
+                    isValid={isValid}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <h1 id="inner-wrap" style={{ color: 'darkgreen' }}>
+              아직 게시글이 없습니다.
+            </h1>
+          )}
         </div>
       </div>
     </div>
