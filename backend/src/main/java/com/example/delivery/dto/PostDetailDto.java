@@ -9,6 +9,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PostDetailDto {
+    private String createdAt;
     private Long userId;
     private String location;
     private String restaurant;
