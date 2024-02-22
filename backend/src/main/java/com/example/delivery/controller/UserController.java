@@ -59,9 +59,9 @@ public class UserController {
     }
 
     @GetMapping("/user/posts")
-    public ResponseEntity<List<PostListDto>> showPost(){
+    public ResponseEntity<List<PostHistoryDto>> showPost(){
         Long id = Long.valueOf(String.valueOf(session.getAttribute("userId")));
-        List<PostListDto> posts = userService.getPost(id);
+        List<PostHistoryDto> posts = userService.getPost(id);
         return (posts!=null) ?
                 ResponseEntity.status(HttpStatus.OK).body(posts) :
                 ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

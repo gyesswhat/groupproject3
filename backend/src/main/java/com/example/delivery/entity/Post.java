@@ -2,6 +2,7 @@ package com.example.delivery.entity;
 
 import com.example.delivery.dto.ParticipantListDto;
 import com.example.delivery.dto.PostDetailDto;
+import com.example.delivery.dto.PostHistoryDto;
 import com.example.delivery.dto.PostListDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -50,12 +51,13 @@ import lombok.*;
         ),
         @NamedNativeQuery(
                 name = "Post.findPostListInMyPage",
-                query = "SELECT p.post_id, p.created_at, p.restaurant, p.menu, p.price, p.part_num, u.nickname, p.is_valid " +
+                query = "SELECT p.post_id, p.created_at, u.nickname, p.restaurant, p.menu, p.price, p.part_num, p.is_valid " +
                         "FROM post p " +
                         "INNER JOIN user u ON p.user_id = u.id " +
                         "INNER JOIN participant pr ON p.post_id = pr.post_post_id " +
-                        "WHERE pr.user_id = :userId",
-                resultSetMapping = "postListMapper"
+                        "WHERE pr.user_id = :userId " +
+                        "GROUP BY p.post_id",
+                resultSetMapping = "myPostListMapper"
         )
 })
 @SqlResultSetMappings({
@@ -112,6 +114,22 @@ import lombok.*;
                 columns = {
                         @ColumnResult(name="post_id", type=Long.class)
                 }
+        ),
+        @SqlResultSetMapping(
+                name = "myPostListMapper",
+                classes = @ConstructorResult(
+                        targetClass = PostHistoryDto.class,
+                        columns = {
+                                @ColumnResult(name="post_id", type=Long.class),
+                                @ColumnResult(name="created_at", type=String.class),
+                                @ColumnResult(name="nickname", type=String.class),
+                                @ColumnResult(name="restaurant", type= String.class),
+                                @ColumnResult(name="menu", type=String.class),
+                                @ColumnResult(name="price", type=Integer.class),
+                                @ColumnResult(name="part_num", type=Integer.class),
+                                @ColumnResult(name="is_valid",type= Integer.class)
+                        }
+                )
         )
 })
 public class Post {
