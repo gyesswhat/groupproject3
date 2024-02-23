@@ -153,7 +153,7 @@ export const PostDetail = () => {
     const remainingTime = deadline - now;
     const remainingMinutes = Math.ceil(remainingTime / 60000);
 
-    return remainingMinutes;
+    return remainingMinutes - 1;
   }
 
   const isCaptain = post?.userId === parseInt(currentUserId);

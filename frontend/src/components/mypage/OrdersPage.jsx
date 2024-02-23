@@ -26,7 +26,7 @@ export const OrdersPage = () => {
     const remainingTime = deadline - now;
     const remainingMinutes = Math.ceil(remainingTime / 60000);
 
-    return remainingMinutes;
+    return remainingMinutes - 1;
   }
 
   return (
