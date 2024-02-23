@@ -1,9 +1,6 @@
 import { FOOD_TYPE_LIST } from '../menu';
 
-export function MenuDropdownW({ value, onChange, name }) {
-  const handleSelectChange = event => {
-    onChange(event.target.value);
-  };
+export function MenuDropdownW() {
   return (
     <>
       <option value="" hidden>

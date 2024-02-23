@@ -1,6 +1,5 @@
 import { MyPage } from './MyPage';
 import { BankOptions } from '../auth';
-import { fakeUser } from '../../Fakeuser';
 import { Header } from '../header';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -24,7 +23,6 @@ export const ProfilePage = () => {
       try {
         const response = await axios.get('/user');
         setUserData(response.data);
-        console.log(response.data);
       } catch (error) {
         console.error('Error fetching user data:', error);
       }

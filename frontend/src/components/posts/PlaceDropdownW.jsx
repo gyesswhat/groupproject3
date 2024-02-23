@@ -1,9 +1,6 @@
 import { BUILDING_LIST } from '../main/main.const';
 
-export function PlaceDropdownW({ value, onChange, name }) {
-  const handleSelectChange = event => {
-    onChange(event.target.value);
-  };
+export function PlaceDropdownW() {
   return (
     <>
       <option value="" hidden>

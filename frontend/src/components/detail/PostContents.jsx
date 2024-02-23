@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 export const PostContents = ({
   click,
   disabled,
@@ -45,7 +43,7 @@ export const PostContents = ({
           </p>
           <p>모집 인원</p>
           <p id="green">
-            {recruited}/{recruit}
+            {recruited - 1}/{recruit}
           </p>
         </div>
         <div id="where">

@@ -19,7 +19,7 @@ export const DeliveryItem = ({ id, restaurant, menu, timer, recruit, recruited, 
         </p>
         <p>모집 인원</p>
         <p id="green">
-          {recruited}/{recruit}
+          {recruited - 1}/{recruit}
         </p>
       </S.Info>
       <S.PriceWrap>

@@ -20,15 +20,10 @@ export const OrdersPage = () => {
   }, []);
 
   function calculatePostRemainingTime(createdAt) {
-    const now = new Date(); // 현재 시간
-
+    const now = new Date();
     const createdDate = new Date(createdAt);
-
-    // 현재 시간에 30분을 더함
-    const deadline = new Date(createdDate.getTime() + 30 * 60000); // 30분 = 30 * 60 * 1000 밀리초
-
+    const deadline = new Date(createdDate.getTime() + 30 * 60000);
     const remainingTime = deadline - now;
-
     const remainingMinutes = Math.ceil(remainingTime / 60000);
 
     return remainingMinutes;

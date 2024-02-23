@@ -5,17 +5,6 @@ import { MenuDropdownW } from './MenuDropdown';
 import { Header } from '../header';
 
 export function PostForm() {
-  const [selectedBuilding, setSelectedBuilding] = useState('');
-  const [selectedFoodType, setSelectedFoodType] = useState('');
-
-  const handleBuildingChange = selectedValue => {
-    setSelectedBuilding(selectedValue);
-  };
-
-  const handleFoodTypeChange = selectedValue => {
-    setSelectedFoodType(selectedValue);
-  };
-
   const [inputs, setInputs] = useState({
     userId: '',
     location: '',
@@ -53,7 +42,6 @@ export function PostForm() {
         postBody,
       });
 
-      // 입력 필드 초기화
       setInputs({
         location: '',
         category: '',
@@ -82,7 +70,7 @@ export function PostForm() {
                   <label>배달받을 장소</label>
                   <div>
                     <select id="dropdown" value={location} onChange={handleInputChange} name="location">
-                      <PlaceDropdownW value={location} name="location" onChange={handleInputChange} />
+                      <PlaceDropdownW />
                     </select>
                   </div>
                 </div>

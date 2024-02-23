@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import './App.css';
-import { fakeUser } from './Fakeuser';
 import { Login, Main, OrderFailed, OrdersPage, PostDetail, PostForm, ProfilePage, Register } from './components';
 
 export function App() {

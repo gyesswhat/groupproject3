@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 export function Header() {
   const handleLogout = () => {
-    // 세션 클리어
     sessionStorage.clear();
   };
 
