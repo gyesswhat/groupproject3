@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import * as S from '../main/main.style';
 
 export const DeliveryItem = ({ id, restaurant, menu, timer, recruit, recruited, cost, recruiter, isValid }) => (
-  <Link to={timer <= 0 ? `/post/${id}/order-failed` : `/post/${id}`}>
+  <Link to={isValid !== 3 ? `/post/${id}/order-failed` : `/post/${id}`}>
     <S.DeliveryItem>
       {timer <= 5 && timer > 0 && isValid !== 0 && isValid !== 1 && <S.Badge>마감 임박</S.Badge>}
       {isValid === 4 && timer > 0 && <S.Badge>진행 중</S.Badge>}

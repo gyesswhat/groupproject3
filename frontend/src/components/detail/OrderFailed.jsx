@@ -60,9 +60,15 @@ export const OrderFailed = () => {
               menu={post.menu}
               recruit={post.partNum}
               recruited={part?.length}
-              timer={<p>주문 취소</p>}
+              timer={post.partNum !== part?.length - 1 ? <p>주문 취소</p> : <p>주문 성공</p>}
               cost={post.price}
-              content={<h4>모집 인원이 다 차지 않아 주문이 취소되었습니다.</h4>}
+              content={
+                post.partNum !== part?.length - 1 ? (
+                  <h4>모집 인원이 다 차지 않아 주문이 취소되었습니다.</h4>
+                ) : (
+                  post.postBody
+                )
+              }
               building={post.location}
               account={part?.account}
               isJoined={isJoined}
@@ -83,7 +89,7 @@ export const OrderFailed = () => {
                   </div>
                   <div id="status">{index === 0 ? null : <StatusList status={status} />}</div>
                   <div id="account">
-                    {isCaptain ? (
+                    {isCaptain && post.partNum !== part?.length - 1 ? (
                       index !== 0 && (
                         <>
                           <p>

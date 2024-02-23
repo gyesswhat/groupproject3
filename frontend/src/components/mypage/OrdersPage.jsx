@@ -52,7 +52,7 @@ export const OrdersPage = () => {
                       restaurant={restaurant}
                       menu={menu}
                       recruiter={nickname}
-                      recruited={'N'}
+                      recruited={'1'}
                       recruit={partNum}
                       timer={
                         isValid === 4 && calculatePostRemainingTime(createdAt) > 0
