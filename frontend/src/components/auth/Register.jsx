@@ -52,9 +52,11 @@ export const Register = () => {
 
       setIsSnackbarOpen(true); // 회원가입 성공 시 스낵바 열기
       sessionStorage.setItem('userId', response.data);
-      //setTimeout(() => {
-      // setIsSnackbarOpen(false); // 일정 시간 후 스낵바 닫기
-      //}, 3000); // 3초 후에 자동으로 닫힘
+      sessionStorage.setItem('IsRegistered', true);
+
+      setTimeout(() => {
+        setIsSnackbarOpen(false); // 일정 시간 후 스낵바 닫기
+      }, 3000); // 3초 후에 자동으로 닫힘
       navigate('/');
     } catch (error) {
       setEmailExists(error.response.data !== '이미 존재하는 이메일입니다.');
@@ -118,7 +120,7 @@ export const Register = () => {
             <div>
               <label>은행</label>
               <select id="id" name="bank" value={formData.bank} onChange={handleChange} required>
-                <option selected hidden value="select">
+                <option hidden value="select">
                   은행 선택
                 </option>
                 <BankOptions />

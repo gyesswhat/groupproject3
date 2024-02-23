@@ -3,40 +3,26 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, PlaceDropdown } from '../menu';
 import { DeliveryItem } from './DeliveryItem';
-import { dummyDeliveryRecruitment } from './posts.const';
 
 export const Posts = () => {
   const [selectedBuilding, setSelectedBuilding] = useState('');
   const [selectedFoodType, setSelectedFoodType] = useState('');
 
   const [posts, setPosts] = useState([]);
-  const [part, setPart] = useState([]);
 
   useEffect(() => {
     async function fetchPosts() {
       try {
         const response = await axios.get('/posts');
-        console.log(123, response);
+
         setPosts(response);
       } catch (error) {
         console.error('Error fetching posts:', error);
       }
     }
 
-    const fetchPart = async () => {
-      try {
-        const response = await axios.get(`/posts/${posts.postId}/participants`);
-        setPart(response.data);
-      } catch (error) {
-        console.error('Error fetching participant:', error);
-      }
-    };
-
     fetchPosts();
-    fetchPart();
   }, [posts?.postId]);
-
-  console.log('posts:', posts);
 
   const handleBuildingChange = selectedValue => {
     setSelectedBuilding(selectedValue);
@@ -69,7 +55,7 @@ export const Posts = () => {
             (!selectedFoodType || DeliveryR?.category === selectedFoodType) &&
             calculatePostRemainingTime(DeliveryR?.createdAt) >= 0,
         );
-        console.log(111, filteredData);
+
         return filteredData;
       }
     } else {
