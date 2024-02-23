@@ -65,7 +65,7 @@ export const Register = () => {
 
   return (
     <>
-      <div style={{ marginLeft: '100px', borderBottom: '1px solid #eee' }}>
+      <div style={{ paddingLeft: '100px', borderBottom: '1px solid #eee' }}>
         <Logo />
       </div>
       <div id="register-box">
