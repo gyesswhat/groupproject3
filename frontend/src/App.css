@@ -232,11 +232,12 @@ body {
 }
 
 #login-page-whole {
-  height: 100%;
+  height: 180%;
   background: linear-gradient(to right, white 550px, #087112 550px);
   display: flex;
   /*justify-content: center;*/
   flex-direction: row;
+  overflow: hidden;
 }
 
 #login-page {
