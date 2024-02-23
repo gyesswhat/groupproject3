@@ -107,10 +107,10 @@ export const PostDetail = () => {
   }, [postId]);
 
   useEffect(() => {
-    if (post && remainingTime < 0 && post.partNum !== part.length) {
+    if ((post && calculatePostRemainingTime(post.createdAt) < 0) || post?.isValid !== 4) {
       <Link to={`/post/${postId}/order-failed`} />;
     }
-  }, [post, part, remainingTime]);
+  }, [post, part, postId]);
 
   const handleEditSubmit = async (editIndex, editedComment) => {
     try {
@@ -172,7 +172,11 @@ export const PostDetail = () => {
                 menu={post.menu}
                 recruit={post.partNum}
                 recruited={part?.length}
-                timer={calculatePostRemainingTime(post.createdAt)}
+                timer={
+                  <>
+                    <p id="green">{calculatePostRemainingTime(post.createdAt)}분</p> <p>뒤 주문 예정</p>
+                  </>
+                }
                 cost={post.price}
                 content={post.postBody}
                 building={post.location}

@@ -18,14 +18,15 @@ export const OrderFailed = () => {
     setIsJoined(true);
   };
 
-  const currentUserId = sessionStorage.getItem('userId');
-  const isCaptain = post.userId === currentUserId;
+  const currentUserId = Number(sessionStorage.getItem('userId'));
+  const isCaptain = post?.userId === currentUserId;
 
   useEffect(() => {
     const fetchPost = async () => {
       try {
         const response = await axios.get(`/posts/${postId}`);
         setPost(response.data);
+        console.log(post);
       } catch (error) {
         console.error('Error fetching post:', error);
       }
@@ -48,57 +49,59 @@ export const OrderFailed = () => {
     <>
       <Header />
       <div id="wrap">
-        <div id="inner-wrap">
-          {post && (
-            <>
-              {post.map(({ location, restaurant, menu, partNum, price }) => (
-                <PostContents
-                  key={postId}
-                  id={postId}
-                  restaurant={restaurant}
-                  menu={menu}
-                  recruit={partNum}
-                  recruited={part.length}
-                  timer={<p>주문 취소</p>}
-                  cost={price}
-                  content={<h4>모집 인원이 다 차지 않아 주문이 취소되었습니다.</h4>}
-                  building={location}
-                  account={part.account}
-                  isJoined={isJoined}
-                  click={handleButtonClick}
-                  disabled={isButtonDisabled}
-                />
-              ))}
-              <div id="part-wrap">
-                {part.map(({ nickname, status, bank, account }, index) => (
-                  <div id="participants" key={nickname}>
-                    <div id="participant-list">
-                      <div id="participant">
-                        <p id="role">{index === 0 ? '방장' : '참여자'}</p>
-                        <p id="nickname">{nickname}</p>
-                      </div>
-                    </div>
-                    <div id="status">{index === 0 ? null : <StatusList status={status} />}</div>
-                    <div id="account">
-                      {isCaptain ? (
-                        index !== 0 && (
-                          <>
-                            <p>
-                              {bank} / {account}
-                            </p>
-                          </>
-                        )
-                      ) : (
-                        <p>환불 진행중</p>
-                      )}
+        {post === null ? (
+          <div>loading...</div>
+        ) : post?.length !== 0 ? (
+          <div id="inner-wrap" style={{ width: '730px' }}>
+            <PostContents
+              key={post.postId}
+              id={post.postId}
+              restaurant={post.restaurant}
+              menu={post.menu}
+              recruit={post.partNum}
+              recruited={part?.length}
+              timer={<p>주문 취소</p>}
+              cost={post.price}
+              content={<h4>모집 인원이 다 차지 않아 주문이 취소되었습니다.</h4>}
+              building={post.location}
+              account={part?.account}
+              isJoined={isJoined}
+              click={handleButtonClick}
+              disabled={isButtonDisabled}
+              isCaptain={isCaptain}
+            />
+
+            <div id="part-wrap">
+              <h4>참여자 목록</h4>
+              {part?.map(({ nickname, status, bank, account }, index) => (
+                <div id="participants" key={nickname}>
+                  <div id="participant-list">
+                    <div id="participant">
+                      <p id="role">{index === 0 ? '방장' : '참여자'}</p>
+                      <p id="nickname">{nickname}</p>
                     </div>
                   </div>
-                ))}
-              </div>
-            </>
-          )}{' '}
-          : (<p>Loading...</p>)
-        </div>
+                  <div id="status">{index === 0 ? null : <StatusList status={status} />}</div>
+                  <div id="account">
+                    {isCaptain ? (
+                      index !== 0 && (
+                        <>
+                          <p>
+                            {bank} / {account}
+                          </p>
+                        </>
+                      )
+                    ) : (
+                      <p>환불 진행중</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
       </div>
     </>
   );

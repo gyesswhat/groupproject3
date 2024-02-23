@@ -557,7 +557,7 @@ ul {
 #statuslist {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+
   flex-wrap: wrap;
 }
 
@@ -572,6 +572,13 @@ ul {
 #status {
   /*margin-top: 86px;*/
   margin-bottom: 0;
+  width: 50%;
+}
+
+#account {
+  width: 25%;
+  display: flex;
+  justify-content: end;
 }
 
 #where {

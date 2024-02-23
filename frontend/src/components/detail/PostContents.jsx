@@ -36,8 +36,8 @@ export const PostContents = ({
         </div>
         <div id="info">
           <img src="/assets/timer-icon.svg" alt="timer" />
-          <p id="green">{timer}분</p>
-          <p> 뒤 주문 예정</p>
+          {timer}
+
           <p className="dot" id="green">
             •
           </p>
