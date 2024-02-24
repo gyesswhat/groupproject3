@@ -31,7 +31,7 @@
 [🧩 팀 회의록](https://www.notion.so/suuujin-kim/e08a8a2d992546bbb916ce12dabbaf05?v=07e59cd440844ac693a3b139c0bc53dd) <br>
 [📗 API 명세서](https://docs.google.com/spreadsheets/d/1Jap0bQoPZ0VVg5za-n9ZCGqq5-aN4dZ0iLo__M-Qirs/edit?usp=sharing) <br>
 [❇️ 피그마 프로토타입](https://www.figma.com/proto/lKPHMsYdBubie33tRkuKib/ecc-3%ED%8C%80?page-id=0%3A1&type=design&node-id=1-849&viewport=502%2C359%2C0.13&t=1CR3Kwoy3MxNxIpT-1&scaling=min-zoom&starting-point-node-id=1%3A849) <br>
-[💚 Vercel](https://ewha-delivery-system-n9oj6zti5-piaoyanxius-projects.vercel.app) <br>
+[💚 Vercel](https://ewha-delivery-system-j4gwf2rlp-piaoyanxius-projects.vercel.app/) <br>
 
 ## 🍃 커밋 메시지 양식
 ``` Markdown
