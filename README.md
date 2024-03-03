@@ -32,7 +32,8 @@
 [📗 API 명세서](https://docs.google.com/spreadsheets/d/1Jap0bQoPZ0VVg5za-n9ZCGqq5-aN4dZ0iLo__M-Qirs/edit?usp=sharing) <br>
 [❇️ 피그마 프로토타입](https://www.figma.com/proto/lKPHMsYdBubie33tRkuKib/ecc-3%ED%8C%80?page-id=0%3A1&type=design&node-id=1-849&viewport=502%2C359%2C0.13&t=1CR3Kwoy3MxNxIpT-1&scaling=min-zoom&starting-point-node-id=1%3A849) <br>
 [🧶 프론트엔드 Vercel](https://groupproject3-edit2-2d1h.vercel.app/) <br>
-[💚 Vercel](https://ewha-delivery-system-j4gwf2rlp-piaoyanxius-projects.vercel.app/) <br>
+[🗣️ 발표 자료](https://drive.google.com/file/d/15utdOQ-SAzbeuNwJ3cyguvxx03LSoCmF/view?usp=drivesdk)  
+*현재 백엔드 서버가 내려간 상태로, 백엔드 연결된 프론트엔드 웹페이지는 발표자료의 '웹사이트 시연' 파트에서 확인하실 수 있습니다.*
 
 ## 🍃 커밋 메시지 양식
 ``` Markdown
